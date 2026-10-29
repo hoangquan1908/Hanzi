@@ -639,7 +639,7 @@
     writers.forEach(w => { try { w.cancelQuiz(); } catch (e) { /* ignore */ } });
     writers = [];
   }
-  function boardSize() { return Math.min(300, Math.max(220, Math.floor(window.innerWidth - 96))); }
+  function boardSize() { return Math.min(340, Math.max(240, Math.floor(window.innerWidth - 56))); }
   function makeWriter(el, ch, opts) {
     const size = opts.size || boardSize();
     el.style.width = el.style.height = size + 'px';
@@ -811,7 +811,7 @@
       const show = () => {
         destroyWriters();
         target.innerHTML = '';
-        writer = makeWriter(target, chars[cur], { size: Math.min(260, boardSize()), showOutline: true });
+        writer = makeWriter(target, chars[cur], { size: Math.min(300, boardSize()), showOutline: true });
         note.textContent = `${chars[cur]} · ${strokeCount(chars[cur])} nét`;
         writer.animateCharacter();
       };
