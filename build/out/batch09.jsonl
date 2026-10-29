@@ -1,0 +1,122 @@
+{"id": "h2-0629", "hv": "Nhất sinh", "pos_vi": "Danh từ", "vi": "Cả đời; suốt đời", "ex_zh": "他一生都在学习。", "ex_vi": "Anh ấy học tập suốt cả đời."}
+{"id": "h2-0630", "hv": "Nhất trực", "pos_vi": "Phó từ", "vi": "Luôn luôn; thẳng; suốt", "ex_zh": "我一直住在河内。", "ex_vi": "Tôi luôn sống ở Hà Nội."}
+{"id": "h2-0631", "hv": "Dĩ kinh", "pos_vi": "Phó từ", "vi": "Đã; rồi", "ex_zh": "他已经走了。", "ex_vi": "Anh ấy đã đi rồi."}
+{"id": "h2-0632", "hv": "Dĩ hậu", "pos_vi": "Danh từ", "vi": "Sau này; về sau; sau khi", "ex_zh": "以后我们常见面。", "ex_vi": "Sau này chúng ta thường gặp nhau."}
+{"id": "h2-0633", "hv": "Dĩ tiền", "pos_vi": "Danh từ", "vi": "Trước đây; trước kia", "ex_zh": "以前我不喜欢喝茶。", "ex_vi": "Trước đây tôi không thích uống trà."}
+{"id": "h2-0634", "hv": "Dĩ thượng", "pos_vi": "Danh từ", "vi": "Trở lên; nói trên", "ex_zh": "十八岁以上才能来。", "ex_vi": "Từ mười tám tuổi trở lên mới được đến."}
+{"id": "h2-0635", "hv": "Dĩ ngoại", "pos_vi": "Danh từ", "vi": "Ngoài ra; ngoài", "ex_zh": "除了他以外,我都认识。", "ex_vi": "Ngoài anh ấy ra, tôi quen tất cả."}
+{"id": "h2-0636", "hv": "Dĩ vi", "pos_vi": "Động từ", "vi": "Tưởng rằng; cho rằng", "ex_zh": "我以为你不在家。", "ex_vi": "Tôi tưởng bạn không ở nhà."}
+{"id": "h2-0637", "hv": "Dĩ hạ", "pos_vi": "Danh từ", "vi": "Trở xuống; sau đây", "ex_zh": "零度以下很冷。", "ex_vi": "Dưới không độ rất lạnh."}
+{"id": "h2-0638", "hv": "Ỷ tử", "pos_vi": "Danh từ", "vi": "Cái ghế", "ex_zh": "请坐在那把椅子上。", "ex_vi": "Mời ngồi lên cái ghế kia."}
+{"id": "h2-0639", "hv": "Ức", "pos_vi": "Số từ", "vi": "Trăm triệu", "ex_zh": "中国有十几亿人。", "ex_vi": "Trung Quốc có hơn một tỷ người."}
+{"id": "h2-0640", "hv": "Ý kiến", "pos_vi": "Danh từ", "vi": "Ý kiến; góp ý; đề nghị", "ex_zh": "你有什么意见?", "ex_vi": "Bạn có ý kiến gì không?"}
+{"id": "h2-0641", "hv": "Ý tư", "pos_vi": "Danh từ", "vi": "Ý nghĩa; ý; thú vị", "ex_zh": "这个词是什么意思?", "ex_vi": "Từ này có nghĩa là gì?"}
+{"id": "h2-0642", "hv": "Nhân vi", "pos_vi": "Liên từ", "vi": "Bởi vì; vì", "ex_zh": "因为下雨,我没去。", "ex_vi": "Vì trời mưa nên tôi không đi."}
+{"id": "h2-0643", "hv": "Âm", "pos_vi": "Tính từ", "vi": "Âm u; âm; râm", "ex_zh": "今天天气很阴。", "ex_vi": "Hôm nay trời rất âm u."}
+{"id": "h2-0644", "hv": "Âm thiên", "pos_vi": "Danh từ", "vi": "Trời âm u; trời nhiều mây", "ex_zh": "明天是阴天。", "ex_vi": "Ngày mai trời âm u."}
+{"id": "h2-0645", "hv": "Âm tiết", "pos_vi": "Danh từ", "vi": "Âm tiết", "ex_zh": "这个字有两个音节。", "ex_vi": "Từ này có hai âm tiết."}
+{"id": "h2-0646", "hv": "Âm nhạc", "pos_vi": "Danh từ", "vi": "Âm nhạc", "ex_zh": "我喜欢听音乐。", "ex_vi": "Tôi thích nghe nhạc."}
+{"id": "h2-0647", "hv": "Âm nhạc hội", "pos_vi": "Danh từ", "vi": "Buổi hòa nhạc", "ex_zh": "我们去听音乐会吧。", "ex_vi": "Chúng ta đi nghe hòa nhạc nhé."}
+{"id": "h2-0648", "hv": "Ngân hàng", "pos_vi": "Danh từ", "vi": "Ngân hàng", "ex_zh": "银行在学校旁边。", "ex_vi": "Ngân hàng ở cạnh trường học."}
+{"id": "h2-0649", "hv": "Ngân hàng tạp", "pos_vi": "Danh từ", "vi": "Thẻ ngân hàng; thẻ ATM", "ex_zh": "我的银行卡丢了。", "ex_vi": "Thẻ ngân hàng của tôi bị mất rồi."}
+{"id": "h2-0650", "hv": "Ứng cai", "pos_vi": "Động từ", "vi": "Nên; cần phải", "ex_zh": "你应该多休息。", "ex_vi": "Bạn nên nghỉ ngơi nhiều hơn."}
+{"id": "h2-0651", "hv": "Anh văn", "pos_vi": "Danh từ", "vi": "Tiếng Anh; Anh văn", "ex_zh": "他的英文很好。", "ex_vi": "Tiếng Anh của anh ấy rất tốt."}
+{"id": "h2-0652", "hv": "Anh ngữ", "pos_vi": "Danh từ", "vi": "Tiếng Anh; Anh ngữ", "ex_zh": "我在学英语。", "ex_vi": "Tôi đang học tiếng Anh."}
+{"id": "h2-0653", "hv": "Ảnh phiến", "pos_vi": "Danh từ", "vi": "Phim; bộ phim", "ex_zh": "这部影片很好看。", "ex_vi": "Bộ phim này rất hay."}
+{"id": "h2-0654", "hv": "Ảnh hưởng", "pos_vi": "Động từ", "vi": "Ảnh hưởng; tác động", "ex_zh": "天气影响我的心情。", "ex_vi": "Thời tiết ảnh hưởng đến tâm trạng tôi."}
+{"id": "h2-0655", "hv": "Vĩnh viễn", "pos_vi": "Phó từ", "vi": "Mãi mãi; vĩnh viễn", "ex_zh": "我永远爱你。", "ex_vi": "Anh yêu em mãi mãi."}
+{"id": "h2-0656", "hv": "Du", "pos_vi": "Danh từ", "vi": "Dầu; mỡ", "ex_zh": "这个菜太油了。", "ex_vi": "Món này nhiều dầu mỡ quá."}
+{"id": "h2-0657", "hv": "Du khách", "pos_vi": "Danh từ", "vi": "Du khách; khách tham quan", "ex_zh": "游客在拍照片。", "ex_vi": "Du khách đang chụp ảnh."}
+{"id": "h2-0658", "hv": "Hữu điểm nhi", "pos_vi": "Phó từ", "vi": "Hơi; một chút", "ex_zh": "我有点儿累。", "ex_vi": "Tôi hơi mệt."}
+{"id": "h2-0659", "hv": "Hữu không nhi", "pos_vi": "Động từ", "vi": "Rảnh; có thời gian", "ex_zh": "你明天有空儿吗?", "ex_vi": "Ngày mai bạn có rảnh không?"}
+{"id": "h2-0660", "hv": "Hữu nhân", "pos_vi": "Đại từ", "vi": "Có người; ai đó", "ex_zh": "外面有人找你。", "ex_vi": "Bên ngoài có người tìm bạn."}
+{"id": "h2-0661", "hv": "Hữu nhất điểm nhi", "pos_vi": "Phó từ", "vi": "Hơi; một chút", "ex_zh": "今天有一点儿冷。", "ex_vi": "Hôm nay hơi lạnh."}
+{"id": "h2-0662", "hv": "Hữu ý tư", "pos_vi": "Tính từ", "vi": "Thú vị; có ý nghĩa", "ex_zh": "这本书很有意思。", "ex_vi": "Quyển sách này rất thú vị."}
+{"id": "h2-0663", "hv": "Hựu", "pos_vi": "Phó từ", "vi": "Lại; lại nữa; vừa...vừa...", "ex_zh": "他又来了。", "ex_vi": "Anh ấy lại đến nữa rồi."}
+{"id": "h2-0664", "hv": "Hữu hảo", "pos_vi": "Tính từ", "vi": "Thân thiện; hữu nghị", "ex_zh": "他对我很友好。", "ex_vi": "Anh ấy rất thân thiện với tôi."}
+{"id": "h2-0665", "hv": "Ngư", "pos_vi": "Danh từ", "vi": "Cá", "ex_zh": "我喜欢吃鱼。", "ex_vi": "Tôi thích ăn cá."}
+{"id": "h2-0666", "hv": "Ngữ ngôn", "pos_vi": "Danh từ", "vi": "Ngôn ngữ", "ex_zh": "汉语是一种语言。", "ex_vi": "Tiếng Hán là một ngôn ngữ."}
+{"id": "h2-0667", "hv": "Nguyên lai", "pos_vi": "Phó từ", "vi": "Hóa ra; vốn dĩ; ban đầu", "ex_zh": "原来是你啊!", "ex_vi": "Hóa ra là bạn à!"}
+{"id": "h2-0668", "hv": "Nguyên nhân", "pos_vi": "Danh từ", "vi": "Nguyên nhân", "ex_zh": "你知道原因吗?", "ex_vi": "Bạn có biết nguyên nhân không?"}
+{"id": "h2-0669", "hv": "Viện", "pos_vi": "Danh từ", "vi": "Sân; viện; cơ quan", "ex_zh": "医院在学院旁边。", "ex_vi": "Bệnh viện ở cạnh học viện."}
+{"id": "h2-0670", "hv": "Viện trưởng", "pos_vi": "Danh từ", "vi": "Viện trưởng; hiệu trưởng", "ex_zh": "院长今天不在。", "ex_vi": "Viện trưởng hôm nay không có mặt."}
+{"id": "h2-0671", "hv": "Viện tử", "pos_vi": "Danh từ", "vi": "Sân; sân vườn", "ex_zh": "院子里有一棵树。", "ex_vi": "Trong sân có một cái cây."}
+{"id": "h2-0672", "hv": "Nguyện ý", "pos_vi": "Động từ", "vi": "Bằng lòng; sẵn lòng; muốn", "ex_zh": "我愿意帮助你。", "ex_vi": "Tôi sẵn lòng giúp bạn."}
+{"id": "h2-0673", "hv": "Nguyệt phận", "pos_vi": "Danh từ", "vi": "Tháng", "ex_zh": "这个月份天气很热。", "ex_vi": "Tháng này thời tiết rất nóng."}
+{"id": "h2-0674", "hv": "Nguyệt lượng", "pos_vi": "Danh từ", "vi": "Mặt trăng; trăng", "ex_zh": "今晚的月亮很圆。", "ex_vi": "Trăng tối nay rất tròn."}
+{"id": "h2-0675", "hv": "Việt", "pos_vi": "Phó từ", "vi": "Càng; vượt qua; (nước) Việt", "ex_zh": "雨越下越大。", "ex_vi": "Mưa càng rơi càng to."}
+{"id": "h2-0676", "hv": "Việt lai việt", "pos_vi": "Phó từ", "vi": "Càng ngày càng", "ex_zh": "天气越来越冷了。", "ex_vi": "Thời tiết càng ngày càng lạnh."}
+{"id": "h2-0677", "hv": "Vân", "pos_vi": "Danh từ", "vi": "Mây; (cổ) nói", "ex_zh": "天上有很多云。", "ex_vi": "Trên trời có rất nhiều mây."}
+{"id": "h2-0678", "hv": "Vận động", "pos_vi": "Động từ", "vi": "Vận động; thể thao; tập thể dục", "ex_zh": "我每天都运动。", "ex_vi": "Mỗi ngày tôi đều tập thể dục."}
+{"id": "h2-0679", "hv": "Tán", "pos_vi": "Đại từ", "vi": "Chúng ta; chúng tôi; tôi", "ex_zh": "咱走吧。", "ex_vi": "Chúng ta đi thôi."}
+{"id": "h2-0680", "hv": "Tán môn", "pos_vi": "Đại từ", "vi": "Chúng ta (gồm cả người nghe)", "ex_zh": "咱们一起去吧。", "ex_vi": "Chúng ta cùng đi nhé."}
+{"id": "h2-0681", "hv": "Tạng", "pos_vi": "Tính từ", "vi": "Bẩn; dơ; (nội) tạng", "ex_zh": "你的手很脏。", "ex_vi": "Tay bạn bẩn lắm."}
+{"id": "h2-0682", "hv": "Tảo xan", "pos_vi": "Danh từ", "vi": "Bữa sáng", "ex_zh": "我喜欢吃中式早餐。", "ex_vi": "Tôi thích ăn sáng kiểu Trung."}
+{"id": "h2-0683", "hv": "Tảo thần", "pos_vi": "Danh từ", "vi": "Buổi sáng sớm", "ex_zh": "早晨的空气很好。", "ex_vi": "Không khí buổi sáng sớm rất tốt."}
+{"id": "h2-0684", "hv": "Tảo tựu", "pos_vi": "Phó từ", "vi": "Đã từ lâu; sớm đã", "ex_zh": "我早就知道了。", "ex_vi": "Tôi đã biết từ lâu rồi."}
+{"id": "h2-0685", "hv": "Chẩm ma biện", "pos_vi": "Cụm từ", "vi": "Làm sao đây; phải làm thế nào", "ex_zh": "钱丢了,怎么办?", "ex_vi": "Mất tiền rồi, làm sao đây?"}
+{"id": "h2-0686", "hv": "Chẩm ma dạng", "pos_vi": "Đại từ", "vi": "Thế nào; ra sao", "ex_zh": "你的身体怎么样?", "ex_vi": "Sức khỏe của bạn thế nào?"}
+{"id": "h2-0687", "hv": "Chẩm dạng", "pos_vi": "Đại từ", "vi": "Thế nào; như thế nào", "ex_zh": "这个字怎样写?", "ex_vi": "Chữ này viết như thế nào?"}
+{"id": "h2-0688", "hv": "Chiếm", "pos_vi": "Động từ", "vi": "Chiếm; giữ", "ex_zh": "学生占一半。", "ex_vi": "Học sinh chiếm một nửa."}
+{"id": "h2-0689", "hv": "Trạm trụ", "pos_vi": "Động từ", "vi": "Đứng lại; dừng lại", "ex_zh": "站住,别跑!", "ex_vi": "Đứng lại, đừng chạy!"}
+{"id": "h2-0690", "hv": "Trường", "pos_vi": "Tính từ", "vi": "Dài; chiều dài", "ex_zh": "这条路很长。", "ex_vi": "Con đường này rất dài."}
+{"id": "h2-0691", "hv": "Trưởng đại", "pos_vi": "Động từ", "vi": "Lớn lên; trưởng thành", "ex_zh": "孩子长大了。", "ex_vi": "Đứa trẻ đã lớn rồi."}
+{"id": "h2-0692", "hv": "Trảo xuất", "pos_vi": "Động từ", "vi": "Tìm ra; tìm thấy", "ex_zh": "我找出了问题。", "ex_vi": "Tôi đã tìm ra vấn đề."}
+{"id": "h2-0693", "hv": "Chiếu cố", "pos_vi": "Động từ", "vi": "Chăm sóc; chiếu cố", "ex_zh": "她很会照顾孩子。", "ex_vi": "Cô ấy rất biết chăm sóc trẻ."}
+{"id": "h2-0694", "hv": "Chiếu phiến", "pos_vi": "Danh từ", "vi": "Ảnh; tấm ảnh", "ex_zh": "这张照片很漂亮。", "ex_vi": "Tấm ảnh này rất đẹp."}
+{"id": "h2-0695", "hv": "Chiếu tướng", "pos_vi": "Động từ", "vi": "Chụp ảnh", "ex_zh": "我们去那儿照相吧。", "ex_vi": "Chúng ta qua đó chụp ảnh đi."}
+{"id": "h2-0696", "hv": "Giá ma", "pos_vi": "Đại từ", "vi": "Như thế này; thế này; đến thế", "ex_zh": "今天这么热!", "ex_vi": "Hôm nay nóng thế này!"}
+{"id": "h2-0697", "hv": "Giá thời", "pos_vi": "Đại từ", "vi": "Lúc này; khi đó", "ex_zh": "这时他进来了。", "ex_vi": "Lúc này anh ấy bước vào."}
+{"id": "h2-0698", "hv": "Giá thời hậu", "pos_vi": "Đại từ", "vi": "Lúc này; khi ấy", "ex_zh": "这时候你在哪儿?", "ex_vi": "Lúc này bạn đang ở đâu?"}
+{"id": "h2-0699", "hv": "Giá dạng", "pos_vi": "Đại từ", "vi": "Như vậy; thế này", "ex_zh": "不要这样说话。", "ex_vi": "Đừng nói chuyện như vậy."}
+{"id": "h2-0700", "hv": "Chân chính", "pos_vi": "Tính từ", "vi": "Chân chính; thật sự", "ex_zh": "他是真正的朋友。", "ex_vi": "Anh ấy là người bạn thật sự."}
+{"id": "h2-0701", "hv": "Chính thường", "pos_vi": "Tính từ", "vi": "Bình thường; thông thường", "ex_zh": "他的身体很正常。", "ex_vi": "Sức khỏe của anh ấy rất bình thường."}
+{"id": "h2-0702", "hv": "Chính hảo", "pos_vi": "Phó từ", "vi": "Vừa đúng; vừa vặn; đúng lúc", "ex_zh": "你来得正好。", "ex_vi": "Bạn đến thật đúng lúc."}
+{"id": "h2-0703", "hv": "Chính xác", "pos_vi": "Tính từ", "vi": "Chính xác; đúng", "ex_zh": "你的答案很正确。", "ex_vi": "Đáp án của bạn rất chính xác."}
+{"id": "h2-0704", "hv": "Chính thị", "pos_vi": "Động từ", "vi": "Chính là", "ex_zh": "这正是我想要的。", "ex_vi": "Đây chính là thứ tôi muốn."}
+{"id": "h2-0705", "hv": "Trực tiếp", "pos_vi": "Tính từ", "vi": "Trực tiếp; thẳng", "ex_zh": "你可以直接问他。", "ex_vi": "Bạn có thể hỏi thẳng anh ấy."}
+{"id": "h2-0706", "hv": "Chỉ", "pos_vi": "Phó từ", "vi": "Chỉ; chỉ có; con (lượng từ)", "ex_zh": "我只有一个哥哥。", "ex_vi": "Tôi chỉ có một người anh trai."}
+{"id": "h2-0707", "hv": "Chỉ năng", "pos_vi": "Động từ", "vi": "Chỉ có thể; đành phải", "ex_zh": "我只能明天去。", "ex_vi": "Tôi chỉ có thể đi vào ngày mai."}
+{"id": "h2-0708", "hv": "Chỉ yếu", "pos_vi": "Liên từ", "vi": "Chỉ cần", "ex_zh": "只要努力,就能成功。", "ex_vi": "Chỉ cần cố gắng thì sẽ thành công."}
+{"id": "h2-0709", "hv": "Chỉ", "pos_vi": "Danh từ", "vi": "Giấy", "ex_zh": "请给我一张纸。", "ex_vi": "Cho tôi một tờ giấy."}
+{"id": "h2-0710", "hv": "Trung xan", "pos_vi": "Danh từ", "vi": "Bữa trưa; món ăn Trung Quốc", "ex_zh": "我们去吃中餐吧。", "ex_vi": "Chúng ta đi ăn món Trung nhé."}
+{"id": "h2-0711", "hv": "Trung cấp", "pos_vi": "Tính từ", "vi": "Trung cấp", "ex_zh": "我的汉语是中级水平。", "ex_vi": "Tiếng Hán của tôi ở trình độ trung cấp."}
+{"id": "h2-0712", "hv": "Trung niên", "pos_vi": "Danh từ", "vi": "Trung niên", "ex_zh": "他是一位中年人。", "ex_vi": "Ông ấy là một người trung niên."}
+{"id": "h2-0713", "hv": "Trung tiểu học", "pos_vi": "Danh từ", "vi": "Trường trung học và tiểu học", "ex_zh": "中小学放假了。", "ex_vi": "Các trường tiểu học và trung học nghỉ rồi."}
+{"id": "h2-0714", "hv": "Trung tâm", "pos_vi": "Danh từ", "vi": "Trung tâm; tâm điểm", "ex_zh": "商店在城市中心。", "ex_vi": "Cửa hàng ở trung tâm thành phố."}
+{"id": "h2-0715", "hv": "Trung y", "pos_vi": "Danh từ", "vi": "Đông y; bác sĩ Đông y", "ex_zh": "他想学中医。", "ex_vi": "Anh ấy muốn học Đông y."}
+{"id": "h2-0716", "hv": "Trọng điểm", "pos_vi": "Danh từ", "vi": "Trọng điểm; điểm chính", "ex_zh": "这是今天的重点。", "ex_vi": "Đây là trọng điểm của hôm nay."}
+{"id": "h2-0717", "hv": "Trùng phục", "pos_vi": "Động từ", "vi": "Lặp lại; trùng lặp", "ex_zh": "请再重复一遍。", "ex_vi": "Xin hãy lặp lại một lần nữa."}
+{"id": "h2-0718", "hv": "Trọng thị", "pos_vi": "Động từ", "vi": "Coi trọng; xem trọng", "ex_zh": "老师很重视学习。", "ex_vi": "Thầy giáo rất coi trọng việc học."}
+{"id": "h2-0719", "hv": "Trùng tân", "pos_vi": "Phó từ", "vi": "Lại; làm lại từ đầu", "ex_zh": "请重新写一遍。", "ex_vi": "Xin hãy viết lại một lần."}
+{"id": "h2-0720", "hv": "Chu", "pos_vi": "Danh từ riêng", "vi": "Chu (họ); triều Chu; vòng", "ex_zh": "他姓周。", "ex_vi": "Anh ấy họ Chu."}
+{"id": "h2-0721", "hv": "Chu mạt", "pos_vi": "Danh từ", "vi": "Cuối tuần", "ex_zh": "周末你有空儿吗?", "ex_vi": "Cuối tuần bạn có rảnh không?"}
+{"id": "h2-0722", "hv": "Chu niên", "pos_vi": "Danh từ", "vi": "Kỷ niệm năm; chu niên", "ex_zh": "今天是学校十周年。", "ex_vi": "Hôm nay là kỷ niệm mười năm của trường."}
+{"id": "h2-0723", "hv": "Chủ nhân", "pos_vi": "Danh từ", "vi": "Chủ nhân; chủ; chủ nhà", "ex_zh": "主人请我们喝茶。", "ex_vi": "Chủ nhà mời chúng tôi uống trà."}
+{"id": "h2-0724", "hv": "Chủ yếu", "pos_vi": "Tính từ", "vi": "Chủ yếu; chính", "ex_zh": "主要原因是天气。", "ex_vi": "Nguyên nhân chính là do thời tiết."}
+{"id": "h2-0725", "hv": "Trú phòng", "pos_vi": "Danh từ", "vi": "Nhà ở; chỗ ở", "ex_zh": "这里的住房很贵。", "ex_vi": "Nhà ở chỗ này rất đắt."}
+{"id": "h2-0726", "hv": "Trú viện", "pos_vi": "Động từ", "vi": "Nhập viện; nằm viện", "ex_zh": "他生病住院了。", "ex_vi": "Anh ấy bị bệnh nên nhập viện."}
+{"id": "h2-0727", "hv": "Trang", "pos_vi": "Động từ", "vi": "Đựng; lắp đặt; giả vờ; trang điểm", "ex_zh": "把书装进包里。", "ex_vi": "Bỏ sách vào trong cặp."}
+{"id": "h2-0728", "hv": "Chuẩn xác", "pos_vi": "Tính từ", "vi": "Chính xác; đúng", "ex_zh": "他的发音很准确。", "ex_vi": "Phát âm của anh ấy rất chuẩn."}
+{"id": "h2-0729", "hv": "Tự điển", "pos_vi": "Danh từ", "vi": "Từ điển chữ Hán", "ex_zh": "我买了一本字典。", "ex_vi": "Tôi đã mua một quyển từ điển."}
+{"id": "h2-0730", "hv": "Tự kỷ", "pos_vi": "Đại từ", "vi": "Bản thân; tự mình", "ex_zh": "他自己做饭。", "ex_vi": "Anh ấy tự nấu cơm."}
+{"id": "h2-0731", "hv": "Tự hành xa", "pos_vi": "Danh từ", "vi": "Xe đạp", "ex_zh": "我骑自行车上班。", "ex_vi": "Tôi đạp xe đi làm."}
+{"id": "h2-0732", "hv": "Tự do", "pos_vi": "Tính từ", "vi": "Tự do", "ex_zh": "周末我很自由。", "ex_vi": "Cuối tuần tôi rất tự do."}
+{"id": "h2-0733", "hv": "Tẩu quá", "pos_vi": "Động từ", "vi": "Đi qua; đi ngang qua", "ex_zh": "他从我身边走过。", "ex_vi": "Anh ấy đi ngang qua bên cạnh tôi."}
+{"id": "h2-0734", "hv": "Tẩu tiến", "pos_vi": "Động từ", "vi": "Bước vào; đi vào", "ex_zh": "老师走进教室。", "ex_vi": "Thầy giáo bước vào lớp học."}
+{"id": "h2-0735", "hv": "Tẩu khai", "pos_vi": "Động từ", "vi": "Đi đi; tránh ra; rời đi", "ex_zh": "请你走开一下。", "ex_vi": "Xin bạn tránh ra một chút."}
+{"id": "h2-0736", "hv": "Tô", "pos_vi": "Động từ", "vi": "Thuê; cho thuê", "ex_zh": "我想租一个房子。", "ex_vi": "Tôi muốn thuê một căn nhà."}
+{"id": "h2-0737", "hv": "Tổ", "pos_vi": "Lượng từ", "vi": "Nhóm; tổ; bộ", "ex_zh": "我们分成三组。", "ex_vi": "Chúng tôi chia thành ba nhóm."}
+{"id": "h2-0738", "hv": "Tổ thành", "pos_vi": "Động từ", "vi": "Tạo thành; hợp thành", "ex_zh": "一周由七天组成。", "ex_vi": "Một tuần gồm bảy ngày hợp thành."}
+{"id": "h2-0739", "hv": "Tổ trưởng", "pos_vi": "Danh từ", "vi": "Tổ trưởng; nhóm trưởng", "ex_zh": "他是我们的组长。", "ex_vi": "Anh ấy là nhóm trưởng của chúng tôi."}
+{"id": "h2-0740", "hv": "Chủy", "pos_vi": "Danh từ", "vi": "Miệng; mỏ", "ex_zh": "他的嘴很大。", "ex_vi": "Miệng của anh ấy rất to."}
+{"id": "h2-0741", "hv": "Tối cận", "pos_vi": "Danh từ", "vi": "Gần đây; dạo này", "ex_zh": "你最近忙吗?", "ex_vi": "Dạo này bạn có bận không?"}
+{"id": "h2-0742", "hv": "Tác gia", "pos_vi": "Danh từ", "vi": "Nhà văn; tác giả", "ex_zh": "他是一位有名的作家。", "ex_vi": "Ông ấy là một nhà văn nổi tiếng."}
+{"id": "h2-0743", "hv": "Tác văn", "pos_vi": "Danh từ", "vi": "Bài văn; làm văn", "ex_zh": "我在写作文。", "ex_vi": "Tôi đang viết bài văn."}
+{"id": "h2-0744", "hv": "Tác nghiệp", "pos_vi": "Danh từ", "vi": "Bài tập về nhà", "ex_zh": "我还没做完作业。", "ex_vi": "Tôi vẫn chưa làm xong bài tập."}
+{"id": "h2-0745", "hv": "Tác dụng", "pos_vi": "Danh từ", "vi": "Tác dụng; ảnh hưởng", "ex_zh": "这个药很有作用。", "ex_vi": "Loại thuốc này rất có tác dụng."}
+{"id": "h2-0746", "hv": "Tọa", "pos_vi": "Lượng từ", "vi": "Tòa; ngọn (lượng từ cho núi, nhà...)", "ex_zh": "那座山很高。", "ex_vi": "Ngọn núi kia rất cao."}
+{"id": "h2-0747", "hv": "Tọa vị", "pos_vi": "Danh từ", "vi": "Chỗ ngồi; ghế ngồi", "ex_zh": "这个座位有人吗?", "ex_vi": "Chỗ ngồi này có người không?"}
+{"id": "h2-0748", "hv": "Tố đáo", "pos_vi": "Động từ", "vi": "Làm được; thực hiện được", "ex_zh": "我一定能做到。", "ex_vi": "Tôi nhất định sẽ làm được."}
+{"id": "h2-0749", "hv": "Tố pháp", "pos_vi": "Danh từ", "vi": "Cách làm; phương pháp", "ex_zh": "这个做法很好。", "ex_vi": "Cách làm này rất tốt."}
+{"id": "h2-0750", "hv": "Tố phạn", "pos_vi": "Động từ", "vi": "Nấu cơm; nấu ăn", "ex_zh": "妈妈在做饭。", "ex_vi": "Mẹ đang nấu cơm."}
