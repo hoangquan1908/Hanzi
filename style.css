@@ -271,3 +271,4 @@ input { font: inherit; }
 .char-tabs button.on { border-color: var(--violet); background: var(--violet-soft); }
 .sheet .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 14px; }
 .sheet .row3 .btn { padding: 12px 6px; font-size: 14px; }
+.lvl-sub { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-top: 2px; }

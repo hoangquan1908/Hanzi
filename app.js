@@ -7,10 +7,12 @@
 
   // ---------------------------------------------------------------- config
   const STORE_KEY = 'hanzi.v1';
-  const ALL_LEVELS = [1, 2, 3, 4, 5, 6];
+  const ALL_LEVELS = [1, 2, 3, 4, 5, 6, 10];       // 10 = list bổ sung
+  const levelName = l => (l === 10 ? 'Bổ sung' : `HSK${l}`);
+  const levelSub = l => (l === 10 ? 'Từ HSK 2.0 ngoài HSK 3.0' : '');
   const SESSION_SIZE = 10;          // số câu mỗi lượt học
   const PTS = { correct: 20, hint: 10, skip: 5 };
-  const VERSION = '1.1.0';
+  const VERSION = '1.2.0';
   // f = cờ "đã xong", w = cờ "làm sai" trong S.words[id]
   const MODES = {
     known: { f: 'k', w: 'wk', label: '# Từ vựng', chip: 'green' },
@@ -148,7 +150,7 @@
   function route() {
     if (typeof destroyWriters === 'function') destroyWriters();
     const h = location.hash.replace(/^#\/?/, '');
-    const m = h.match(/^hsk(\d)(?:\/(quiz))?$/);
+    const m = h.match(/^hsk(\d+)(?:\/(quiz))?$/);
     if (m && LEVELS.includes(+m[1])) {
       const lvl = +m[1];
       if (m[2]) {
@@ -197,7 +199,7 @@
       <div class="card chart">${chartSVG()}</div>
 
       <div class="section-title">
-        <span><i class="bar"></i>HSK 3.0 · 📚 ${ALL_LEVELS.length} giáo trình</span>
+        <span><i class="bar"></i>HSK 3.0 · 📚 ${LEVELS.length} list</span>
         <span class="right"><span class="c-green">#: ${allK}%</span> &nbsp;<span class="c-orange">✓: ${allD}%</span></span>
       </div>
       <div class="levels">
@@ -210,14 +212,14 @@
 
   function levelCard(l) {
     if (!LEVELS.includes(l)) {
-      return `<div class="card level locked"><div class="row"><span class="name">HSK${l}</span><span class="chip orange">Sắp có</span></div></div>`;
+      return `<div class="card level locked"><div class="row"><span class="name">${levelName(l)}</span><span class="chip orange">Sắp có</span></div></div>`;
     }
     const s = levelStats(l);
     const gk = pct(s.known, s.total), od = pct(s.done, s.total);
     return `
       <button class="card level" data-act="open" data-level="${l}">
         <div class="row">
-          <span class="name">HSK${l}</span>
+          <span class="name">${levelName(l)}${levelSub(l) ? `<small class="lvl-sub">${levelSub(l)}</small>` : ''}</span>
           <span class="pct"><span class="c-green">#: ${gk}%</span> &nbsp;<span class="c-orange">✓: ${od}%</span> &nbsp;<span class="c-violet">✍️: ${pct(s.written, s.total)}%</span></span>
         </div>
         <div class="row">
@@ -300,7 +302,7 @@
 
       <div class="meta">
         <span>${metaText}</span>
-        <span class="chip orange">HSK${level}</span>
+        <span class="chip orange">${levelName(level)}</span>
         <span class="acc">Tỷ lệ đúng: ${s.acc == null ? '—' : (s.acc * 100).toFixed(1) + '%'}</span>
       </div>
       <div class="progress bigbar">${mode === 'write'
@@ -388,7 +390,7 @@
     if (mode === 'write') {
       quiz.countdown = 0;
       app.innerHTML = '<div class="countdown"><span style="font-size:20px">Đang tải nét chữ…</span></div>';
-      loadWriter().then(() => {
+      loadWriter().then(() => ensureChars(items.flatMap(it => [...it.w.w]).filter(c => HAN.test(c)))).then(() => {
         if (!quiz || quiz.level !== level) return;
         quiz.countdown = 3;
         const h = `#/hsk${level}/quiz`;
@@ -432,7 +434,7 @@
       </div>
       <div class="meta">
         <span>Câu ${Math.min(q.i + 1, q.items.length)}/${q.items.length}</span>
-        <span class="chip orange">HSK${q.level}</span>
+        <span class="chip orange">${levelName(q.level)}</span>
         <span class="acc">✓ ${q.right} · ✗ ${q.wrong}</span>
       </div>
       <div class="progress bigbar"><div class="g" style="width:${pct(q.i, q.items.length)}%"></div></div>`;
@@ -609,16 +611,27 @@
   }
   // Tải thư viện + dữ liệu nét chữ khi cần (lần đầu luyện viết), không làm chậm lúc mở app
   function loadWriter() {
-    if (window.HanziWriter && window.STROKES) return Promise.resolve();
+    if (window.HanziWriter) return Promise.resolve();
     if (!writerLoad) {
-      writerLoad = Promise.all([
-        window.HanziWriter ? 0 : loadScript('vendor/hanzi-writer.min.js'),
-        window.STROKES ? 0 : loadScript('data/strokes.js'),
-      ]).catch(e => { writerLoad = null; throw e; });
+      writerLoad = loadScript('vendor/hanzi-writer.min.js').catch(e => { writerLoad = null; throw e; });
     }
     return writerLoad;
   }
-  const charLoader = (ch, done, fail) => (window.STROKES && window.STROKES[ch] ? done(window.STROKES[ch]) : fail && fail(new Error('no data')));
+  // Dữ liệu nét chia thành 32 file theo mã Unicode (data/strokes/sNN.js), chỉ tải file cần dùng
+  const SHARDS = 32;
+  const shardLoads = {};
+  const shardOf = ch => ch.codePointAt(0) % SHARDS;
+  function loadShard(n) {
+    if (!shardLoads[n]) {
+      shardLoads[n] = loadScript(`data/strokes/s${String(n).padStart(2, '0')}.js`).catch(e => { delete shardLoads[n]; throw e; });
+    }
+    return shardLoads[n];
+  }
+  const ensureChars = chars => Promise.all([...new Set(chars.map(shardOf))].map(loadShard));
+  const charLoader = (ch, done, fail) => {
+    const got = () => (window.STROKES && window.STROKES[ch] ? done(window.STROKES[ch]) : fail && fail(new Error('no data')));
+    if (window.STROKES && window.STROKES[ch]) got(); else loadShard(shardOf(ch)).then(got, () => fail && fail(new Error('load failed')));
+  };
   const GRID = `<svg class="grid" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 0L100 100M100 0L0 100M50 0V100M0 50H100" /></svg>`;
 
   let writers = [];
@@ -794,7 +807,7 @@
       const note = ov.querySelector('.s-note');
       const close = () => { destroyWriters(); ov.remove(); };
       ov.addEventListener('click', e => { if (e.target === ov) destroyWriters(); }, true);
-      const strokeCount = ch => (window.STROKES[ch] ? window.STROKES[ch].strokes.length : 0);
+      const strokeCount = ch => (window.STROKES && window.STROKES[ch] ? window.STROKES[ch].strokes.length : '?');
       const show = () => {
         destroyWriters();
         target.innerHTML = '';
@@ -802,7 +815,7 @@
         note.textContent = `${chars[cur]} · ${strokeCount(chars[cur])} nét`;
         writer.animateCharacter();
       };
-      loadWriter().then(show).catch(() => { note.textContent = 'Không tải được dữ liệu nét chữ'; });
+      loadWriter().then(() => ensureChars(chars)).then(show).catch(() => { note.textContent = 'Không tải được dữ liệu nét chữ'; });
       ov.querySelectorAll('.char-tabs button').forEach(b => b.onclick = () => {
         ov.querySelectorAll('.char-tabs button').forEach(x => x.classList.remove('on'));
         b.classList.add('on'); cur = +b.dataset.c; if (window.HanziWriter) show();

@@ -1,0 +1,200 @@
+{"id": "h5-0401", "hv": "Giới", "pos_vi": "Lượng từ", "vi": "Khóa; kỳ; lần (hội nghị, tốt nghiệp)", "ex_zh": "他是今年毕业的这一届学生。", "ex_vi": "Cậu ấy là học sinh khóa tốt nghiệp năm nay."}
+{"id": "h5-0402", "hv": "Kim nhật", "pos_vi": "Danh từ", "vi": "Hôm nay; ngày nay", "ex_zh": "今日的天气比昨天好多了。", "ex_vi": "Thời tiết hôm nay tốt hơn hôm qua nhiều."}
+{"id": "h5-0403", "hv": "Tẫn quản", "pos_vi": "Liên từ", "vi": "Mặc dù; dù cho; cứ việc", "ex_zh": "尽管下雨，他还是准时来了。", "ex_vi": "Dù trời mưa, anh ấy vẫn đến đúng giờ."}
+{"id": "h5-0404", "hv": "Tẫn khả năng", "pos_vi": "Phó từ", "vi": "Cố hết sức có thể; càng nhiều càng tốt", "ex_zh": "请你尽可能早一点儿到。", "ex_vi": "Bạn hãy đến sớm hết mức có thể."}
+{"id": "h5-0405", "hv": "Khẩn khẩn", "pos_vi": "Phó từ", "vi": "Chặt chẽ; sát sao", "ex_zh": "孩子紧紧地抱着妈妈。", "ex_vi": "Đứa bé ôm chặt lấy mẹ."}
+{"id": "h5-0406", "hv": "Cận lai", "pos_vi": "Phó từ", "vi": "Gần đây; dạo này", "ex_zh": "近来他的工作特别忙。", "ex_vi": "Dạo này công việc của anh ấy đặc biệt bận."}
+{"id": "h5-0407", "hv": "Tiến hóa", "pos_vi": "Động từ", "vi": "Tiến hóa", "ex_zh": "人类是从猿慢慢进化来的。", "ex_vi": "Loài người tiến hóa dần từ loài vượn."}
+{"id": "h5-0408", "hv": "Kinh phí", "pos_vi": "Danh từ", "vi": "Kinh phí; chi phí", "ex_zh": "学校的经费不够用了。", "ex_vi": "Kinh phí của trường không đủ dùng nữa."}
+{"id": "h5-0409", "hv": "Cảnh tượng", "pos_vi": "Danh từ", "vi": "Cảnh tượng; quang cảnh", "ex_zh": "那个景象让我一直忘不了。", "ex_vi": "Cảnh tượng ấy khiến tôi mãi không quên được."}
+{"id": "h5-0410", "hv": "Cảnh cáo", "pos_vi": "Động từ", "vi": "Cảnh cáo; cảnh báo", "ex_zh": "老师警告他不要再迟到。", "ex_vi": "Thầy giáo cảnh cáo cậu ấy đừng đi muộn nữa."}
+{"id": "h5-0411", "hv": "Cạnh tái", "pos_vi": "Danh từ", "vi": "Cuộc thi đấu; cuộc đua tài", "ex_zh": "我们班参加了学校的竞赛。", "ex_vi": "Lớp chúng tôi tham gia cuộc thi của trường."}
+{"id": "h5-0412", "hv": "Cạnh tranh", "pos_vi": "Động từ", "vi": "Cạnh tranh; tranh đua", "ex_zh": "两家公司在市场上互相竞争。", "ex_vi": "Hai công ty cạnh tranh lẫn nhau trên thị trường."}
+{"id": "h5-0413", "hv": "Tửu quỷ", "pos_vi": "Danh từ", "vi": "Kẻ nghiện rượu; con sâu rượu", "ex_zh": "他是个出了名的酒鬼。", "ex_vi": "Ông ta là một kẻ nghiện rượu nổi tiếng."}
+{"id": "h5-0414", "hv": "Cứu tai", "pos_vi": "Động từ", "vi": "Cứu trợ thiên tai", "ex_zh": "大家都去灾区参加救灾工作。", "ex_vi": "Mọi người đều đến vùng thiên tai tham gia cứu trợ."}
+{"id": "h5-0415", "hv": "Cư nhiên", "pos_vi": "Phó từ", "vi": "Lại (bất ngờ); không ngờ", "ex_zh": "他居然忘了今天是我的生日。", "ex_vi": "Anh ấy lại quên mất hôm nay là sinh nhật tôi."}
+{"id": "h5-0416", "hv": "Cục diện", "pos_vi": "Danh từ", "vi": "Cục diện; tình thế", "ex_zh": "新的局面让大家都很吃惊。", "ex_vi": "Tình thế mới khiến mọi người đều rất ngạc nhiên."}
+{"id": "h5-0417", "hv": "Cục trưởng", "pos_vi": "Danh từ", "vi": "Cục trưởng", "ex_zh": "局长正在开会，请你等一下。", "ex_vi": "Cục trưởng đang họp, mời bạn chờ một lát."}
+{"id": "h5-0418", "hv": "Cử động", "pos_vi": "Danh từ", "vi": "Hành động; cử chỉ", "ex_zh": "他的举动让人觉得很奇怪。", "ex_vi": "Hành động của anh ấy khiến người ta thấy rất lạ."}
+{"id": "h5-0419", "hv": "Cự tuyệt", "pos_vi": "Động từ", "vi": "Từ chối; khước từ", "ex_zh": "他很客气地拒绝了我的邀请。", "ex_vi": "Anh ấy rất lịch sự từ chối lời mời của tôi."}
+{"id": "h5-0420", "hv": "Câu lạc bộ", "pos_vi": "Danh từ", "vi": "Câu lạc bộ", "ex_zh": "我哥哥参加了一个足球俱乐部。", "ex_vi": "Anh tôi tham gia một câu lạc bộ bóng đá."}
+{"id": "h5-0421", "hv": "Kịch bản", "pos_vi": "Danh từ", "vi": "Kịch bản; vở kịch", "ex_zh": "这个剧本写得非常精彩。", "ex_vi": "Kịch bản này viết vô cùng hay."}
+{"id": "h5-0422", "hv": "Quyết bất", "pos_vi": "Phó từ", "vi": "Quyết không; nhất định không", "ex_zh": "我决不会放弃自己的理想。", "ex_vi": "Tôi quyết không từ bỏ lý tưởng của mình."}
+{"id": "h5-0423", "hv": "Tuyệt vọng", "pos_vi": "Tính từ", "vi": "Tuyệt vọng", "ex_zh": "别绝望，事情总会有办法的。", "ex_vi": "Đừng tuyệt vọng, việc gì cũng sẽ có cách."}
+{"id": "h5-0424", "hv": "Quân nhân", "pos_vi": "Danh từ", "vi": "Quân nhân; bộ đội", "ex_zh": "他从小就想当一名军人。", "ex_vi": "Từ nhỏ anh ấy đã muốn làm một quân nhân."}
+{"id": "h5-0425", "hv": "Khai mạc", "pos_vi": "Động từ", "vi": "Khai mạc; mở màn", "ex_zh": "运动会明天上午九点开幕。", "ex_vi": "Đại hội thể thao khai mạc lúc chín giờ sáng mai."}
+{"id": "h5-0426", "hv": "Khai mạc thức", "pos_vi": "Danh từ", "vi": "Lễ khai mạc", "ex_zh": "开幕式上有很多精彩的表演。", "ex_vi": "Lễ khai mạc có nhiều tiết mục đặc sắc."}
+{"id": "h5-0427", "hv": "Khán thành", "pos_vi": "Động từ", "vi": "Coi như; xem là; nhìn nhầm thành", "ex_zh": "别把我看成不懂事的孩子。", "ex_vi": "Đừng coi tôi là đứa trẻ không hiểu chuyện."}
+{"id": "h5-0428", "hv": "Khán xuất", "pos_vi": "Động từ", "vi": "Nhìn ra; nhận ra", "ex_zh": "我看出他心里有点儿不高兴。", "ex_vi": "Tôi nhận ra trong lòng anh ấy hơi không vui."}
+{"id": "h5-0429", "hv": "Khán đãi", "pos_vi": "Động từ", "vi": "Nhìn nhận; đối xử", "ex_zh": "我们要正确看待自己的缺点。", "ex_vi": "Chúng ta cần nhìn nhận đúng khuyết điểm của mình."}
+{"id": "h5-0430", "hv": "Khảo hạch", "pos_vi": "Động từ", "vi": "Khảo hạch; đánh giá; kiểm tra", "ex_zh": "公司每年都要考核员工。", "ex_vi": "Công ty mỗi năm đều đánh giá nhân viên."}
+{"id": "h5-0431", "hv": "Khảo nhục", "pos_vi": "Danh từ", "vi": "Thịt nướng", "ex_zh": "周末我们一起去吃烤肉吧。", "ex_vi": "Cuối tuần chúng ta cùng đi ăn thịt nướng nhé."}
+{"id": "h5-0432", "hv": "Khảo áp", "pos_vi": "Danh từ", "vi": "Vịt quay", "ex_zh": "北京烤鸭是很有名的菜。", "ex_vi": "Vịt quay Bắc Kinh là món ăn rất nổi tiếng."}
+{"id": "h5-0433", "hv": "Kháo cận", "pos_vi": "Động từ", "vi": "Đến gần; tiến sát", "ex_zh": "请不要靠近那只狗。", "ex_vi": "Xin đừng lại gần con chó đó."}
+{"id": "h5-0434", "hv": "Khỏa", "pos_vi": "Lượng từ", "vi": "Hạt; viên; quả (lượng từ vật tròn nhỏ)", "ex_zh": "他送给我一颗红色的小星星。", "ex_vi": "Anh ấy tặng tôi một ngôi sao nhỏ màu đỏ."}
+{"id": "h5-0435", "hv": "Khả", "pos_vi": "Phó từ", "vi": "Có thể; nhưng; thật là (nhấn mạnh)", "ex_zh": "这件事你可得小心点儿。", "ex_vi": "Việc này bạn phải cẩn thận đấy."}
+{"id": "h5-0436", "hv": "Khả liên", "pos_vi": "Tính từ", "vi": "Đáng thương; tội nghiệp", "ex_zh": "那只小猫看起来很可怜。", "ex_vi": "Con mèo nhỏ ấy trông thật đáng thương."}
+{"id": "h5-0437", "hv": "Khả tích", "pos_vi": "Tính từ", "vi": "Đáng tiếc; tiếc", "ex_zh": "可惜我今天没有时间去。", "ex_vi": "Đáng tiếc hôm nay tôi không có thời gian đi."}
+{"id": "h5-0438", "hv": "Khát vọng", "pos_vi": "Động từ", "vi": "Khao khát; ước mong", "ex_zh": "孩子们都渴望自由和快乐。", "ex_vi": "Trẻ em đều khao khát tự do và niềm vui."}
+{"id": "h5-0439", "hv": "Khách hộ", "pos_vi": "Danh từ", "vi": "Khách hàng", "ex_zh": "我们要认真对待每一位客户。", "ex_vi": "Chúng ta phải nghiêm túc với từng khách hàng."}
+{"id": "h5-0440", "hv": "Khách khí", "pos_vi": "Tính từ", "vi": "Khách sáo; lịch sự", "ex_zh": "你太客气了，不用谢。", "ex_vi": "Bạn khách sáo quá, không cần cảm ơn."}
+{"id": "h5-0441", "hv": "Khách sảnh", "pos_vi": "Danh từ", "vi": "Phòng khách", "ex_zh": "客厅里放着一张大沙发。", "ex_vi": "Trong phòng khách đặt một chiếc sofa lớn."}
+{"id": "h5-0442", "hv": "Khóa đề", "pos_vi": "Danh từ", "vi": "Đề tài; chủ đề nghiên cứu", "ex_zh": "这个课题需要大家一起研究。", "ex_vi": "Đề tài này cần mọi người cùng nghiên cứu."}
+{"id": "h5-0443", "hv": "Khẳng định", "pos_vi": "Động từ", "vi": "Khẳng định; chắc chắn; nhất định", "ex_zh": "我肯定他今天会来。", "ex_vi": "Tôi chắc chắn hôm nay anh ấy sẽ đến."}
+{"id": "h5-0444", "hv": "Không trung", "pos_vi": "Danh từ", "vi": "Trên không; giữa không trung", "ex_zh": "一只小鸟在空中飞来飞去。", "ex_vi": "Một chú chim nhỏ bay lượn trên không trung."}
+{"id": "h5-0445", "hv": "Khống chế", "pos_vi": "Động từ", "vi": "Khống chế; kiểm soát", "ex_zh": "他很难控制自己的情绪。", "ex_vi": "Anh ấy rất khó kiểm soát cảm xúc của mình."}
+{"id": "h5-0446", "hv": "Khẩu hiệu", "pos_vi": "Danh từ", "vi": "Khẩu hiệu", "ex_zh": "大家一起喊起了比赛的口号。", "ex_vi": "Mọi người cùng hô khẩu hiệu của cuộc thi."}
+{"id": "h5-0447", "hv": "Khố", "pos_vi": "Danh từ", "vi": "Kho; thư viện dữ liệu", "ex_zh": "这些资料都放在数据库里。", "ex_vi": "Những tài liệu này đều để trong cơ sở dữ liệu."}
+{"id": "h5-0448", "hv": "Khoái hoạt", "pos_vi": "Tính từ", "vi": "Vui vẻ; sung sướng", "ex_zh": "孩子们在草地上快活地玩儿。", "ex_vi": "Bọn trẻ vui vẻ chơi trên bãi cỏ."}
+{"id": "h5-0449", "hv": "Khoan độ", "pos_vi": "Danh từ", "vi": "Chiều rộng; độ rộng", "ex_zh": "这条河的宽度大约有五十米。", "ex_vi": "Chiều rộng của con sông này khoảng năm mươi mét."}
+{"id": "h5-0450", "hv": "Cuồng", "pos_vi": "Tính từ", "vi": "Điên cuồng; cuồng nhiệt; ngông cuồng", "ex_zh": "他狂笑了很久，怎么也停不下来。", "ex_vi": "Anh ấy cười như điên rất lâu, không sao dừng được."}
+{"id": "h5-0451", "hv": "Khuy", "pos_vi": "Động từ", "vi": "Thiệt; lỗ; may mà (có ơn)", "ex_zh": "这次生意亏了不少钱。", "ex_vi": "Vụ làm ăn lần này lỗ không ít tiền."}
+{"id": "h5-0452", "hv": "Khốn nhiễu", "pos_vi": "Động từ", "vi": "Quấy rầy; làm phiền lòng", "ex_zh": "这个问题一直困扰着他。", "ex_vi": "Vấn đề này luôn làm anh ấy phiền lòng."}
+{"id": "h5-0453", "hv": "Lai tín", "pos_vi": "Danh từ", "vi": "Thư gửi đến; thư của bạn", "ex_zh": "我收到了你的来信，非常高兴。", "ex_vi": "Tôi nhận được thư của bạn, rất vui."}
+{"id": "h5-0454", "hv": "Lạn", "pos_vi": "Tính từ", "vi": "Thối; nát; hỏng", "ex_zh": "这个苹果已经烂了，别吃了。", "ex_vi": "Quả táo này đã thối rồi, đừng ăn nữa."}
+{"id": "h5-0455", "hv": "Lãng độc", "pos_vi": "Động từ", "vi": "Đọc to; ngâm đọc", "ex_zh": "老师让我们大声朗读课文。", "ex_vi": "Cô giáo bảo chúng tôi đọc to bài khóa."}
+{"id": "h5-0456", "hv": "Lãng mạn", "pos_vi": "Tính từ", "vi": "Lãng mạn", "ex_zh": "他们在海边过了一个浪漫的晚上。", "ex_vi": "Họ đã trải qua một buổi tối lãng mạn bên bờ biển."}
+{"id": "h5-0457", "hv": "Lao động", "pos_vi": "Động từ", "vi": "Lao động", "ex_zh": "爷爷每天都坚持劳动。", "ex_vi": "Ông nội ngày nào cũng kiên trì lao động."}
+{"id": "h5-0458", "hv": "Lê", "pos_vi": "Danh từ", "vi": "Quả lê; cây lê", "ex_zh": "这种梨又大又甜。", "ex_vi": "Loại lê này vừa to vừa ngọt."}
+{"id": "h5-0459", "hv": "Lễ", "pos_vi": "Danh từ", "vi": "Lễ; lễ nghi; quà tặng", "ex_zh": "他带了一份小礼来看你。", "ex_vi": "Anh ấy mang một món quà nhỏ đến thăm bạn."}
+{"id": "h5-0460", "hv": "Lễ bái", "pos_vi": "Danh từ", "vi": "Tuần lễ; thứ (trong tuần); lễ bái", "ex_zh": "下个礼拜我们要去旅行。", "ex_vi": "Tuần sau chúng tôi sẽ đi du lịch."}
+{"id": "h5-0461", "hv": "Lễ mạo", "pos_vi": "Tính từ", "vi": "Lịch sự; lễ phép", "ex_zh": "这个孩子对人很有礼貌。", "ex_vi": "Đứa trẻ này đối xử với người khác rất lễ phép."}
+{"id": "h5-0462", "hv": "Lệ hại", "pos_vi": "Tính từ", "vi": "Lợi hại; giỏi; dữ dội", "ex_zh": "他的汉语说得真厉害。", "ex_vi": "Tiếng Trung anh ấy nói thật giỏi."}
+{"id": "h5-0463", "hv": "Lập", "pos_vi": "Động từ", "vi": "Đứng; dựng; thành lập", "ex_zh": "他在门口立了很久。", "ex_vi": "Anh ấy đã đứng ở cửa rất lâu."}
+{"id": "h5-0464", "hv": "Lập trường", "pos_vi": "Danh từ", "vi": "Lập trường; quan điểm", "ex_zh": "我们要站在公平的立场上说话。", "ex_vi": "Chúng ta cần nói trên lập trường công bằng."}
+{"id": "h5-0465", "hv": "Lợi nhuận", "pos_vi": "Danh từ", "vi": "Lợi nhuận", "ex_zh": "这家公司今年的利润很高。", "ex_vi": "Lợi nhuận của công ty này năm nay rất cao."}
+{"id": "h5-0466", "hv": "Lệ ngoại", "pos_vi": "Danh từ", "vi": "Ngoại lệ", "ex_zh": "这个规定对谁都没有例外。", "ex_vi": "Quy định này không có ngoại lệ với ai cả."}
+{"id": "h5-0467", "hv": "Liên tiếp", "pos_vi": "Động từ", "vi": "Nối; kết nối", "ex_zh": "请把电脑和电视连接起来。", "ex_vi": "Hãy kết nối máy tính với tivi."}
+{"id": "h5-0468", "hv": "Liên lạc", "pos_vi": "Động từ", "vi": "Liên lạc; liên hệ", "ex_zh": "到了以后请马上和我联络。", "ex_vi": "Đến nơi rồi hãy liên lạc với tôi ngay."}
+{"id": "h5-0469", "hv": "Liên tưởng", "pos_vi": "Động từ", "vi": "Liên tưởng", "ex_zh": "看到大海，我联想到了童年。", "ex_vi": "Nhìn thấy biển, tôi liên tưởng đến tuổi thơ."}
+{"id": "h5-0470", "hv": "Kiểm bồn", "pos_vi": "Danh từ", "vi": "Chậu rửa mặt", "ex_zh": "他把脸盆放在了桌子下面。", "ex_vi": "Anh ấy để chậu rửa mặt dưới gầm bàn."}
+{"id": "h5-0471", "hv": "Kiểm sắc", "pos_vi": "Danh từ", "vi": "Sắc mặt; sắc diện", "ex_zh": "你的脸色不太好，是不是病了？", "ex_vi": "Sắc mặt bạn không tốt lắm, bị ốm à?"}
+{"id": "h5-0472", "hv": "Luyến ái", "pos_vi": "Động từ", "vi": "Yêu đương; luyến ái", "ex_zh": "他们恋爱已经三年了。", "ex_vi": "Họ yêu nhau đã ba năm rồi."}
+{"id": "h5-0473", "hv": "Lưỡng ngạn", "pos_vi": "Danh từ", "vi": "Hai bờ; hai bên bờ", "ex_zh": "河的两岸种满了柳树。", "ex_vi": "Hai bên bờ sông trồng đầy liễu."}
+{"id": "h5-0474", "hv": "Lân cư", "pos_vi": "Danh từ", "vi": "Hàng xóm; láng giềng", "ex_zh": "我的邻居是一位很热情的老人。", "ex_vi": "Hàng xóm của tôi là một cụ già rất nhiệt tình."}
+{"id": "h5-0475", "hv": "Linh", "pos_vi": "Danh từ", "vi": "Cái chuông; chuông nhỏ", "ex_zh": "门上挂着一个小铃。", "ex_vi": "Trên cửa treo một cái chuông nhỏ."}
+{"id": "h5-0476", "hv": "Linh thanh", "pos_vi": "Danh từ", "vi": "Tiếng chuông", "ex_zh": "下课铃声一响，同学们就跑出去了。", "ex_vi": "Tiếng chuông tan học vừa reo, học sinh liền chạy ra ngoài."}
+{"id": "h5-0477", "hv": "Lĩnh đái", "pos_vi": "Danh từ", "vi": "Cà vạt; ca-vát", "ex_zh": "他今天系了一条红色的领带。", "ex_vi": "Hôm nay anh ấy đeo một chiếc cà vạt màu đỏ."}
+{"id": "h5-0478", "hv": "Lệnh", "pos_vi": "Động từ", "vi": "Khiến cho; ra lệnh; làm cho", "ex_zh": "这个消息令大家非常高兴。", "ex_vi": "Tin này khiến mọi người rất vui."}
+{"id": "h5-0479", "hv": "Lưu động", "pos_vi": "Động từ", "vi": "Lưu động; di chuyển; chảy", "ex_zh": "河水在山谷里缓缓流动。", "ex_vi": "Nước sông chảy chậm trong thung lũng."}
+{"id": "h5-0480", "hv": "Lưu thông", "pos_vi": "Động từ", "vi": "Lưu thông; thông suốt", "ex_zh": "打开窗户可以让空气流通。", "ex_vi": "Mở cửa sổ có thể làm không khí lưu thông."}
+{"id": "h5-0481", "hv": "Lậu", "pos_vi": "Động từ", "vi": "Rò rỉ; dột; sót", "ex_zh": "屋顶漏了，雨水滴到了床上。", "ex_vi": "Mái nhà dột, nước mưa nhỏ xuống giường."}
+{"id": "h5-0482", "hv": "Lậu động", "pos_vi": "Danh từ", "vi": "Lỗ hổng; sơ hở", "ex_zh": "这个系统有一个很大的漏洞。", "ex_vi": "Hệ thống này có một lỗ hổng rất lớn."}
+{"id": "h5-0483", "hv": "Suất lĩnh", "pos_vi": "Động từ", "vi": "Dẫn dắt; dẫn đầu", "ex_zh": "他率领球队取得了胜利。", "ex_vi": "Anh ấy dẫn dắt đội bóng giành chiến thắng."}
+{"id": "h5-0484", "hv": "La tập", "pos_vi": "Danh từ", "vi": "Logic; lô-gic", "ex_zh": "他说的话一点儿逻辑都没有。", "ex_vi": "Lời anh ta nói chẳng có chút logic nào."}
+{"id": "h5-0485", "hv": "Lạc thực", "pos_vi": "Động từ", "vi": "Thực hiện; triển khai; đảm bảo", "ex_zh": "计划已经落实到每个人了。", "ex_vi": "Kế hoạch đã được triển khai đến từng người."}
+{"id": "h5-0486", "hv": "Mã đầu", "pos_vi": "Danh từ", "vi": "Bến tàu; bến cảng", "ex_zh": "船很快就靠在了码头旁边。", "ex_vi": "Con thuyền nhanh chóng cập vào bến tàu."}
+{"id": "h5-0487", "hv": "Mạ", "pos_vi": "Động từ", "vi": "Mắng; chửi", "ex_zh": "他不应该这样骂孩子。", "ex_vi": "Anh ấy không nên mắng đứa trẻ như vậy."}
+{"id": "h5-0488", "hv": "Mãi mại", "pos_vi": "Danh từ", "vi": "Buôn bán; việc làm ăn", "ex_zh": "他在市场上做小买卖。", "ex_vi": "Anh ấy buôn bán nhỏ ở chợ."}
+{"id": "h5-0489", "hv": "Mạn họa", "pos_vi": "Danh từ", "vi": "Truyện tranh; hoạt họa", "ex_zh": "我弟弟喜欢看日本漫画。", "ex_vi": "Em trai tôi thích đọc truyện tranh Nhật Bản."}
+{"id": "h5-0490", "hv": "Mạn trường", "pos_vi": "Tính từ", "vi": "Dài dằng dặc; lê thê", "ex_zh": "漫长的冬天终于过去了。", "ex_vi": "Mùa đông dài đằng đẵng cuối cùng đã qua."}
+{"id": "h5-0491", "hv": "Mao bút", "pos_vi": "Danh từ", "vi": "Bút lông", "ex_zh": "爷爷用毛笔写了一幅字。", "ex_vi": "Ông nội dùng bút lông viết một bức chữ."}
+{"id": "h5-0492", "hv": "Mâu thuẫn", "pos_vi": "Tính từ", "vi": "Mâu thuẫn; xung đột", "ex_zh": "他们俩的想法有些矛盾。", "ex_vi": "Suy nghĩ của hai người họ có chút mâu thuẫn."}
+{"id": "h5-0493", "hv": "Mạo", "pos_vi": "Động từ", "vi": "Bốc lên; liều; mạo (hiểm)", "ex_zh": "烟从屋顶上冒了出来。", "ex_vi": "Khói bốc ra từ trên mái nhà."}
+{"id": "h5-0494", "hv": "Mậu dịch", "pos_vi": "Danh từ", "vi": "Thương mại; mậu dịch", "ex_zh": "两国之间的贸易越来越多。", "ex_vi": "Thương mại giữa hai nước ngày càng nhiều."}
+{"id": "h5-0495", "hv": "Môi", "pos_vi": "Danh từ", "vi": "Than; than đá", "ex_zh": "冬天很多人家里用煤取暖。", "ex_vi": "Mùa đông nhiều nhà dùng than để sưởi ấm."}
+{"id": "h5-0496", "hv": "Môi khí", "pos_vi": "Danh từ", "vi": "Khí ga; ga đốt", "ex_zh": "做饭前请先打开煤气。", "ex_vi": "Trước khi nấu ăn hãy mở ga trước."}
+{"id": "h5-0497", "hv": "Môn chẩn", "pos_vi": "Danh từ", "vi": "Khám ngoại trú; phòng khám", "ex_zh": "他今天下午去医院看门诊。", "ex_vi": "Chiều nay anh ấy đến bệnh viện khám ngoại trú."}
+{"id": "h5-0498", "hv": "Mê nhân", "pos_vi": "Tính từ", "vi": "Quyến rũ; hấp dẫn", "ex_zh": "这里的夜景真是太迷人了。", "ex_vi": "Cảnh đêm ở đây thật quá quyến rũ."}
+{"id": "h5-0499", "hv": "Mê tín", "pos_vi": "Động từ", "vi": "Mê tín", "ex_zh": "他一点儿也不迷信。", "ex_vi": "Anh ấy chẳng mê tín chút nào."}
+{"id": "h5-0500", "hv": "Diện mạo", "pos_vi": "Danh từ", "vi": "Diện mạo; bộ mặt", "ex_zh": "这座城市的面貌变化很大。", "ex_vi": "Diện mạo của thành phố này thay đổi rất lớn."}
+{"id": "h5-0501", "hv": "Diện tử", "pos_vi": "Danh từ", "vi": "Thể diện; mặt mũi", "ex_zh": "他很爱面子，不愿意求别人。", "ex_vi": "Anh ấy rất sĩ diện, không muốn nhờ người khác."}
+{"id": "h5-0502", "hv": "Miểu", "pos_vi": "Lượng từ", "vi": "Giây", "ex_zh": "他一百米只跑了十二秒。", "ex_vi": "Anh ấy chạy một trăm mét chỉ mất mười hai giây."}
+{"id": "h5-0503", "hv": "Mẫn cảm", "pos_vi": "Tính từ", "vi": "Nhạy cảm", "ex_zh": "她对声音特别敏感。", "ex_vi": "Cô ấy đặc biệt nhạy cảm với âm thanh."}
+{"id": "h5-0504", "hv": "Minh lượng", "pos_vi": "Tính từ", "vi": "Sáng sủa; sáng ngời", "ex_zh": "这间屋子又干净又明亮。", "ex_vi": "Căn phòng này vừa sạch vừa sáng sủa."}
+{"id": "h5-0505", "hv": "Minh minh", "pos_vi": "Phó từ", "vi": "Rõ ràng là", "ex_zh": "他明明知道，却不告诉我。", "ex_vi": "Rõ ràng anh ấy biết mà lại không nói cho tôi."}
+{"id": "h5-0506", "hv": "Mệnh lệnh", "pos_vi": "Danh từ", "vi": "Mệnh lệnh; ra lệnh", "ex_zh": "队长命令大家马上出发。", "ex_vi": "Đội trưởng ra lệnh cho mọi người xuất phát ngay."}
+{"id": "h5-0507", "hv": "Mô phạm", "pos_vi": "Danh từ", "vi": "Gương mẫu; người mẫu mực", "ex_zh": "她是我们学校的模范老师。", "ex_vi": "Cô ấy là giáo viên gương mẫu của trường chúng tôi."}
+{"id": "h5-0508", "hv": "Mô phỏng", "pos_vi": "Động từ", "vi": "Mô phỏng; bắt chước", "ex_zh": "小孩子喜欢模仿大人说话。", "ex_vi": "Trẻ con thích bắt chước người lớn nói chuyện."}
+{"id": "h5-0509", "hv": "Mô hồ", "pos_vi": "Tính từ", "vi": "Mờ; mơ hồ", "ex_zh": "我的眼睛看东西有点儿模糊。", "ex_vi": "Mắt tôi nhìn đồ vật hơi bị mờ."}
+{"id": "h5-0510", "hv": "Mô thức", "pos_vi": "Danh từ", "vi": "Mô hình; kiểu mẫu; chế độ", "ex_zh": "这种工作模式很适合年轻人。", "ex_vi": "Mô hình làm việc này rất hợp với người trẻ."}
+{"id": "h5-0511", "hv": "Mô dạng", "pos_vi": "Danh từ", "vi": "Dáng vẻ; bộ dạng", "ex_zh": "他长得跟他爸爸一个模样。", "ex_vi": "Anh ấy giống bố mình như đúc."}
+{"id": "h5-0512", "hv": "Ma sát", "pos_vi": "Động từ", "vi": "Cọ xát; ma sát; xích mích", "ex_zh": "两只手互相摩擦就会变热。", "ex_vi": "Hai bàn tay cọ vào nhau sẽ nóng lên."}
+{"id": "h5-0513", "hv": "Ma thác", "pos_vi": "Danh từ", "vi": "Xe máy; mô tô", "ex_zh": "他骑着摩托去上班。", "ex_vi": "Anh ấy đi làm bằng xe máy."}
+{"id": "h5-0514", "hv": "Mục quang", "pos_vi": "Danh từ", "vi": "Ánh mắt; tầm nhìn", "ex_zh": "她的目光一直看着窗外。", "ex_vi": "Ánh mắt cô ấy luôn nhìn ra ngoài cửa sổ."}
+{"id": "h5-0515", "hv": "Nại tâm", "pos_vi": "Tính từ", "vi": "Kiên nhẫn; nhẫn nại", "ex_zh": "老师对学生非常有耐心。", "ex_vi": "Thầy cô rất kiên nhẫn với học sinh."}
+{"id": "h5-0516", "hv": "Nam tính", "pos_vi": "Danh từ", "vi": "Nam giới; đàn ông", "ex_zh": "这个工作更适合男性。", "ex_vi": "Công việc này phù hợp với nam giới hơn."}
+{"id": "h5-0517", "hv": "Nam bắc", "pos_vi": "Danh từ", "vi": "Nam bắc; hai miền Nam Bắc", "ex_zh": "这条路是南北方向的。", "ex_vi": "Con đường này chạy theo hướng nam bắc."}
+{"id": "h5-0518", "hv": "Nam cực", "pos_vi": "Danh từ riêng", "vi": "Nam Cực", "ex_zh": "南极的冬天特别冷。", "ex_vi": "Mùa đông ở Nam Cực đặc biệt lạnh."}
+{"id": "h5-0519", "hv": "Nan đắc", "pos_vi": "Tính từ", "vi": "Hiếm có; khó được", "ex_zh": "这么好的机会真是难得。", "ex_vi": "Cơ hội tốt thế này thật hiếm có."}
+{"id": "h5-0520", "hv": "Nan dĩ", "pos_vi": "Phó từ", "vi": "Khó mà; khó có thể", "ex_zh": "他的话让人难以相信。", "ex_vi": "Lời anh ấy nói khiến người ta khó mà tin được."}
+{"id": "h5-0521", "hv": "Não tử", "pos_vi": "Danh từ", "vi": "Bộ não; đầu óc", "ex_zh": "他的脑子转得特别快。", "ex_vi": "Đầu óc anh ấy xoay chuyển đặc biệt nhanh."}
+{"id": "h5-0522", "hv": "Nội tại", "pos_vi": "Tính từ", "vi": "Nội tại; bên trong", "ex_zh": "内在的美比外表更重要。", "ex_vi": "Vẻ đẹp nội tại quan trọng hơn vẻ bề ngoài."}
+{"id": "h5-0523", "hv": "Năng lượng", "pos_vi": "Danh từ", "vi": "Năng lượng", "ex_zh": "太阳能是一种干净的能量。", "ex_vi": "Năng lượng mặt trời là một loại năng lượng sạch."}
+{"id": "h5-0524", "hv": "Niên độ", "pos_vi": "Danh từ", "vi": "Năm (tài chính); niên độ", "ex_zh": "公司正在做年度总结。", "ex_vi": "Công ty đang làm tổng kết cả năm."}
+{"id": "h5-0525", "hv": "Niên linh", "pos_vi": "Danh từ", "vi": "Tuổi; tuổi tác", "ex_zh": "她看起来比实际年龄小。", "ex_vi": "Trông cô ấy trẻ hơn tuổi thật."}
+{"id": "h5-0526", "hv": "Niên tiền", "pos_vi": "Danh từ", "vi": "Năm trước; cách đây... năm", "ex_zh": "三年前他还住在北京。", "ex_vi": "Ba năm trước anh ấy còn sống ở Bắc Kinh."}
+{"id": "h5-0527", "hv": "Ngưu tể khố", "pos_vi": "Danh từ", "vi": "Quần bò; quần jean", "ex_zh": "这条牛仔裤穿着很舒服。", "ex_vi": "Chiếc quần bò này mặc rất thoải mái."}
+{"id": "h5-0528", "hv": "Nông sản phẩm", "pos_vi": "Danh từ", "vi": "Nông sản", "ex_zh": "这里的农产品都很新鲜。", "ex_vi": "Nông sản ở đây đều rất tươi."}
+{"id": "h5-0529", "hv": "Nữ tính", "pos_vi": "Danh từ", "vi": "Nữ giới; phụ nữ", "ex_zh": "现在越来越多的女性出来工作。", "ex_vi": "Ngày nay ngày càng nhiều phụ nữ ra ngoài đi làm."}
+{"id": "h5-0530", "hv": "Noãn", "pos_vi": "Tính từ", "vi": "Ấm; ấm áp", "ex_zh": "屋子里很暖，你把外套脱了吧。", "ex_vi": "Trong phòng rất ấm, bạn cởi áo khoác ra đi."}
+{"id": "h5-0531", "hv": "Ngẫu nhĩ", "pos_vi": "Phó từ", "vi": "Thỉnh thoảng; đôi khi", "ex_zh": "他偶尔会来我们家吃饭。", "ex_vi": "Thỉnh thoảng anh ấy đến nhà chúng tôi ăn cơm."}
+{"id": "h5-0532", "hv": "Ngẫu nhiên", "pos_vi": "Tính từ", "vi": "Ngẫu nhiên; tình cờ", "ex_zh": "我们是偶然在街上遇到的。", "ex_vi": "Chúng tôi tình cờ gặp nhau trên phố."}
+{"id": "h5-0533", "hv": "Ngẫu tượng", "pos_vi": "Danh từ", "vi": "Thần tượng; idol", "ex_zh": "她是很多年轻人的偶像。", "ex_vi": "Cô ấy là thần tượng của nhiều bạn trẻ."}
+{"id": "h5-0534", "hv": "Phách nhiếp", "pos_vi": "Động từ", "vi": "Quay phim; chụp ảnh", "ex_zh": "这部电影是在海边拍摄的。", "ex_vi": "Bộ phim này được quay ở bên bờ biển."}
+{"id": "h5-0535", "hv": "Bài trừ", "pos_vi": "Động từ", "vi": "Loại trừ; bài trừ; gạt bỏ", "ex_zh": "医生排除了生病的可能。", "ex_vi": "Bác sĩ đã loại trừ khả năng bị bệnh."}
+{"id": "h5-0536", "hv": "Bàng", "pos_vi": "Danh từ", "vi": "Bên cạnh; cạnh", "ex_zh": "学校旁有一家小书店。", "ex_vi": "Bên cạnh trường có một hiệu sách nhỏ."}
+{"id": "h5-0537", "hv": "Bồi", "pos_vi": "Động từ", "vi": "Đi cùng; tháp tùng", "ex_zh": "周末我陪妈妈去买东西。", "ex_vi": "Cuối tuần tôi đi mua sắm cùng mẹ."}
+{"id": "h5-0538", "hv": "Bồi", "pos_vi": "Động từ", "vi": "Bồi thường; lỗ vốn", "ex_zh": "我不小心打破了杯子，要赔钱。", "ex_vi": "Tôi lỡ làm vỡ cái cốc nên phải đền tiền."}
+{"id": "h5-0539", "hv": "Bồi thường", "pos_vi": "Động từ", "vi": "Bồi thường; đền", "ex_zh": "他同意赔偿我们的损失。", "ex_vi": "Anh ấy đồng ý bồi thường thiệt hại cho chúng tôi."}
+{"id": "h5-0540", "hv": "Phối bị", "pos_vi": "Động từ", "vi": "Trang bị; bố trí", "ex_zh": "每个教室都配备了电脑。", "ex_vi": "Mỗi phòng học đều được trang bị máy tính."}
+{"id": "h5-0541", "hv": "Phối sáo", "pos_vi": "Tính từ", "vi": "Đồng bộ; đi kèm; hoàn chỉnh", "ex_zh": "这套房子的配套设施很齐全。", "ex_vi": "Các tiện ích đồng bộ của căn nhà này rất đầy đủ."}
+{"id": "h5-0542", "hv": "Phún", "pos_vi": "Động từ", "vi": "Phun; xịt", "ex_zh": "他在花上喷了一点儿水。", "ex_vi": "Anh ấy xịt một chút nước lên hoa."}
+{"id": "h5-0543", "hv": "Bồn", "pos_vi": "Danh từ", "vi": "Chậu; cái chậu", "ex_zh": "她买了一盆很漂亮的花。", "ex_vi": "Cô ấy mua một chậu hoa rất đẹp."}
+{"id": "h5-0544", "hv": "Phi", "pos_vi": "Động từ", "vi": "Khoác; choàng", "ex_zh": "天冷了，你披件衣服吧。", "ex_vi": "Trời lạnh rồi, bạn khoác thêm cái áo đi."}
+{"id": "h5-0545", "hv": "Bì phu", "pos_vi": "Danh từ", "vi": "Da; làn da", "ex_zh": "冬天我的皮肤特别干。", "ex_vi": "Mùa đông da tôi đặc biệt khô."}
+{"id": "h5-0546", "hv": "Bì hài", "pos_vi": "Danh từ", "vi": "Giày da", "ex_zh": "他买了一双黑色的皮鞋。", "ex_vi": "Anh ấy mua một đôi giày da màu đen."}
+{"id": "h5-0547", "hv": "Bì khí", "pos_vi": "Danh từ", "vi": "Tính khí; tính nết", "ex_zh": "他的脾气很好，从不生气。", "ex_vi": "Tính anh ấy rất tốt, chẳng bao giờ nổi giận."}
+{"id": "h5-0548", "hv": "Thất", "pos_vi": "Lượng từ", "vi": "Con (ngựa); xấp (vải)", "ex_zh": "草地上有几匹马在吃草。", "ex_vi": "Trên đồng cỏ có mấy con ngựa đang gặm cỏ."}
+{"id": "h5-0549", "hv": "Phiến", "pos_vi": "Động từ", "vi": "Lừa; lừa gạt", "ex_zh": "你别骗我，我不会相信的。", "ex_vi": "Bạn đừng lừa tôi, tôi sẽ không tin đâu."}
+{"id": "h5-0550", "hv": "Phiến tử", "pos_vi": "Danh từ", "vi": "Kẻ lừa đảo", "ex_zh": "那个骗子骗了很多老人的钱。", "ex_vi": "Tên lừa đảo đó đã lừa tiền của nhiều cụ già."}
+{"id": "h5-0551", "hv": "Bính", "pos_vi": "Động từ", "vi": "Ghép; liều; dốc sức", "ex_zh": "他拼命地往学校跑。", "ex_vi": "Cậu ấy dốc hết sức chạy về phía trường."}
+{"id": "h5-0552", "hv": "Tần đạo", "pos_vi": "Danh từ", "vi": "Kênh (truyền hình); tần số", "ex_zh": "这个频道每天都有新闻。", "ex_vi": "Kênh này ngày nào cũng có tin tức."}
+{"id": "h5-0553", "hv": "Tần phồn", "pos_vi": "Tính từ", "vi": "Thường xuyên; dồn dập", "ex_zh": "最近他们见面很频繁。", "ex_vi": "Gần đây họ gặp nhau rất thường xuyên."}
+{"id": "h5-0554", "hv": "Phẩm", "pos_vi": "Danh từ", "vi": "Hàng hóa; phẩm chất; nếm thử", "ex_zh": "你可以先品一下这杯茶。", "ex_vi": "Bạn có thể nếm thử tách trà này trước."}
+{"id": "h5-0555", "hv": "Phẩm chủng", "pos_vi": "Danh từ", "vi": "Giống; chủng loại", "ex_zh": "这家店的水果品种很多。", "ex_vi": "Cửa hàng này có rất nhiều loại trái cây."}
+{"id": "h5-0556", "hv": "Bình thản", "pos_vi": "Tính từ", "vi": "Bằng phẳng", "ex_zh": "前面的路又宽又平坦。", "ex_vi": "Đường phía trước vừa rộng vừa bằng phẳng."}
+{"id": "h5-0557", "hv": "Bình nguyên", "pos_vi": "Danh từ", "vi": "Đồng bằng", "ex_zh": "这片平原上种着很多小麦。", "ex_vi": "Đồng bằng này trồng rất nhiều lúa mì."}
+{"id": "h5-0558", "hv": "Bình cổ", "pos_vi": "Động từ", "vi": "Đánh giá; ước tính", "ex_zh": "专家们正在评估这个计划。", "ex_vi": "Các chuyên gia đang đánh giá kế hoạch này."}
+{"id": "h5-0559", "hv": "Bình luận", "pos_vi": "Danh từ", "vi": "Bình luận; nhận xét", "ex_zh": "大家对这部电影的评论很好。", "ex_vi": "Mọi người nhận xét rất tốt về bộ phim này."}
+{"id": "h5-0560", "hv": "Bằng", "pos_vi": "Đại từ", "vi": "Dựa vào; căn cứ vào", "ex_zh": "凭你的能力一定能成功。", "ex_vi": "Dựa vào năng lực của bạn nhất định sẽ thành công."}
+{"id": "h5-0561", "hv": "Bát", "pos_vi": "Động từ", "vi": "Hắt; tạt", "ex_zh": "别往地上泼水，会滑倒的。", "ex_vi": "Đừng hắt nước xuống đất, sẽ trượt ngã đấy."}
+{"id": "h5-0562", "hv": "Bồ đào", "pos_vi": "Danh từ", "vi": "Nho; quả nho", "ex_zh": "这些葡萄又大又甜。", "ex_vi": "Những quả nho này vừa to vừa ngọt."}
+{"id": "h5-0563", "hv": "Bồ đào tửu", "pos_vi": "Danh từ", "vi": "Rượu vang", "ex_zh": "他喜欢喝一杯葡萄酒。", "ex_vi": "Anh ấy thích uống một ly rượu vang."}
+{"id": "h5-0564", "hv": "Kỳ vọng", "pos_vi": "Động từ", "vi": "Kỳ vọng; mong đợi", "ex_zh": "父母对孩子的期望很高。", "ex_vi": "Cha mẹ kỳ vọng rất cao vào con cái."}
+{"id": "h5-0565", "hv": "Tề toàn", "pos_vi": "Tính từ", "vi": "Đầy đủ; đủ cả", "ex_zh": "这家商店的东西很齐全。", "ex_vi": "Hàng hóa ở cửa hàng này rất đầy đủ."}
+{"id": "h5-0566", "hv": "Kỳ", "pos_vi": "Đại từ", "vi": "Của nó; của họ; ấy", "ex_zh": "我们应该各尽其职。", "ex_vi": "Chúng ta nên mỗi người làm tròn chức trách của mình."}
+{"id": "h5-0567", "hv": "Khởi động", "pos_vi": "Động từ", "vi": "Khởi động; bắt đầu chạy", "ex_zh": "请先启动电脑，再打开文件。", "ex_vi": "Hãy khởi động máy tính trước rồi mở tệp."}
+{"id": "h5-0568", "hv": "Khải phát", "pos_vi": "Động từ", "vi": "Gợi mở; khai sáng", "ex_zh": "老师的话给了我很大的启发。", "ex_vi": "Lời thầy cô gợi mở cho tôi rất nhiều."}
+{"id": "h5-0569", "hv": "Khải sự", "pos_vi": "Danh từ", "vi": "Thông báo; cáo thị", "ex_zh": "门口贴着一张寻人启事。", "ex_vi": "Ở cửa dán một tờ thông báo tìm người."}
+{"id": "h5-0570", "hv": "Khởi đáo", "pos_vi": "Động từ", "vi": "Đạt được; phát huy (tác dụng)", "ex_zh": "这个办法起到了很好的作用。", "ex_vi": "Cách này đã phát huy tác dụng rất tốt."}
+{"id": "h5-0571", "hv": "Khởi mã", "pos_vi": "Phó từ", "vi": "Ít nhất; tối thiểu", "ex_zh": "起码要三天才能做完。", "ex_vi": "Ít nhất phải ba ngày mới làm xong."}
+{"id": "h5-0572", "hv": "Khí thể", "pos_vi": "Danh từ", "vi": "Chất khí; khí", "ex_zh": "水变成热气是一种气体。", "ex_vi": "Hơi nước là một loại chất khí."}
+{"id": "h5-0573", "hv": "Khí tượng", "pos_vi": "Danh từ", "vi": "Khí tượng; thời tiết", "ex_zh": "气象台说明天有大雨。", "ex_vi": "Đài khí tượng nói ngày mai có mưa to."}
+{"id": "h5-0574", "hv": "Thiêm", "pos_vi": "Động từ", "vi": "Ký; bốc thăm; viết tên", "ex_zh": "请在这里签你的名字。", "ex_vi": "Xin hãy ký tên của bạn ở đây."}
+{"id": "h5-0575", "hv": "Thiêm đính", "pos_vi": "Động từ", "vi": "Ký kết", "ex_zh": "两家公司签订了新的合同。", "ex_vi": "Hai công ty đã ký kết hợp đồng mới."}
+{"id": "h5-0576", "hv": "Thiêm danh", "pos_vi": "Động từ", "vi": "Ký tên", "ex_zh": "请在表格下面签名。", "ex_vi": "Xin hãy ký tên ở phía dưới biểu mẫu."}
+{"id": "h5-0577", "hv": "Thiêm ước", "pos_vi": "Động từ", "vi": "Ký hợp đồng", "ex_zh": "那位球员已经和球队签约了。", "ex_vi": "Cầu thủ đó đã ký hợp đồng với đội bóng."}
+{"id": "h5-0578", "hv": "Thiêm chứng", "pos_vi": "Danh từ", "vi": "Thị thực; visa", "ex_zh": "办签证需要带护照和照片。", "ex_vi": "Làm visa cần mang theo hộ chiếu và ảnh."}
+{"id": "h5-0579", "hv": "Thiêm tự", "pos_vi": "Động từ", "vi": "Ký tên; ký", "ex_zh": "这份文件需要经理签字。", "ex_vi": "Tài liệu này cần giám đốc ký tên."}
+{"id": "h5-0580", "hv": "Tiền cảnh", "pos_vi": "Danh từ", "vi": "Triển vọng; tương lai", "ex_zh": "这个行业的前景非常好。", "ex_vi": "Triển vọng của ngành này rất tốt."}
+{"id": "h5-0581", "hv": "Tiền đề", "pos_vi": "Danh từ", "vi": "Tiền đề; điều kiện tiên quyết", "ex_zh": "努力是成功的前提。", "ex_vi": "Nỗ lực là tiền đề của thành công."}
+{"id": "h5-0582", "hv": "Khiếm", "pos_vi": "Động từ", "vi": "Nợ; thiếu", "ex_zh": "我还欠他一百块钱。", "ex_vi": "Tôi còn nợ anh ấy một trăm tệ."}
+{"id": "h5-0583", "hv": "Thương", "pos_vi": "Danh từ", "vi": "Súng; cây súng", "ex_zh": "他手里拿着一把玩具枪。", "ex_vi": "Trong tay cậu ấy cầm một khẩu súng đồ chơi."}
+{"id": "h5-0584", "hv": "Cường độ", "pos_vi": "Danh từ", "vi": "Cường độ; độ mạnh", "ex_zh": "这项工作的强度很大。", "ex_vi": "Cường độ của công việc này rất lớn."}
+{"id": "h5-0585", "hv": "Cưỡng bách", "pos_vi": "Động từ", "vi": "Ép buộc; cưỡng bức", "ex_zh": "没有人能强迫你做这件事。", "ex_vi": "Không ai có thể ép bạn làm việc này."}
+{"id": "h5-0586", "hv": "Tường bích", "pos_vi": "Danh từ", "vi": "Bức tường; vách", "ex_zh": "墙壁上挂着一幅画。", "ex_vi": "Trên tường treo một bức tranh."}
+{"id": "h5-0587", "hv": "Thưởng", "pos_vi": "Động từ", "vi": "Cướp; giành; tranh", "ex_zh": "他抢着去帮老人拿东西。", "ex_vi": "Anh ấy giành đi giúp cụ già xách đồ."}
+{"id": "h5-0588", "hv": "Thưởng cứu", "pos_vi": "Động từ", "vi": "Cấp cứu; cứu chữa khẩn cấp", "ex_zh": "医生们正在全力抢救病人。", "ex_vi": "Các bác sĩ đang dốc sức cấp cứu bệnh nhân."}
+{"id": "h5-0589", "hv": "Tiễu tiễu", "pos_vi": "Phó từ", "vi": "Lặng lẽ; nhẹ nhàng", "ex_zh": "他悄悄地走进了房间。", "ex_vi": "Anh ấy lặng lẽ bước vào phòng."}
+{"id": "h5-0590", "hv": "Xao", "pos_vi": "Động từ", "vi": "Gõ; đập", "ex_zh": "有人在敲窗户，你去看看。", "ex_vi": "Có người gõ cửa sổ, bạn đi xem thử."}
+{"id": "h5-0591", "hv": "Xao môn", "pos_vi": "Động từ", "vi": "Gõ cửa", "ex_zh": "进来之前请先敲门。", "ex_vi": "Trước khi vào xin hãy gõ cửa."}
+{"id": "h5-0592", "hv": "Tiều", "pos_vi": "Động từ", "vi": "Nhìn; xem (khẩu ngữ)", "ex_zh": "你瞧，天上有一道彩虹。", "ex_vi": "Bạn nhìn kìa, trên trời có cầu vồng."}
+{"id": "h5-0593", "hv": "Cầm", "pos_vi": "Danh từ", "vi": "Đàn; nhạc cụ", "ex_zh": "她从五岁起就开始学琴。", "ex_vi": "Cô ấy học đàn từ năm năm tuổi."}
+{"id": "h5-0594", "hv": "Cần phấn", "pos_vi": "Tính từ", "vi": "Chăm chỉ; cần cù", "ex_zh": "这个学生学习非常勤奋。", "ex_vi": "Học sinh này học tập vô cùng chăm chỉ."}
+{"id": "h5-0595", "hv": "Thanh", "pos_vi": "Tính từ", "vi": "Xanh; xanh lục; trẻ", "ex_zh": "山上的树又青又绿。", "ex_vi": "Cây trên núi vừa xanh vừa biếc."}
+{"id": "h5-0596", "hv": "Thanh thần", "pos_vi": "Danh từ", "vi": "Sáng sớm; tinh mơ", "ex_zh": "清晨的空气特别新鲜。", "ex_vi": "Không khí buổi sáng sớm đặc biệt trong lành."}
+{"id": "h5-0597", "hv": "Thanh lý", "pos_vi": "Động từ", "vi": "Dọn dẹp; thanh lý", "ex_zh": "周末我们一起清理房间吧。", "ex_vi": "Cuối tuần chúng ta cùng dọn dẹp phòng nhé."}
+{"id": "h5-0598", "hv": "Tình tiết", "pos_vi": "Danh từ", "vi": "Tình tiết; diễn biến", "ex_zh": "这部电影的情节很有意思。", "ex_vi": "Tình tiết của bộ phim này rất thú vị."}
+{"id": "h5-0599", "hv": "Tình hình", "pos_vi": "Danh từ", "vi": "Tình hình; tình trạng", "ex_zh": "你能说说现场的情形吗？", "ex_vi": "Bạn có thể kể về tình hình tại hiện trường không?"}
+{"id": "h5-0600", "hv": "Tình lãng", "pos_vi": "Tính từ", "vi": "Trời quang; sáng sủa", "ex_zh": "今天天气晴朗，适合出去玩儿。", "ex_vi": "Hôm nay trời quang đãng, thích hợp ra ngoài chơi."}

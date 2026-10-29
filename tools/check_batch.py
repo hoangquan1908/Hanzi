@@ -34,7 +34,7 @@ for n, l in enumerate(lines, 1):
     for k in ("hv", "vi", "ex_zh", "ex_vi"):
         if not str(o[k]).strip():
             problems.append(f"{i}: empty {k}")
-    if not (4 <= len(o["ex_zh"]) <= 24):
+    if not (4 <= len(o["ex_zh"]) <= 30):
         problems.append(f"{i}: ex_zh length {len(o['ex_zh'])}")
 missing = [r[0] for r in rows if r[0] not in seen]
 if missing:

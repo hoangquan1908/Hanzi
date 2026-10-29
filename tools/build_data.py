@@ -6,7 +6,12 @@ import glob, json, os, re
 from pypinyin import pinyin, Style
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-base = json.load(open(os.path.join(ROOT, "build/base.json"), encoding="utf-8"))
+base = []
+for f in sorted(glob.glob(os.path.join(ROOT, "build/base_*.json"))):
+    base += json.load(open(f, encoding="utf-8"))
+ONLY = set(int(x) for x in os.environ.get("LEVELS", "").split(",") if x)   # LEVELS=1,2 để build một phần
+if ONLY:
+    base = [w for w in base if w["level"] in ONLY]
 extra = {}
 for f in sorted(glob.glob(os.path.join(ROOT, "build/out/*.jsonl"))):
     for line in open(f, encoding="utf-8"):
@@ -28,9 +33,16 @@ if os.path.exists(COMPLETE):
             continue
         tr = forms[0].get("i") or forms[0].get("transcriptions") or {}
         py = tr.get("y") or tr.get("pinyin")
-        if py and len(py.split()) == len(w) and w not in WORD_PY:
-            WORD_PY[w] = py
+        if py and not set(e.get("p") or e.get("pos") or []) & {"nr", "ns", "nz", "nt"}:
+            py = py[:1].lower() + py[1:]       # chỉ tên riêng mới viết hoa (大学 → dàxué)
+        if py and len(py.split()) == len(w):
+            # ưu tiên cách đọc viết thường (bỏ dạng tên riêng như "Dà xué")
+            if w not in WORD_PY or (WORD_PY[w][:1].isupper() and not py[:1].isupper()):
+                WORD_PY[w] = py
+PROPER_POS = {"nr", "ns", "nz", "nt"}
 for w in base:
+    if not set(w.get("pos") or []) & PROPER_POS:
+        w["py"] = w["py"][:1].lower() + w["py"][1:]
     if len(w["py"].split()) == len(w["w"]):
         WORD_PY[w["w"]] = w["py"]
 
@@ -53,6 +65,9 @@ def char_pinyin(s: str) -> list:
                 p = "cháng"
             elif c == "教" and p == "jiào" and s[i + 1:i + 2] in ("我", "你", "他", "她", "们", "学", "孩", "大", "人"):
                 p = "jiāo"                      # 教 + tân ngữ = dạy
+            elif c == "得" and p == "dé" and i > 0 and HAN.match(s[i - 1]) and s[i - 1] not in "获取难记懂值使免" \
+                    and s[i + 1:i + 2] not in ("到", "出", "知", "以", "意", "失", "分", "罪", "奖", "病", "益", "体", "力"):
+                p = "de"                        # bổ ngữ trình độ: 说得好, 唱得很好
             elif c == "谁" and p == "shuí":
                 p = "shéi"                      # cách đọc khẩu ngữ phổ biến
             elif c == "喂" and p == "wèi" and (i == 0 or not HAN.match(s[i - 1])):
@@ -80,6 +95,8 @@ def sentence_pinyin(s: str, target: str, target_py: str):
                 out.append(target_py.replace(" ", ""))
             elif tok.startswith("个") and i > 0 and s[i - 1] in "一二三四五六七八九十两几半每这那哪":
                 out.append(" ".join(per[i:j]))   # 八个人 → bā gè rén, không phải gèrén
+            elif len(tok) > 1 and "得" in tok:
+                out.append(" ".join(per[i:j]))   # 说得/做得 → de theo ngữ cảnh
             elif len(tok) > 1 and tok in WORD_PY:
                 out.append(WORD_PY[tok].replace(" ", ""))
             elif len(tok) > 1:
@@ -104,13 +121,12 @@ fixes = []
 for w in base:
     e = extra[w["id"]]
     assert w["w"] in e["ex_zh"], w["id"]
-    ex_py, ctx = sentence_pinyin(e["ex_zh"], w["w"], w["py"])
     py = w["py"]
+    ex_py, ctx = sentence_pinyin(e["ex_zh"], w["w"], py)
     # chữ đơn: lấy cách đọc theo ngữ cảnh câu ví dụ (sửa 吧 bā→ba, 吗 má→ma, 过 Guō→guò...)
     if len(w["w"]) == 1 and w["w"] not in "一不" and ctx and ctx != py.lower():
         fixes.append(f'{w["w"]}: {py} → {ctx}')
         py = ctx
-    py = py[:1].lower() + py[1:] if e["pos_vi"] != "Danh từ riêng" else py
     by_level.setdefault(w["level"], []).append({
         "id": w["id"], "w": w["w"], "py": py, "hv": e["hv"], "pos": e["pos_vi"],
         "vi": e["vi"], "ex": e["ex_zh"], "exPy": ex_py, "exVi": e["ex_vi"],

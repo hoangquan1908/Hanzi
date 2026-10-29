@@ -1,6 +1,6 @@
 # 汉字 · Hanzi
 
-App học từ vựng HSK 3.0 cho người Việt, chạy hoàn toàn trên trình duyệt: không cần server, không cần tài khoản. Tiến độ lưu trong trình duyệt (localStorage).
+App học từ vựng HSK 3.0 (cấp 1–6, 5.363 từ) + list **Bổ sung** (2.056 từ HSK 2.0 không có trong HSK 3.0 cấp 1–6) cho người Việt, chạy hoàn toàn trên trình duyệt: không cần server, không cần tài khoản. Tiến độ lưu trong trình duyệt (localStorage).
 
 ## Chạy
 
@@ -36,8 +36,8 @@ Phát âm dùng giọng đọc tiếng Trung có sẵn của hệ điều hành 
 
 ```
 index.html, style.css, app.js     giao diện + logic
-data/hsk1.js, data/hsk2.js        dữ liệu từ vựng (mỗi cấp một file)
-data/strokes.js                   dữ liệu nét chữ cho mọi chữ trong data/hsk*.js (tải khi luyện viết)
+data/hsk1.js … hsk6.js, hsk10.js   dữ liệu từ vựng (mỗi cấp một file; 10 = list Bổ sung)
+data/strokes/s00–s31.js           dữ liệu nét chữ (2.639 chữ), chia 32 file theo mã Unicode, chỉ tải file cần dùng
 vendor/hanzi-writer.min.js        thư viện vẽ & chấm nét
 sw.js, manifest.webmanifest       offline + cài như app (PWA)
 tools/                            script sinh dữ liệu
@@ -54,7 +54,7 @@ Mỗi từ trong `data/hsk{N}.js`:
 
 Muốn sửa dữ liệu vĩnh viễn: sửa `build/out/*.jsonl` rồi chạy `python3 tools/build_data.py` (cần `pip install pypinyin jieba` và repo [complete-hsk-vocabulary](https://github.com/drkameleon/complete-hsk-vocabulary)). Sửa nhanh cho riêng mình thì dùng nút ✏️ trong app.
 
-**Thêm HSK3–6:** chạy `tools/prep.py` cho cấp mới, sinh phần tiếng Việt (`hv`, `pos_vi`, `vi`, `ex_zh`, `ex_vi`) theo `tools/ENRICH_PROMPT.md`, kiểm tra bằng `tools/check_batch.py`, chạy `build_data.py`, chạy `tools/build_strokes.py <node_modules/hanzi-writer-data>` để cập nhật nét chữ, rồi thêm một dòng `<script src="data/hskN.js">` vào `index.html` và thêm file vào `sw.js` (nhớ tăng `CACHE`).
+**Thêm list mới:** chạy `tools/prep.py <complete-hsk-vocabulary> <cấp>` cho cấp mới, sinh phần tiếng Việt (`hv`, `pos_vi`, `vi`, `ex_zh`, `ex_vi`) theo `tools/ENRICH_PROMPT.md`, kiểm tra bằng `tools/check_batch.py`, chạy `build_data.py`, chạy `tools/build_strokes.py <node_modules/hanzi-writer-data>` để cập nhật nét chữ, rồi thêm một dòng `<script src="data/hskN.js">` vào `index.html` và thêm file vào `sw.js` (nhớ tăng `CACHE`).
 
 ## Nguồn dữ liệu
 
