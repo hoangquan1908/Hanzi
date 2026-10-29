@@ -1,10 +1,11 @@
 // Service worker: cache toàn bộ app để dùng offline.
 // Đổi CACHE khi cập nhật file để trình duyệt tải bản mới.
-const CACHE = 'hanzi-v1.0.0';
+const CACHE = 'hanzi-v1.1.0';
 const ASSETS = [
   './', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest',
   'icon.svg', 'icon-192.png', 'icon-512.png',
   'data/hsk1.js', 'data/hsk2.js',
+  'vendor/hanzi-writer.min.js', 'data/strokes.js',
 ];
 
 self.addEventListener('install', e => {

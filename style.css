@@ -115,7 +115,7 @@ input { font: inherit; }
 .seg button.on.done { color: var(--orange); }
 .meta { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 800; }
 .meta .acc { color: var(--rose); font-size: 12px; }
-.bigbar { height: 7px; margin: 8px 0 16px; }
+.bigbar { height: 7px; margin: 8px 0 16px; flex: none; }
 
 .list-head { text-align: center; margin-bottom: 10px; font-weight: 900; }
 .list-head small { color: var(--muted); font-weight: 700; }
@@ -129,7 +129,7 @@ input { font: inherit; }
 
 .words { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-bottom: 90px; }
 .word { padding: 14px 16px; position: relative; }
-.word .head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; padding-right: 72px; }
+.word .head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; padding-right: 108px; }
 .word .idx { color: var(--green); font-weight: 900; width: 26px; }
 .word .w { font-family: var(--zh); font-size: 22px; font-weight: 900; }
 .word .py { color: var(--muted); font-size: 13px; }
@@ -242,3 +242,32 @@ input { font: inherit; }
   .stat .num { font-size: 18px; }
   .prompt .sentence { font-size: 21px; }
 }
+
+/* ---------- luyện viết ---------- */
+:root { --violet-ink: #6d28d9; }
+.c-violet { color: var(--violet); }
+.seg.seg3 { grid-template-columns: 1fr 1fr 1fr; }
+.seg button.on.write { color: var(--violet); }
+.btn.violet { background: var(--violet); }
+.progress .v { background: var(--violet); }
+.badge.v { background: var(--violet-soft); color: var(--violet); }
+.chip.violet { background: var(--violet-soft); color: var(--violet-ink); }
+
+.board-wrap { padding: 14px 10px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.board { position: relative; border: 2px solid #fecaca; border-radius: 14px; background: #fffdfb; touch-action: none; width: max-content; }
+.board .grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.board .grid path { stroke: #fca5a5; stroke-width: .5; stroke-dasharray: 2 2; fill: none; }
+.board > div { position: relative; }
+.board svg:not(.grid) { display: block; }
+.board-note { font-size: 13px; color: var(--muted); text-align: center; }
+.slots { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.slot { min-width: 40px; height: 40px; border-radius: 10px; border: 2px dashed var(--line); display: grid; place-items: center;
+  font-family: var(--zh); font-size: 22px; font-weight: 900; color: var(--faint); padding: 0 4px; }
+.slot.cur { border-color: var(--violet); border-style: solid; font-size: 16px; }
+.slot.ok { border: 2px solid var(--green); color: var(--ink); background: #ecfdf5; }
+.slot.meh { border: 2px solid var(--orange); color: var(--ink); background: #fffbeb; }
+.char-tabs { display: flex; gap: 8px; justify-content: center; }
+.char-tabs button { width: 46px; height: 46px; border-radius: 12px; border: 2px solid var(--line); font-size: 24px; font-weight: 900; }
+.char-tabs button.on { border-color: var(--violet); background: var(--violet-soft); }
+.sheet .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 14px; }
+.sheet .row3 .btn { padding: 12px 6px; font-size: 14px; }

@@ -23,6 +23,8 @@ Mở http://localhost:8000.
 - **Danh sách từ theo cấp:** chữ Hán, pinyin, âm Hán Việt, từ loại, nghĩa tiếng Việt, câu ví dụ (chữ Hán + pinyin + dịch), nghe phát âm, tìm kiếm (chữ / pinyin không dấu / Hán Việt / nghĩa), sửa nội dung từng từ.
 - **Chế độ `# Known`:** nhìn chữ → chọn nghĩa đúng trong 4 đáp án.
 - **Chế độ `✓ Done`:** câu ví dụ bị khuyết từ → chọn từ đúng. Khi đã biết hết từ của một cấp, app tự chuyển sang chế độ này.
+- **Chế độ `✍️ Viết`:** nhìn nghĩa → tự viết từng chữ lên bảng ô 米 bằng ngón tay / chuột, app chấm từng nét (sai 3 lần sẽ hiện gợi ý nét). Gợi ý: Pinyin, Nghe, Xem mẫu (−10Đ). Đạt nếu trung bình ≤ 2 lỗi/chữ và không dùng "Xem mẫu".
+- **Xem thứ tự nét:** nút ✍️ ở mỗi từ trong danh sách → hoạt ảnh thứ tự nét + tập viết từng chữ.
 - **Gợi ý trừ điểm:** Hán Việt (−10), Nghe (−10), Nghĩa/Ví dụ (−10), Bỏ qua (−5). Trả lời đúng +20.
 - **Câu sai:** ôn lại những từ đã trả lời sai; trả lời đúng thì từ đó được gỡ khỏi danh sách.
 - **Cài đặt (⚙️):** sao lưu và khôi phục tiến độ ra file `.json`, thử giọng đọc, xoá tiến độ.
@@ -35,6 +37,8 @@ Phát âm dùng giọng đọc tiếng Trung có sẵn của hệ điều hành 
 ```
 index.html, style.css, app.js     giao diện + logic
 data/hsk1.js, data/hsk2.js        dữ liệu từ vựng (mỗi cấp một file)
+data/strokes.js                   dữ liệu nét chữ cho mọi chữ trong data/hsk*.js (tải khi luyện viết)
+vendor/hanzi-writer.min.js        thư viện vẽ & chấm nét
 sw.js, manifest.webmanifest       offline + cài như app (PWA)
 tools/                            script sinh dữ liệu
 build/                            dữ liệu trung gian (danh sách gốc + phần bổ sung tiếng Việt)
@@ -50,10 +54,11 @@ Mỗi từ trong `data/hsk{N}.js`:
 
 Muốn sửa dữ liệu vĩnh viễn: sửa `build/out/*.jsonl` rồi chạy `python3 tools/build_data.py` (cần `pip install pypinyin jieba` và repo [complete-hsk-vocabulary](https://github.com/drkameleon/complete-hsk-vocabulary)). Sửa nhanh cho riêng mình thì dùng nút ✏️ trong app.
 
-**Thêm HSK3–6:** chạy `tools/prep.py` cho cấp mới, sinh phần tiếng Việt (`hv`, `pos_vi`, `vi`, `ex_zh`, `ex_vi`) theo `tools/ENRICH_PROMPT.md`, kiểm tra bằng `tools/check_batch.py`, chạy `build_data.py`, rồi thêm một dòng `<script src="data/hskN.js">` vào `index.html` và thêm file vào `sw.js`.
+**Thêm HSK3–6:** chạy `tools/prep.py` cho cấp mới, sinh phần tiếng Việt (`hv`, `pos_vi`, `vi`, `ex_zh`, `ex_vi`) theo `tools/ENRICH_PROMPT.md`, kiểm tra bằng `tools/check_batch.py`, chạy `build_data.py`, chạy `tools/build_strokes.py <node_modules/hanzi-writer-data>` để cập nhật nét chữ, rồi thêm một dòng `<script src="data/hskN.js">` vào `index.html` và thêm file vào `sw.js` (nhớ tăng `CACHE`).
 
 ## Nguồn dữ liệu
 
 - Danh sách từ HSK 3.0 (chữ, pinyin, từ loại): [complete-hsk-vocabulary](https://github.com/drkameleon/complete-hsk-vocabulary) — MIT License (xem `tools/LICENSE-complete-hsk-vocabulary.txt`).
 - Âm Hán Việt, nghĩa tiếng Việt, câu ví dụ và bản dịch: sinh tự động bằng AI, đã kiểm tra định dạng nhưng chưa được người duyệt từng dòng. Nếu thấy sai, sửa bằng nút ✏️ hoặc trong `build/out/`.
+- Luyện viết: [Hanzi Writer](https://github.com/chanind/hanzi-writer) (MIT); dữ liệu nét chữ [hanzi-writer-data](https://github.com/chanind/hanzi-writer-data) từ Make Me a Hanzi, theo Arphic Public License (xem `vendor/`).
 - Pinyin câu ví dụ: sinh bằng `pypinyin` + `jieba`, có thể lệch ở một số chữ đa âm.

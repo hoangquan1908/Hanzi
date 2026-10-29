@@ -10,7 +10,13 @@
   const ALL_LEVELS = [1, 2, 3, 4, 5, 6];
   const SESSION_SIZE = 10;          // số câu mỗi lượt học
   const PTS = { correct: 20, hint: 10, skip: 5 };
-  const VERSION = '1.0.0';
+  const VERSION = '1.1.0';
+  // f = cờ "đã xong", w = cờ "làm sai" trong S.words[id]
+  const MODES = {
+    known: { f: 'k', w: 'wk', label: '# Từ vựng', chip: 'green' },
+    done:  { f: 'd', w: 'wd', label: '✓ Đoạn văn', chip: 'orange' },
+    write: { f: 'v', w: 'wv', label: '✍️ Luyện viết', chip: 'violet' },
+  };
   const CHEERS = [
     '🌟 Bạn đang làm rất tốt!', '💪 Mỗi ngày một chút!', '📚 Học chữ Hán vui vẻ!',
     '🚀 Tiến bộ từng ngày!', '🎯 Kiên định với mục tiêu!', '🔥 Đừng bỏ cuộc!',
@@ -39,7 +45,7 @@
     return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
   };
   function day(key = todayKey()) {
-    return S.days[key] || (S.days[key] = { known: 0, completed: 0, score: 0 });
+    return S.days[key] || (S.days[key] = { known: 0, completed: 0, written: 0, score: 0 });
   }
   function addScore(n) {
     S.score += n;
@@ -57,11 +63,16 @@
     return ed ? Object.assign({}, base, ed) : base;
   }
   const words = level => DATA[level].map(w => word(w.id));
-  const modeOf = level => S.mode[level] || 'known';
+  const modeOf = level => (MODES[S.mode[level]] ? S.mode[level] : 'known');
+  const modeCounts = (s, mode) => {
+    const done = mode === 'known' ? s.known : mode === 'done' ? s.done : s.written;
+    const wrong = mode === 'known' ? s.wk : mode === 'done' ? s.wd : s.wv;
+    return { done, wrong, remaining: s.total - done };
+  };
 
   function levelStats(level) {
     const list = DATA[level];
-    let known = 0, done = 0, wk = 0, wd = 0, a = 0, c = 0;
+    let known = 0, done = 0, written = 0, wk = 0, wd = 0, wv = 0, a = 0, c = 0;
     list.forEach(w => {
       const s = S.words[w.id];
       if (!s) return;
@@ -69,14 +80,16 @@
       if (s.d) done++;
       if (s.wk) wk++;
       if (s.wd) wd++;
+      if (s.v) written++;
+      if (s.wv) wv++;
       a += s.a || 0; c += s.c || 0;
     });
-    return { total: list.length, known, done, wk, wd, acc: a ? c / a : null };
+    return { total: list.length, known, done, written, wk, wd, wv, acc: a ? c / a : null };
   }
 
   function streak() {
     const d = new Date();
-    const active = k => { const x = S.days[k]; return x && (x.known || x.completed); };
+    const active = k => { const x = S.days[k]; return x && (x.known || x.completed || x.written); };
     if (!active(todayKey(d))) d.setDate(d.getDate() - 1);
     let n = 0;
     while (active(todayKey(d))) { n++; d.setDate(d.getDate() - 1); }
@@ -133,6 +146,7 @@
   let listQuery = '';
 
   function route() {
+    if (typeof destroyWriters === 'function') destroyWriters();
     const h = location.hash.replace(/^#\/?/, '');
     const m = h.match(/^hsk(\d)(?:\/(quiz))?$/);
     if (m && LEVELS.includes(+m[1])) {
@@ -153,11 +167,11 @@
 
   // ---------------------------------------------------------------- home
   function renderHome() {
-    let total = 0, known = 0, done = 0;
-    LEVELS.forEach(l => { const s = levelStats(l); total += s.total; known += s.known; done += s.done; });
+    let total = 0, known = 0, done = 0, written = 0;
+    LEVELS.forEach(l => { const s = levelStats(l); total += s.total; known += s.known; done += s.done; written += s.written; });
     const td = day();
     const sk = streak();
-    const activeDays = Object.values(S.days).filter(d => d.known || d.completed).length;
+    const activeDays = Object.values(S.days).filter(d => d.known || d.completed || d.written).length;
     const allK = pct(known, total), allD = pct(done, total);
 
     app.innerHTML = `
@@ -172,7 +186,7 @@
       <div class="card stats">
         <div class="stat"><div class="lbl">Tổng từ</div><div class="num c-ink">${fmt(total)}</div></div>
         <div class="stat"><div class="lbl">Đã biết</div><div class="num c-green">${fmt(known)}</div></div>
-        <div class="stat"><div class="lbl">Hoàn thành</div><div class="num c-orange">${fmt(done)}</div></div>
+        <div class="stat"><div class="lbl">Hoàn thành</div><div class="num c-orange">${fmt(done)}</div><div class="lbl c-violet" style="margin-top:2px">✍️ ${fmt(written)}</div></div>
         <div class="stat"><div class="lbl">Điểm học</div><div class="num c-rose">${fmt(S.score)}</div></div>
       </div>
 
@@ -204,7 +218,7 @@
       <button class="card level" data-act="open" data-level="${l}">
         <div class="row">
           <span class="name">HSK${l}</span>
-          <span class="pct"><span class="c-green">#: ${gk}%</span> &nbsp;<span class="c-orange">✓: ${od}%</span></span>
+          <span class="pct"><span class="c-green">#: ${gk}%</span> &nbsp;<span class="c-orange">✓: ${od}%</span> &nbsp;<span class="c-violet">✍️: ${pct(s.written, s.total)}%</span></span>
         </div>
         <div class="row">
           <div class="progress"><div class="g" style="width:${Math.max(0, gk - od)}%"></div><div class="o" style="width:${od}%"></div></div>
@@ -219,16 +233,16 @@
     d.setDate(d.getDate() - 6);
     for (let i = 0; i < 7; i++) {
       const k = todayKey(d);
-      const x = S.days[k] || { known: 0, completed: 0 };
-      days.push({ label: `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`, known: x.known, completed: x.completed });
+      const x = S.days[k] || { known: 0, completed: 0, written: 0 };
+      days.push({ label: `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`, known: x.known, completed: x.completed, written: x.written || 0 });
       d.setDate(d.getDate() + 1);
     }
-    if (!days.some(x => x.known || x.completed)) {
-      return `<div class="legend"><span><i style="background:var(--green-soft);border:1.5px solid var(--green)"></i>Đã biết (#)</span><span><i style="background:var(--orange)"></i>Hoàn thành (✓)</span></div>
+    if (!days.some(x => x.known || x.completed || x.written)) {
+      return `<div class="legend"><span><i style="background:var(--green-soft);border:1.5px solid var(--green)"></i>Đã biết (#)</span><span><i style="background:var(--orange)"></i>Hoàn thành (✓)</span><span><i style="background:var(--violet)"></i>Đã viết (✍️)</span></div>
               <div class="chart-empty">Chưa có dữ liệu — bắt đầu học để thấy biểu đồ 📈</div>`;
     }
     const W = 340, H = 150, padL = 34, padB = 22, padT = 18;
-    const max = Math.max(4, ...days.map(x => Math.max(x.known, x.completed)));
+    const max = Math.max(4, ...days.map(x => Math.max(x.known, x.completed, x.written)));
     const nice = Math.ceil(max / 4) * 4;
     const cw = (W - padL - 6) / 7;
     const y = v => padT + (H - padT - padB) * (1 - v / nice);
@@ -244,6 +258,11 @@
       if (x.known) g += `<rect x="${cx - bw / 2}" y="${y(x.known)}" width="${bw}" height="${y(0) - y(x.known)}" rx="4" fill="#d1fae5" stroke="#10b981" stroke-width="1.2"/>`;
       g += `<text x="${cx}" y="${H - 6}" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700">${x.label}</text>`;
     });
+    if (days.some(x => x.written)) {
+      const vp = days.map((x, i) => [padL + cw * i + cw / 2, y(x.written)]);
+      g += `<polyline points="${vp.map(p => p.join(',')).join(' ')}" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>`;
+      vp.forEach((p, i) => { if (days[i].written) g += `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#7c3aed"/>`; });
+    }
     const pts = days.map((x, i) => [padL + cw * i + cw / 2, y(x.completed)]);
     g += `<polyline points="${pts.map(p => p.join(',')).join(' ')}" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linejoin="round"/>`;
     pts.forEach((p, i) => {
@@ -251,7 +270,7 @@
       g += `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#fff" stroke="#f59e0b" stroke-width="2"/>`;
       if (v) g += `<text x="${p[0]}" y="${p[1] - 8}" text-anchor="middle" font-size="9" fill="#b45309" font-weight="800">${fmt(v)}</text>`;
     });
-    return `<div class="legend"><span><i style="background:var(--green-soft);border:1.5px solid var(--green)"></i>Đã biết (#)</span><span><i style="background:var(--orange)"></i>Hoàn thành (✓)</span></div>
+    return `<div class="legend"><span><i style="background:var(--green-soft);border:1.5px solid var(--green)"></i>Đã biết (#)</span><span><i style="background:var(--orange)"></i>Hoàn thành (✓)</span><span><i style="background:var(--violet)"></i>Đã viết (✍️)</span></div>
             <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Biểu đồ 7 ngày">${g}</svg>`;
   }
 
@@ -259,37 +278,41 @@
   function renderLevel(level) {
     const s = levelStats(level);
     const mode = modeOf(level);
-    const wrong = mode === 'known' ? s.wk : s.wd;
-    const remaining = mode === 'known' ? s.total - s.known : s.total - s.done;
+    const { done: doneN, wrong, remaining } = modeCounts(s, mode);
     const g = pct(s.known, s.total), o = pct(s.done, s.total);
+    const metaText = mode === 'known' ? `Đã biết: ${s.known}/${s.total} từ`
+      : mode === 'done' ? `Hoàn thành: ${s.done}/${s.total} câu` : `Đã viết: ${s.written}/${s.total} từ`;
 
     app.innerHTML = `
       <div class="topbar">
         <button class="icon-btn" data-act="home" aria-label="Về trang chủ">←</button>
         <div class="pill">
-          <span class="chip ${mode === 'known' ? 'green' : 'orange'}">${mode === 'known' ? '# Từ vựng' : '✓ Đoạn văn'}</span>
+          <span class="chip ${MODES[mode].chip}">${MODES[mode].label}</span>
           Điểm: <span class="val" style="color:var(--ink)">${fmt(S.score)}</span>
         </div>
       </div>
 
-      <div class="seg">
+      <div class="seg seg3">
         <button class="${mode === 'known' ? 'on known' : ''}" data-act="mode" data-mode="known"># Known</button>
         <button class="${mode === 'done' ? 'on done' : ''}" data-act="mode" data-mode="done">✓ Done</button>
+        <button class="${mode === 'write' ? 'on write' : ''}" data-act="mode" data-mode="write">✍️ Viết</button>
       </div>
 
       <div class="meta">
-        <span>${mode === 'known' ? `Đã biết: ${s.known}/${s.total} từ` : `Hoàn thành: ${s.done}/${s.total} câu`}</span>
+        <span>${metaText}</span>
         <span class="chip orange">HSK${level}</span>
         <span class="acc">Tỷ lệ đúng: ${s.acc == null ? '—' : (s.acc * 100).toFixed(1) + '%'}</span>
       </div>
-      <div class="progress bigbar"><div class="g" style="width:${Math.max(0, g - o)}%"></div><div class="o" style="width:${o}%"></div></div>
+      <div class="progress bigbar">${mode === 'write'
+        ? `<div class="v" style="width:${pct(doneN, s.total)}%"></div>`
+        : `<div class="g" style="width:${Math.max(0, g - o)}%"></div><div class="o" style="width:${o}%"></div>`}</div>
 
       <div class="list-head">📚 Danh sách từ <small>(${s.total} từ)</small></div>
       <div class="search"><input id="q" type="search" placeholder="Tìm chữ, pinyin, nghĩa…" value="${esc(listQuery)}" autocomplete="off"><span>⌕</span></div>
       <div class="words" id="words"></div>
 
       <div class="bottom-actions"><div class="inner">
-        <button class="btn green" data-act="start" data-kind="new" ${remaining ? '' : (mode === 'known' ? '' : 'disabled')}>📝 Học mới (${remaining})</button>
+        <button class="btn ${mode === 'write' ? 'violet' : 'green'}" data-act="start" data-kind="new" ${remaining || mode === 'known' ? '' : 'disabled'}>${mode === 'write' ? '✍️ Viết mới' : '📝 Học mới'} (${remaining})</button>
         <button class="btn rose" data-act="start" data-kind="wrong" ${wrong ? '' : 'disabled'}>🔁 Câu sai (${wrong})</button>
       </div></div>
     `;
@@ -321,9 +344,10 @@
           <span class="py">${esc(w.py)}</span>
           <span class="hv">[${esc(w.hv)}]</span>
           <span class="pos">(${esc(w.pos)})</span>
-          <span class="badges">${s.k ? '<span class="badge k">#</span>' : ''}${s.d ? '<span class="badge d">✓</span>' : ''}${(s.wk || s.wd) ? '<span class="badge x">✗</span>' : ''}</span>
+          <span class="badges">${s.k ? '<span class="badge k">#</span>' : ''}${s.d ? '<span class="badge d">✓</span>' : ''}${s.v ? '<span class="badge v">✍️</span>' : ''}${(s.wk || s.wd || s.wv) ? '<span class="badge x">✗</span>' : ''}</span>
           <span class="tools">
             <button data-act="speak" data-text="${esc(w.w)}" aria-label="Nghe">🔊</button>
+            <button data-act="strokes" data-id="${w.id}" aria-label="Xem cách viết">✍️</button>
             <button data-act="edit" data-id="${w.id}" aria-label="Sửa">✏️</button>
           </span>
         </div>
@@ -343,7 +367,7 @@
     const list = words(level);
     let pool;
     if (kind === 'wrong') {
-      const flag = mode === 'known' ? 'wk' : 'wd';
+      const flag = MODES[mode].w;
       pool = shuffle(list.filter(w => S.words[w.id] && S.words[w.id][flag]));
     } else {
       if (mode === 'known' && list.every(w => S.words[w.id] && S.words[w.id].k)) {
@@ -351,16 +375,28 @@
         save();
         toast('✨ Bạn đã biết hết từ vựng! Tự động chuyển sang Đoạn văn.');
       }
-      const flag = mode === 'known' ? 'k' : 'd';
+      const flag = MODES[mode].f;
       pool = list.filter(w => !(S.words[w.id] && S.words[w.id][flag]));
-      if (mode === 'done') {
+      if (mode !== 'known') {
         // ưu tiên những từ đã biết nghĩa trước
         pool.sort((a, b) => (S.words[b.id]?.k ? 1 : 0) - (S.words[a.id]?.k ? 1 : 0));
       }
     }
-    if (!pool.length) { toast(mode === 'done' ? '🎉 Bạn đã hoàn thành hết cấp này!' : 'Không còn từ nào'); return; }
-    const items = pool.slice(0, SESSION_SIZE).map(w => buildQuestion(w, mode, list));
+    if (!pool.length) { toast(mode === 'known' ? 'Không còn từ nào' : '🎉 Bạn đã hoàn thành hết cấp này!'); return; }
+    const items = pool.slice(0, SESSION_SIZE).map(w => mode === 'write' ? { w, options: [] } : buildQuestion(w, mode, list));
     quiz = { level, kind, mode, items, i: 0, right: 0, wrong: 0, gained: 0, countdown: 3, answered: null, used: {} };
+    if (mode === 'write') {
+      quiz.countdown = 0;
+      app.innerHTML = '<div class="countdown"><span style="font-size:20px">Đang tải nét chữ…</span></div>';
+      loadWriter().then(() => {
+        if (!quiz || quiz.level !== level) return;
+        quiz.countdown = 3;
+        const h = `#/hsk${level}/quiz`;
+        if (location.hash === h) renderQuiz(); else location.hash = h;
+      })
+        .catch(() => { quiz = null; toast('Không tải được dữ liệu nét chữ'); renderLevel(level); });
+      return;
+    }
     location.hash = `#/hsk${level}/quiz`;
   }
 
@@ -390,7 +426,7 @@
       <div class="topbar">
         <button class="icon-btn" data-act="quit" aria-label="Thoát">✕</button>
         <div class="pill">
-          <span class="chip ${q.mode === 'known' ? 'green' : 'orange'}">${q.kind === 'wrong' ? '🔁 Câu sai' : (q.mode === 'known' ? '# Từ vựng' : '✓ Đoạn văn')}</span>
+          <span class="chip ${MODES[q.mode].chip}">${q.kind === 'wrong' ? '🔁 Câu sai' : MODES[q.mode].label}</span>
           Điểm: <span class="val" style="color:var(--ink)">${fmt(S.score)}</span>
         </div>
       </div>
@@ -407,6 +443,7 @@
       return;
     }
     if (q.i >= q.items.length) { renderFinish(header); return; }
+    if (q.mode === 'write') { renderWrite(header); return; }
 
     const it = q.items[q.i];
     const w = it.w;
@@ -503,8 +540,8 @@
     const w = q.items[q.i].w;
     const s = st(w.id);
     const ok = !skipped && pickedId === w.id;
-    const flag = q.mode === 'known' ? 'k' : 'd';
-    const wflag = q.mode === 'known' ? 'wk' : 'wd';
+    const flag = MODES[q.mode].f;
+    const wflag = MODES[q.mode].w;
     if (skipped) {
       addScore(-PTS.skip); q.gained -= PTS.skip;
     } else {
@@ -513,7 +550,7 @@
         s.c = (s.c || 0) + 1;
         if (!s[flag]) {
           s[flag] = 1;
-          if (flag === 'k') day().known++; else day().completed++;
+          if (flag === 'k') day().known++; else if (flag === 'd') day().completed++; else day().written = (day().written || 0) + 1;
         }
         delete s[wflag];
         addScore(PTS.correct); q.gained += PTS.correct;
@@ -525,11 +562,13 @@
     }
     save();
     q.answered = { ok, pickedId, skipped };
+    if (q.mode === 'write') { renderWriteResult(); if (ok) speak(w.w); return; }
     renderQuiz();
     if (ok && q.mode === 'done') speak(w.ex);
   }
 
   function nextQuestion() {
+    destroyWriters();
     quiz.i++;
     quiz.answered = null;
     quiz.used = {};
@@ -541,7 +580,7 @@
     const total = q.items.length;
     const emoji = q.right === total ? '🏆' : q.right >= total / 2 ? '🎉' : '💪';
     const s = levelStats(q.level);
-    const remain = q.mode === 'known' ? s.total - s.known : s.total - s.done;
+    const { remaining: remain, wrong: wrongN } = modeCounts(s, q.mode);
     app.innerHTML = header + `
       <div class="card finish">
         <div class="emoji">${emoji}</div>
@@ -551,10 +590,238 @@
         <p>${esc(pick(CHEERS))}</p>
         <div class="actions">
           ${remain ? `<button class="btn green" data-act="again" data-kind="new">📝 Học tiếp (${remain})</button>` : ''}
-          ${(q.mode === 'known' ? s.wk : s.wd) ? `<button class="btn rose" data-act="again" data-kind="wrong">🔁 Ôn câu sai (${q.mode === 'known' ? s.wk : s.wd})</button>` : ''}
+          ${wrongN ? `<button class="btn rose" data-act="again" data-kind="wrong">🔁 Ôn câu sai (${wrongN})</button>` : ''}
           <button class="btn ghost" data-act="back">Về danh sách</button>
         </div>
       </div>`;
+  }
+
+
+  // ---------------------------------------------------------------- writing (Hanzi Writer)
+  const HAN = /[一-鿿]/;
+  let writerLoad = null;
+  function loadScript(src) {
+    return new Promise((ok, fail) => {
+      const el = document.createElement('script');
+      el.src = src; el.onload = ok; el.onerror = fail;
+      document.head.appendChild(el);
+    });
+  }
+  // Tải thư viện + dữ liệu nét chữ khi cần (lần đầu luyện viết), không làm chậm lúc mở app
+  function loadWriter() {
+    if (window.HanziWriter && window.STROKES) return Promise.resolve();
+    if (!writerLoad) {
+      writerLoad = Promise.all([
+        window.HanziWriter ? 0 : loadScript('vendor/hanzi-writer.min.js'),
+        window.STROKES ? 0 : loadScript('data/strokes.js'),
+      ]).catch(e => { writerLoad = null; throw e; });
+    }
+    return writerLoad;
+  }
+  const charLoader = (ch, done, fail) => (window.STROKES && window.STROKES[ch] ? done(window.STROKES[ch]) : fail && fail(new Error('no data')));
+  const GRID = `<svg class="grid" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 0L100 100M100 0L0 100M50 0V100M0 50H100" /></svg>`;
+
+  let writers = [];
+  function destroyWriters() {
+    writers.forEach(w => { try { w.cancelQuiz(); } catch (e) { /* ignore */ } });
+    writers = [];
+  }
+  function boardSize() { return Math.min(300, Math.max(220, Math.floor(window.innerWidth - 96))); }
+  function makeWriter(el, ch, opts) {
+    const size = opts.size || boardSize();
+    el.style.width = el.style.height = size + 'px';
+    const w = HanziWriter.create(el, ch, Object.assign({
+      width: size, height: size, padding: 12,
+      charDataLoader: charLoader,
+      strokeColor: '#1e293b', radicalColor: '#ef4444', highlightColor: '#10b981',
+      outlineColor: '#e2e8f0', drawingColor: '#334155', drawingWidth: 22,
+      strokeAnimationSpeed: 1.2, delayBetweenStrokes: 220,
+    }, opts));
+    writers.push(w);
+    return w;
+  }
+
+  // ----- quiz viết: nhìn nghĩa + pinyin → viết lần lượt từng chữ
+  function renderWrite(header) {
+    const q = quiz, w = q.items[q.i].w;
+    const chars = [...w.w].filter(c => HAN.test(c));
+    q.wstate = { chars, ci: 0, mistakes: 0, hinted: 0 };
+    app.innerHTML = header + `
+      <div class="quiz">
+        <div class="card prompt">
+          <div class="sub" style="font-size:18px;color:var(--ink);font-weight:800">${esc(w.vi)}</div>
+          <div class="sub" id="w-py">${q.used.py ? esc(w.py) : '&nbsp;'}</div>
+          <div class="hints">
+            <button class="hint nghe" data-act="whint" data-h="py">🔤 Pinyin${q.used.py ? '' : ` (−${PTS.hint}Đ)`}</button>
+            <button class="hint nghe" data-act="whint" data-h="nghe">🔊 Nghe${q.used.nghe ? '' : ` (−${PTS.hint}Đ)`}</button>
+            <button class="hint hv" data-act="whint" data-h="mau">👁 Xem mẫu (−${PTS.hint}Đ)</button>
+          </div>
+          <div class="reveal"><div class="zh" id="w-ex">${q.used.ex ? highlight(w.ex, w.w) : ''}</div></div>
+        </div>
+        <div class="card board-wrap">
+          <div class="slots" id="w-slots">${chars.map((c, k) => `<span class="slot${k === 0 ? ' cur' : ''}">${k === 0 ? '✍️' : '·'}</span>`).join('')}</div>
+          <div class="board" id="w-board">${GRID}<div id="w-target"></div></div>
+          <div class="board-note" id="w-note">Viết chữ thứ 1/${chars.length} — sai 3 lần sẽ hiện gợi ý nét</div>
+        </div>
+        <div class="card answer" id="w-answer" hidden></div>
+        <div class="quiz-foot" id="w-foot"><button class="skip" data-act="skip">⏩ Bỏ qua (−${PTS.skip}Đ)</button></div>
+      </div>`;
+    if (!chars.length) { answer(null, true); return; }
+    startChar();
+  }
+
+  function startChar() {
+    const q = quiz, ws = q.wstate;
+    destroyWriters();
+    const target = document.getElementById('w-target');
+    if (!target) return;
+    target.innerHTML = '';
+    const ch = ws.chars[ws.ci];
+    const wr = makeWriter(target, ch, { showCharacter: false, showOutline: false });
+    let charMiss = 0;
+    wr.quiz({
+      showHintAfterMisses: 3,
+      leniency: 1.15,
+      onMistake: () => { charMiss++; ws.mistakes++; },
+      onComplete: () => {
+        const slots = document.querySelectorAll('#w-slots .slot');
+        if (slots[ws.ci]) { slots[ws.ci].textContent = ch; slots[ws.ci].className = 'slot ' + (charMiss >= 3 ? 'meh' : 'ok'); }
+        ws.ci++;
+        if (ws.ci < ws.chars.length) {
+          if (slots[ws.ci]) { slots[ws.ci].classList.add('cur'); slots[ws.ci].textContent = '✍️'; }
+          const note = document.getElementById('w-note');
+          if (note) note.textContent = `Viết chữ thứ ${ws.ci + 1}/${ws.chars.length}`;
+          setTimeout(() => { if (quiz === q && !q.answered) startChar(); }, 450);
+        } else {
+          // đạt nếu trung bình không quá 2 lỗi / chữ và không phải dùng "xem mẫu"
+          const ok = ws.mistakes <= ws.chars.length * 2 && !ws.hinted;
+          setTimeout(() => { if (quiz === q && !q.answered) answer(ok ? q.items[q.i].w.id : '__miss__'); }, 350);
+        }
+      },
+    });
+  }
+
+  function writeHint(h) {
+    const q = quiz; if (!q || q.answered) return;
+    const w = q.items[q.i].w;
+    if (h === 'py' && !q.used.py) {
+      q.used.py = true; addScore(-PTS.hint); q.gained -= PTS.hint;
+      document.getElementById('w-py').textContent = w.py;
+    } else if (h === 'nghe') {
+      if (!q.used.nghe) { q.used.nghe = true; addScore(-PTS.hint); q.gained -= PTS.hint; }
+      speak(w.w);
+    } else if (h === 'mau') {
+      addScore(-PTS.hint); q.gained -= PTS.hint; q.wstate.hinted++;
+      const wr = writers[0];
+      if (wr) wr.showOutline();
+    }
+    save();
+    const btns = app.querySelectorAll('[data-act=whint]');
+    btns.forEach(b => {
+      const k = b.dataset.h;
+      if (k === 'py') { b.textContent = '🔤 Pinyin'; b.disabled = !!q.used.py; }
+      if (k === 'nghe' && q.used.nghe) b.textContent = '🔊 Nghe';
+    });
+    const pill = app.querySelector('.topbar .pill .val'); if (pill) pill.textContent = fmt(S.score);
+  }
+
+  function renderWriteResult() {
+    const q = quiz, w = q.items[q.i].w, ans = q.answered;
+    destroyWriters();
+    // hiện chữ hoàn chỉnh + hoạt ảnh thứ tự nét ở bảng
+    const target = document.getElementById('w-target');
+    const ws = q.wstate;
+    if (target && ws && ws.chars.length) {
+      target.innerHTML = '';
+      const ch = ws.chars[Math.min(ws.ci, ws.chars.length) - 1] || ws.chars[0];
+      const wr = makeWriter(target, ch, { showCharacter: !ans.skipped, showOutline: true });
+      if (ans.skipped) loopAnimate(wr, ws.chars, 0);
+    }
+    document.getElementById('w-slots').innerHTML = [...w.w].map(c => `<span class="slot ok">${esc(c)}</span>`).join('');
+    document.getElementById('w-note').textContent = ans.ok ? `Lỗi: ${ws ? ws.mistakes : 0} nét` : (ans.skipped ? 'Xem thứ tự nét' : `Lỗi: ${ws ? ws.mistakes : 0} nét — từ này được đưa vào "Câu sai"`);
+    app.querySelectorAll('[data-act=whint]').forEach(b => { b.disabled = true; });
+    const box = document.getElementById('w-answer');
+    box.hidden = false;
+    box.innerHTML = `
+      <div class="verdict ${ans.ok ? 'ok' : 'no'}">${ans.ok ? `✓ Viết đúng! +${PTS.correct}Đ` : (ans.skipped ? `⏭ Đã bỏ qua (−${PTS.skip}Đ)` : '✗ Cần luyện thêm')}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+        <div>
+          <span class="zh" style="font-size:26px;font-weight:900">${esc(w.w)}</span>
+          <span class="p" style="margin-left:6px">${esc(w.py)}</span>
+          <span style="color:var(--violet);font-weight:800;font-size:13px;margin-left:6px">[${esc(w.hv)}]</span>
+        </div>
+        <button class="icon-btn" data-act="speak" data-text="${esc(w.w)}" aria-label="Nghe">🔊</button>
+      </div>
+      <div class="z" style="margin-top:6px">${highlight(w.ex, w.w)}</div>
+      ${w.exPy ? `<div class="p">${esc(w.exPy)}</div>` : ''}
+      <div class="v">${esc(w.exVi)}</div>
+      <button class="btn ghost" style="width:100%;margin-top:10px" data-act="strokes" data-id="${w.id}">✍️ Xem thứ tự nét</button>`;
+    document.getElementById('w-foot').innerHTML =
+      `<button class="btn green next" data-act="next">${q.i + 1 < q.items.length ? 'Câu tiếp →' : 'Xem kết quả'}</button>`;
+    const pill = app.querySelector('.topbar .pill .val'); if (pill) pill.textContent = fmt(S.score);
+    const acc = app.querySelector('.meta .acc'); if (acc) acc.textContent = `✓ ${q.right} · ✗ ${q.wrong}`;
+  }
+
+  function loopAnimate(wr, chars, k) {
+    wr.animateCharacter({ onComplete: () => {
+      if (!writers.includes(wr) || chars.length < 2) return;
+      setTimeout(() => {
+        if (!writers.includes(wr)) return;
+        const n = (k + 1) % chars.length;
+        wr.setCharacter(chars[n]).then(() => loopAnimate(wr, chars, n));
+      }, 700);
+    } });
+  }
+
+  // ----- bảng xem / tập viết cho một từ (mở từ danh sách)
+  function openStrokeSheet(id) {
+    const w = word(id);
+    const chars = [...w.w].filter(c => HAN.test(c));
+    if (!chars.length) { toast('Từ này không có chữ Hán để viết'); return; }
+    let cur = 0, writer = null;
+    const ov = openSheet(`
+      <h3 style="display:flex;align-items:baseline;gap:8px">✍️ <span class="zh">${esc(w.w)}</span>
+        <small style="color:var(--muted)">${esc(w.py)} · ${esc(w.vi)}</small></h3>
+      ${chars.length > 1 ? `<div class="char-tabs">${chars.map((c, k) => `<button class="zh${k === 0 ? ' on' : ''}" data-c="${k}">${esc(c)}</button>`).join('')}</div>` : ''}
+      <div class="board" style="margin:10px auto">${GRID}<div class="target"></div></div>
+      <div class="board-note s-note">Đang tải…</div>
+      <div class="row3">
+        <button class="btn ghost" data-x="anim">▶️ Xem nét</button>
+        <button class="btn green" data-x="practice">✍️ Tập viết</button>
+        <button class="btn ghost" data-x="speak">🔊 Nghe</button>
+      </div>`, ov => {
+      const target = ov.querySelector('.target');
+      const note = ov.querySelector('.s-note');
+      const close = () => { destroyWriters(); ov.remove(); };
+      ov.addEventListener('click', e => { if (e.target === ov) destroyWriters(); }, true);
+      const strokeCount = ch => (window.STROKES[ch] ? window.STROKES[ch].strokes.length : 0);
+      const show = () => {
+        destroyWriters();
+        target.innerHTML = '';
+        writer = makeWriter(target, chars[cur], { size: Math.min(260, boardSize()), showOutline: true });
+        note.textContent = `${chars[cur]} · ${strokeCount(chars[cur])} nét`;
+        writer.animateCharacter();
+      };
+      loadWriter().then(show).catch(() => { note.textContent = 'Không tải được dữ liệu nét chữ'; });
+      ov.querySelectorAll('.char-tabs button').forEach(b => b.onclick = () => {
+        ov.querySelectorAll('.char-tabs button').forEach(x => x.classList.remove('on'));
+        b.classList.add('on'); cur = +b.dataset.c; if (window.HanziWriter) show();
+      });
+      ov.querySelector('[data-x=anim]').onclick = () => { if (!writer) return; writer.cancelQuiz(); writer.showCharacter(); writer.animateCharacter(); note.textContent = `${chars[cur]} · ${strokeCount(chars[cur])} nét`; };
+      ov.querySelector('[data-x=speak]').onclick = () => speak(w.w);
+      ov.querySelector('[data-x=practice]').onclick = () => {
+        if (!writer) return;
+        writer.hideCharacter();
+        let miss = 0;
+        note.textContent = 'Viết theo nét mờ — sai 3 lần sẽ hiện gợi ý';
+        writer.quiz({
+          showHintAfterMisses: 3,
+          onMistake: () => { miss++; },
+          onComplete: () => { note.textContent = miss ? `Xong! Lỗi ${miss} nét` : 'Hoàn hảo! Không lỗi nét nào 🎉'; },
+        });
+      };
+      void close;
+    });
   }
 
   // ---------------------------------------------------------------- sheets
@@ -652,14 +919,20 @@
       case 'answer': answer(b.dataset.id); break;
       case 'skip': answer(null, true); break;
       case 'next': nextQuestion(); break;
-      case 'quit': case 'back': location.hash = `#/hsk${quiz ? quiz.level : lvl}`; break;
-      case 'again': { const l = quiz.level; quiz = null; startQuiz(l, b.dataset.kind); renderQuiz(); break; }
+      case 'quit': case 'back': destroyWriters(); location.hash = `#/hsk${quiz ? quiz.level : lvl}`; break;
+      case 'again': { const l = quiz.level; quiz = null; startQuiz(l, b.dataset.kind); if (quiz && quiz.mode !== 'write') renderQuiz(); break; }
+      case 'strokes': openStrokeSheet(b.dataset.id); break;
+      case 'whint': writeHint(b.dataset.h); break;
     }
   });
 
   document.addEventListener('keydown', e => {
     if (!quiz || quiz.countdown > 0 || e.target.matches('input, textarea')) return;
     const k = e.key.toUpperCase();
+    if (quiz.mode === 'write') {
+      if (quiz.answered && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); nextQuestion(); }
+      return;
+    }
     if (!quiz.answered && 'ABCD1234'.includes(k) && k) {
       const idx = 'ABCD'.includes(k) ? 'ABCD'.indexOf(k) : +k - 1;
       const opt = quiz.items[quiz.i]?.options[idx];
