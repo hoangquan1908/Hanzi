@@ -1,6 +1,6 @@
 // Service worker: cache toàn bộ app để dùng offline.
 // Đổi CACHE khi cập nhật file để trình duyệt tải bản mới.
-const CACHE = 'hanzi-v1.2.2';
+const CACHE = 'hanzi-v1.2.3';
 const ASSETS = [
   './', 'index.html', 'style.css', 'app.js', 'manifest.webmanifest',
   'icon.svg', 'icon-192.png', 'icon-512.png',

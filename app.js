@@ -639,7 +639,7 @@
     writers.forEach(w => { try { w.cancelQuiz(); } catch (e) { /* ignore */ } });
     writers = [];
   }
-  function boardSize() { return Math.min(340, Math.max(240, Math.floor(window.innerWidth - 56))); }
+  function boardSize() { return Math.min(350, Math.max(240, Math.floor(window.innerWidth - 40))); }
   function makeWriter(el, ch, opts) {
     const size = opts.size || boardSize();
     el.style.width = el.style.height = size + 'px';

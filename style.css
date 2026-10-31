@@ -272,3 +272,13 @@ input { font: inherit; }
 .sheet .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 14px; }
 .sheet .row3 .btn { padding: 12px 6px; font-size: 14px; }
 .lvl-sub { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-top: 2px; }
+
+/* công tắc Tự viết */
+.switch-row { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 14px; font-weight: 800; cursor: pointer; user-select: none; margin: 4px auto 0; }
+.switch-row small { color: var(--muted); font-weight: 700; }
+.switch-row input { display: none; }
+.switch { position: relative; width: 42px; height: 24px; border-radius: 99px; background: #cbd5e1; transition: background .2s; flex: none; }
+.switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .2s; }
+.switch-row input:checked + .switch { background: var(--violet); }
+.switch-row input:checked + .switch::after { transform: translateX(18px); }
+.sheet label.switch-row { display: flex; font-size: 14px; color: var(--ink); margin: 8px 0 0; }

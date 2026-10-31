@@ -24,6 +24,7 @@ Mở http://localhost:8000.
 - **Chế độ `# Known`:** nhìn chữ → chọn nghĩa đúng trong 4 đáp án.
 - **Chế độ `✓ Done`:** câu ví dụ bị khuyết từ → chọn từ đúng. Khi đã biết hết từ của một cấp, app tự chuyển sang chế độ này.
 - **Chế độ `✍️ Viết`:** nhìn nghĩa → tự viết từng chữ lên bảng ô 米 bằng ngón tay / chuột, app chấm từng nét (sai 3 lần sẽ hiện gợi ý nét). Gợi ý: Pinyin, Nghe, Xem mẫu (−10Đ). Đạt nếu trung bình ≤ 2 lỗi/chữ và không dùng "Xem mẫu".
+- **Công tắc "Tự viết":** ở bảng luyện viết và bảng xem nét — bật để ẩn nét mờ và tắt gợi ý khi viết sai, tự viết hoàn toàn. App nhớ lựa chọn cho lần sau.
 - **Xem thứ tự nét:** nút ✍️ ở mỗi từ trong danh sách → hoạt ảnh thứ tự nét + tập viết từng chữ.
 - **Gợi ý trừ điểm:** Hán Việt (−10), Nghe (−10), Nghĩa/Ví dụ (−10), Bỏ qua (−5). Trả lời đúng +20.
 - **Câu sai:** ôn lại những từ đã trả lời sai; trả lời đúng thì từ đó được gỡ khỏi danh sách.
