@@ -12,7 +12,7 @@
   const levelSub = l => (l === 10 ? 'Từ HSK 2.0 ngoài HSK 3.0' : '');
   const SESSION_SIZE = 10;          // số câu mỗi lượt học
   const PTS = { correct: 20, hint: 10, skip: 5 };
-  const VERSION = '2.1.0';
+  const VERSION = '2.2.0';
   // f = cờ "đã xong", w = cờ "làm sai" trong S.words[id]
   const MODES = {
     known: { f: 'k', w: 'wk', label: 'Nghĩa', chip: 'green' },
@@ -143,12 +143,19 @@
   }
 
   let toastTimer;
-  function toast(msg) {
+  function toast(msg, action) {
     const el = document.getElementById('toast');
-    el.textContent = msg;
+    el.innerHTML = `<span class="toast-msg">${esc(msg)}</span>`;
+    if (action) {
+      const b = document.createElement('button');
+      b.className = 'toast-act';
+      b.textContent = action.label;
+      b.onclick = () => { el.classList.remove('show'); action.run(); };
+      el.appendChild(b);
+    }
     el.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+    toastTimer = setTimeout(() => el.classList.remove('show'), action ? 5000 : 2600);
   }
 
   // ---------------------------------------------------------------- speech
@@ -176,6 +183,8 @@
   const app = document.getElementById('app');
   let quiz = null;          // phiên học hiện tại
   let listQuery = '';
+  let listFilter = 'all';   // all | todo | done  (lọc danh sách theo đã học xong)
+  let homeQuery = '';       // ô tìm kiếm ở trang chủ (cả 7 list)
 
   function route() {
     if (typeof destroyWriters === 'function') destroyWriters();
@@ -215,6 +224,9 @@
         </div>
       </div>
 
+      <div class="search home-search"><input id="hq" type="search" placeholder="Tìm từ trong cả 7 list: chữ, pinyin, Hán Việt, nghĩa…" value="${esc(homeQuery)}" autocomplete="off"><span>⌕</span></div>
+      <div class="words home-results" id="hres"></div>
+
       ${dailyCard()}
 
       <div class="stats">
@@ -239,6 +251,40 @@
 
       <div class="footer">hanzi · v${VERSION} · ${activeDays} ngày học · dữ liệu HSK 3.0 (complete-hsk-vocabulary, MIT)</div>
     `;
+    app.dataset.view = 'home';
+    renderHomeResults();
+    const hq = document.getElementById('hq');
+    hq.addEventListener('input', () => { homeQuery = hq.value; renderHomeResults(); });
+  }
+
+  // tìm trong cả 7 list; xếp: trùng chữ → bắt đầu bằng chữ → trùng pinyin → còn lại
+  const HOME_MAX = 50;
+  function renderHomeResults() {
+    const box = document.getElementById('hres');
+    if (!box) return;
+    const raw = homeQuery.trim();
+    if (!raw) { box.innerHTML = ''; box.hidden = true; return; }
+    box.hidden = false;
+    const q = stripTones(raw), qn = q.replace(/\s/g, '');
+    const hits = [];
+    LEVELS.forEach(l => words(l).forEach(w => {
+      const py = stripTones(w.py).replace(/\s/g, '');
+      let r = -1;
+      if (w.w === raw) r = 0;
+      else if (w.w.startsWith(raw)) r = 1;
+      else if (py === qn) r = 2;
+      else if (w.w.includes(raw)) r = 3;
+      else if (py.startsWith(qn)) r = 4;
+      else if (stripTones(w.hv) === q) r = 5;
+      else if (py.includes(qn) || stripTones(w.hv).includes(q)) r = 6;
+      else if (stripTones(w.vi).includes(q)) r = 7;
+      if (r >= 0) hits.push([r, w]);
+    }));
+    hits.sort((a, b) => a[0] - b[0] || a[1].w.length - b[1].w.length);
+    if (!hits.length) { box.innerHTML = '<div class="empty">Không tìm thấy từ nào</div>'; return; }
+    const more = hits.length - HOME_MAX;
+    box.innerHTML = `<div class="res-head">${fmt(hits.length)} kết quả${more > 0 ? ` · hiện ${HOME_MAX} đầu tiên, gõ cụ thể hơn để lọc` : ''}</div>`
+      + hits.slice(0, HOME_MAX).map(h => wordCard(h[1], true)).join('');
   }
 
   function levelCard(l) {
@@ -348,6 +394,7 @@
 
       <div class="list-head">Danh sách từ <small>(${s.total} từ${s.mastered ? ` · ${s.mastered} đã học xong` : ''})</small></div>
       <div class="search"><input id="q" type="search" placeholder="Tìm chữ, pinyin, nghĩa…" value="${esc(listQuery)}" autocomplete="off"><span>⌕</span></div>
+      <div id="lfilter"></div>
       <div class="words" id="words"></div>
 
       <div class="bottom-actions"><div class="inner">
@@ -356,6 +403,7 @@
       </div></div>
     `;
     app.dataset.level = level;
+    app.dataset.view = 'level';
     renderWordList(level);
     const q = document.getElementById('q');
     q.addEventListener('input', () => { listQuery = q.value; renderWordList(level); });
@@ -372,18 +420,35 @@
         stripTones(w.py).replace(/\s/g, '').includes(q.replace(/\s/g, '')) ||
         stripTones(w.hv).includes(q) || stripTones(w.vi).includes(q));
     }
-    if (!list.length) { box.innerHTML = '<div class="empty">Không tìm thấy từ nào</div>'; return; }
-    list = [...list.filter(w => !isM(w.id)), ...list.filter(w => isM(w.id))];   // từ đã học xong xuống cuối
-    let firstM = true;
+    const todo = list.filter(w => !isM(w.id)), doneL = list.filter(w => isM(w.id));
+    // thanh lọc: chỉ hiện khi đã có từ học xong
+    const fb = document.getElementById('lfilter');
+    if (fb) {
+      const any = DATA[level].some(w => isM(w.id));
+      if (!any && listFilter !== 'all') listFilter = 'all';
+      fb.innerHTML = any ? `<div class="lfilter">
+        <button class="${listFilter === 'all' ? 'on' : ''}" data-act="lfilter" data-f="all">Tất cả <small>${fmt(list.length)}</small></button>
+        <button class="${listFilter === 'todo' ? 'on' : ''}" data-act="lfilter" data-f="todo">Chưa xong <small>${fmt(todo.length)}</small></button>
+        <button class="${listFilter === 'done' ? 'on done' : ''}" data-act="lfilter" data-f="done">${I.check} Học xong <small>${fmt(doneL.length)}</small></button>
+      </div>` : '';
+    }
+    list = listFilter === 'todo' ? todo : listFilter === 'done' ? doneL : [...todo, ...doneL];   // từ đã học xong xuống cuối
+    if (!list.length) { box.innerHTML = `<div class="empty">${listFilter === 'done' ? 'Chưa có từ nào học xong' : 'Không tìm thấy từ nào'}</div>`; return; }
+    let firstM = listFilter === 'all';
     box.innerHTML = list.map(w => {
-      const s = S.words[w.id] || {};
-      const m = !!s.m;
-      const divider = m && firstM ? (firstM = false, `<div class="m-divider">${I.check} Đã học xong</div>`) : '';
-      return `${divider}
-      <div class="card word${m ? ' mastered' : ''}">
+      const divider = isM(w.id) && firstM ? (firstM = false, `<div class="m-divider">${I.check} Đã học xong</div>`) : '';
+      return divider + wordCard(w, false);
+    }).join('');
+  }
+
+  function wordCard(w, showLevel) {
+    const s = S.words[w.id] || {};
+    const m = !!s.m;
+    return `
+      <div class="card word${m ? ' mastered' : ''}" data-wid="${w.id}">
         <div class="head">
           <button class="tick${m ? ' on' : ''}" data-act="tick" data-id="${w.id}" aria-pressed="${m}" aria-label="${m ? 'Bỏ đánh dấu học xong' : 'Đánh dấu đã học xong'}">${I.check}</button>
-          <span class="idx">${w.n}</span>
+          ${showLevel ? `<button class="chip orange lvl-chip" data-act="open" data-level="${w.level}">${levelName(w.level)}</button>` : ''}<span class="idx">${w.n}</span>
           <span class="w">${esc(w.w)}</span>
           <span class="py">${esc(w.py)}</span>
           <span class="hv">[${esc(w.hv)}]</span>
@@ -402,17 +467,24 @@
           <div class="v">${esc(w.exVi)}</div>
         </div>
       </div>`;
-    }).join('');
   }
 
-  function toggleMastered(id, level) {
-    const s = st(id), w = word(id);
-    if (s.m) { delete s.m; delete s.mt; toast(`Bỏ đánh dấu ${w.w}`); }
-    else { s.m = 1; s.mt = todayKey(); toast(`Đã học xong ${w.w} — chuyển xuống cuối danh sách`); }
+  function setMastered(id, on) {
+    const s = st(id);
+    if (on) { s.m = 1; s.mt = todayKey(); } else { delete s.m; delete s.mt; }
     save();
     const y = window.scrollY;
-    renderLevel(level);
+    if (app.dataset.view === 'home') renderHome();
+    else if (app.dataset.view === 'level') renderLevel(+app.dataset.level);
     window.scrollTo(0, y);
+  }
+
+  function toggleMastered(id) {
+    const w = word(id), on = !isM(id);
+    setMastered(id, on);
+    const moved = on && app.dataset.view === 'level' && listFilter === 'all';
+    toast(on ? `Đã học xong ${w.w}${moved ? ' · chuyển xuống cuối' : ''}` : `Bỏ đánh dấu ${w.w}`,
+      { label: 'Hoàn tác', run: () => setMastered(id, !on) });
   }
 
   // ---------------------------------------------------------------- quiz
@@ -1462,7 +1534,7 @@
     const act = b.dataset.act;
     const lvl = +(app.dataset.level || 0);
     switch (act) {
-      case 'open': listQuery = ''; location.hash = `#/hsk${b.dataset.level}`; break;
+      case 'open': listQuery = ''; listFilter = 'all'; location.hash = `#/hsk${b.dataset.level}`; break;
       case 'home': location.hash = '#/'; break;
       case 'menu': openMenu(); break;
       case 'mode': S.mode[lvl] = b.dataset.mode; save(); renderLevel(lvl); break;
@@ -1478,7 +1550,8 @@
       case 'strokes': openStrokeSheet(b.dataset.id); break;
       case 'whint': writeHint(b.dataset.h); break;
       case 'daily': runDaily(true); break;
-      case 'tick': toggleMastered(b.dataset.id, lvl); break;
+      case 'tick': toggleMastered(b.dataset.id); break;
+      case 'lfilter': listFilter = b.dataset.f; renderWordList(lvl); break;
     }
   });
 
