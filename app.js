@@ -12,18 +12,41 @@
   const levelSub = l => (l === 10 ? 'Từ HSK 2.0 ngoài HSK 3.0' : '');
   const SESSION_SIZE = 10;          // số câu mỗi lượt học
   const PTS = { correct: 20, hint: 10, skip: 5 };
-  const VERSION = '1.3.0';
+  const VERSION = '2.0.0';
   // f = cờ "đã xong", w = cờ "làm sai" trong S.words[id]
   const MODES = {
-    known: { f: 'k', w: 'wk', label: '# Từ vựng', chip: 'green' },
-    done:  { f: 'd', w: 'wd', label: '✓ Đoạn văn', chip: 'orange' },
-    write: { f: 'v', w: 'wv', label: '✍️ Luyện viết', chip: 'violet' },
+    known: { f: 'k', w: 'wk', label: 'Nghĩa', chip: 'green' },
+    done:  { f: 'd', w: 'wd', label: 'Điền câu', chip: 'orange' },
+    write: { f: 'v', w: 'wv', label: 'Luyện viết', chip: 'violet' },
   };
   const CHEERS = [
-    '🌟 Bạn đang làm rất tốt!', '💪 Mỗi ngày một chút!', '📚 Học chữ Hán vui vẻ!',
-    '🚀 Tiến bộ từng ngày!', '🎯 Kiên định với mục tiêu!', '🔥 Đừng bỏ cuộc!',
-    '🌱 Tri thức là đầu tư tốt nhất', '📖 Học đến đâu chắc đến đó!',
+    'Bạn đang làm rất tốt', 'Mỗi ngày một chút', 'Học chữ Hán vui vẻ',
+    'Tiến bộ từng ngày', 'Kiên định với mục tiêu', 'Đừng bỏ cuộc',
+    'Tri thức là đầu tư tốt nhất', 'Học đến đâu chắc đến đó',
   ];
+
+  // Icon nét mảnh (stroke = currentColor)
+  const svg = (d, extra = '') => `<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${extra}>${d}</svg>`;
+  const I = {
+    gear: svg('<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>'),
+    speaker: svg('<path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>'),
+    pen: svg('<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="m13.5 6.5 4 4"/>'),
+    brush: svg('<path d="M14 4c2 0 6 4 6 6l-8 8-6-6 8-8z"/><path d="M6 12c-2 0-3 2-3 4 0 1-1 2-1 3 3 0 6-1 7-4"/>'),
+    x: svg('<path d="M6 6l12 12M18 6 6 18"/>'),
+    back: svg('<path d="m15 6-6 6 6 6"/>'),
+    next: svg('<path d="m9 6 6 6-6 6"/>'),
+    check: svg('<path d="m5 12 5 5 9-10"/>'),
+    book: svg('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M4 19a2 2 0 0 1 2-2h13"/>'),
+    eye: svg('<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'),
+    flame: svg('<path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-4-1-6 1-9z"/>'),
+    play: svg('<path d="M8 5v14l11-7z"/>'),
+    skip: svg('<path d="M5 5v14l9-7z"/><path d="M18 5v14"/>'),
+    down: svg('<path d="M12 4v12M6 10l6 6 6-6M4 20h16"/>'),
+    up: svg('<path d="M12 20V8M6 14l6-6 6 6M4 4h16"/>'),
+    trash: svg('<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>'),
+    sun: svg('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
+  };
+  const LOGO = `<div class="logo" aria-hidden="true"><span class="zh">字</span></div>`;
 
   const DATA = window.HSK || {};
   const LEVELS = ALL_LEVELS.filter(l => Array.isArray(DATA[l]) && DATA[l].length);
@@ -178,37 +201,36 @@
 
     app.innerHTML = `
       <div class="topbar">
-        <div class="brand"><div class="logo">汉</div>Hanzi</div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <div class="pill">📊 Hôm nay <span class="sep"></span>⭐ <span class="val">${fmt(td.score)}</span></div>
-          <button class="icon-btn" data-act="menu" aria-label="Cài đặt">⚙️</button>
+        <div class="brand">${LOGO}<span class="wordmark">hanzi</span></div>
+        <div class="top-right">
+          <div class="pill">${I.flame}<span class="val">${sk}</span> ngày</div>
+          <button class="icon-btn" data-act="menu" aria-label="Cài đặt">${I.gear}</button>
         </div>
       </div>
 
       ${dailyCard()}
 
-      <div class="card stats">
-        <div class="stat"><div class="lbl">Tổng từ</div><div class="num c-ink">${fmt(total)}</div></div>
-        <div class="stat"><div class="lbl">Đã biết</div><div class="num c-green">${fmt(known)}</div></div>
-        <div class="stat"><div class="lbl">Hoàn thành</div><div class="num c-orange">${fmt(done)}</div><div class="lbl c-violet" style="margin-top:2px">✍️ ${fmt(written)}</div></div>
-        <div class="stat"><div class="lbl">Điểm học</div><div class="num c-rose">${fmt(S.score)}</div></div>
+      <div class="stats">
+        <div class="card stat"><div class="lbl">Đã biết</div><div class="num">${fmt(known)}</div></div>
+        <div class="card stat"><div class="lbl">Hoàn thành</div><div class="num">${fmt(done)}</div></div>
+        <div class="card stat"><div class="lbl">Đã viết</div><div class="num">${fmt(written)}</div></div>
       </div>
 
       <div class="section-title">
-        <span><i class="bar"></i>7 ngày qua · 📅 ${activeDays} ngày</span>
-        <span class="right">🔥 ${sk}</span>
+        <span class="h">7 ngày qua</span>
+        <span class="right">Hôm nay ${fmt(td.score)} điểm · tổng ${fmt(S.score)}</span>
       </div>
       <div class="card chart">${chartSVG()}</div>
 
       <div class="section-title">
-        <span><i class="bar"></i>HSK 3.0 · 📚 ${LEVELS.length} list</span>
-        <span class="right"><span class="c-green">#: ${allK}%</span> &nbsp;<span class="c-orange">✓: ${allD}%</span></span>
+        <span class="h">Giáo trình</span>
+        <span class="right">HSK 3.0 · ${fmt(total)} từ · biết ${allK}%</span>
       </div>
       <div class="levels">
         ${ALL_LEVELS.map(levelCard).join('')}
       </div>
 
-      <div class="footer">Hanzi · v${VERSION} · dữ liệu HSK 3.0 (complete-hsk-vocabulary, MIT)</div>
+      <div class="footer">hanzi · v${VERSION} · ${activeDays} ngày học · dữ liệu HSK 3.0 (complete-hsk-vocabulary, MIT)</div>
     `;
   }
 
@@ -222,7 +244,7 @@
       <button class="card level" data-act="open" data-level="${l}">
         <div class="row">
           <span class="name">${levelName(l)}${levelSub(l) ? `<small class="lvl-sub">${levelSub(l)}</small>` : ''}</span>
-          <span class="pct"><span class="c-green">#: ${gk}%</span> &nbsp;<span class="c-orange">✓: ${od}%</span> &nbsp;<span class="c-violet">✍️: ${pct(s.written, s.total)}%</span></span>
+          <span class="pct"><span class="c-green">biết ${gk}%</span> · <span class="c-orange">câu ${od}%</span> · <span class="c-violet">viết ${pct(s.written, s.total)}%</span></span>
         </div>
         <div class="row">
           <div class="progress"><div class="g" style="width:${Math.max(0, gk - od)}%"></div><div class="o" style="width:${od}%"></div></div>
@@ -242,8 +264,8 @@
       d.setDate(d.getDate() + 1);
     }
     if (!days.some(x => x.known || x.completed || x.written)) {
-      return `<div class="legend"><span><i style="background:var(--green-soft);border:1.5px solid var(--green)"></i>Đã biết (#)</span><span><i style="background:var(--orange)"></i>Hoàn thành (✓)</span><span><i style="background:var(--violet)"></i>Đã viết (✍️)</span></div>
-              <div class="chart-empty">Chưa có dữ liệu — bắt đầu học để thấy biểu đồ 📈</div>`;
+      return `<div class="legend"><span><i style="background:var(--green-soft);border:1.5px solid var(--green)"></i>Đã biết</span><span><i style="background:var(--orange)"></i>Hoàn thành</span><span><i style="background:var(--violet)"></i>Đã viết</span></div>
+              <div class="chart-empty">Chưa có dữ liệu — bắt đầu học để thấy biểu đồ</div>`;
     }
     const W = 340, H = 150, padL = 34, padB = 22, padT = 18;
     const max = Math.max(4, ...days.map(x => Math.max(x.known, x.completed, x.written)));
@@ -253,28 +275,28 @@
     let g = '';
     for (let i = 0; i <= 4; i++) {
       const v = nice / 4 * i;
-      g += `<line x1="${padL}" x2="${W - 4}" y1="${y(v)}" y2="${y(v)}" stroke="#eef2f6"/>
-            <text x="${padL - 6}" y="${y(v) + 3}" text-anchor="end" font-size="9" fill="#94a3b8">${fmt(v)}</text>`;
+      g += `<line x1="${padL}" x2="${W - 4}" y1="${y(v)}" y2="${y(v)}" style="stroke:var(--line)"/>
+            <text x="${padL - 6}" y="${y(v) + 3}" text-anchor="end" font-size="9" style="fill:var(--faint)">${fmt(v)}</text>`;
     }
     days.forEach((x, i) => {
       const cx = padL + cw * i + cw / 2;
       const bw = cw * 0.56;
-      if (x.known) g += `<rect x="${cx - bw / 2}" y="${y(x.known)}" width="${bw}" height="${y(0) - y(x.known)}" rx="4" fill="#d1fae5" stroke="#10b981" stroke-width="1.2"/>`;
-      g += `<text x="${cx}" y="${H - 6}" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700">${x.label}</text>`;
+      if (x.known) g += `<rect x="${cx - bw / 2}" y="${y(x.known)}" width="${bw}" height="${y(0) - y(x.known)}" rx="4" style="fill:var(--green-soft);stroke:var(--green)" stroke-width="1"/>`;
+      g += `<text x="${cx}" y="${H - 6}" text-anchor="middle" font-size="9" style="fill:var(--muted)" font-weight="500">${x.label}</text>`;
     });
     if (days.some(x => x.written)) {
       const vp = days.map((x, i) => [padL + cw * i + cw / 2, y(x.written)]);
-      g += `<polyline points="${vp.map(p => p.join(',')).join(' ')}" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>`;
-      vp.forEach((p, i) => { if (days[i].written) g += `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#7c3aed"/>`; });
+      g += `<polyline points="${vp.map(p => p.join(',')).join(' ')}" fill="none" style="stroke:var(--violet)" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round"/>`;
+      vp.forEach((p, i) => { if (days[i].written) g += `<circle cx="${p[0]}" cy="${p[1]}" r="2.6" style="fill:var(--violet)"/>`; });
     }
     const pts = days.map((x, i) => [padL + cw * i + cw / 2, y(x.completed)]);
-    g += `<polyline points="${pts.map(p => p.join(',')).join(' ')}" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linejoin="round"/>`;
+    g += `<polyline points="${pts.map(p => p.join(',')).join(' ')}" fill="none" style="stroke:var(--orange)" stroke-width="1.6" stroke-linejoin="round"/>`;
     pts.forEach((p, i) => {
       const v = days[i].completed;
-      g += `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#fff" stroke="#f59e0b" stroke-width="2"/>`;
-      if (v) g += `<text x="${p[0]}" y="${p[1] - 8}" text-anchor="middle" font-size="9" fill="#b45309" font-weight="800">${fmt(v)}</text>`;
+      g += `<circle cx="${p[0]}" cy="${p[1]}" r="3" style="fill:var(--card);stroke:var(--orange)" stroke-width="1.5"/>`;
+      if (v) g += `<text x="${p[0]}" y="${p[1] - 8}" text-anchor="middle" font-size="9" style="fill:var(--orange)" font-weight="600">${fmt(v)}</text>`;
     });
-    return `<div class="legend"><span><i style="background:var(--green-soft);border:1.5px solid var(--green)"></i>Đã biết (#)</span><span><i style="background:var(--orange)"></i>Hoàn thành (✓)</span><span><i style="background:var(--violet)"></i>Đã viết (✍️)</span></div>
+    return `<div class="legend"><span><i style="background:var(--green-soft);border:1.5px solid var(--green)"></i>Đã biết</span><span><i style="background:var(--orange)"></i>Hoàn thành</span><span><i style="background:var(--violet)"></i>Đã viết</span></div>
             <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Biểu đồ 7 ngày">${g}</svg>`;
   }
 
@@ -289,7 +311,7 @@
 
     app.innerHTML = `
       <div class="topbar">
-        <button class="icon-btn" data-act="home" aria-label="Về trang chủ">←</button>
+        <button class="icon-btn" data-act="home" aria-label="Về trang chủ">${I.back}</button>
         <div class="pill">
           <span class="chip ${MODES[mode].chip}">${MODES[mode].label}</span>
           Điểm: <span class="val" style="color:var(--ink)">${fmt(S.score)}</span>
@@ -297,9 +319,9 @@
       </div>
 
       <div class="seg seg3">
-        <button class="${mode === 'known' ? 'on known' : ''}" data-act="mode" data-mode="known"># Known</button>
-        <button class="${mode === 'done' ? 'on done' : ''}" data-act="mode" data-mode="done">✓ Done</button>
-        <button class="${mode === 'write' ? 'on write' : ''}" data-act="mode" data-mode="write">✍️ Viết</button>
+        <button class="${mode === 'known' ? 'on known' : ''}" data-act="mode" data-mode="known">Nghĩa</button>
+        <button class="${mode === 'done' ? 'on done' : ''}" data-act="mode" data-mode="done">Điền câu</button>
+        <button class="${mode === 'write' ? 'on write' : ''}" data-act="mode" data-mode="write">Viết chữ</button>
       </div>
 
       <div class="meta">
@@ -311,13 +333,13 @@
         ? `<div class="v" style="width:${pct(doneN, s.total)}%"></div>`
         : `<div class="g" style="width:${Math.max(0, g - o)}%"></div><div class="o" style="width:${o}%"></div>`}</div>
 
-      <div class="list-head">📚 Danh sách từ <small>(${s.total} từ)</small></div>
+      <div class="list-head">Danh sách từ <small>(${s.total} từ)</small></div>
       <div class="search"><input id="q" type="search" placeholder="Tìm chữ, pinyin, nghĩa…" value="${esc(listQuery)}" autocomplete="off"><span>⌕</span></div>
       <div class="words" id="words"></div>
 
       <div class="bottom-actions"><div class="inner">
-        <button class="btn ${mode === 'write' ? 'violet' : 'green'}" data-act="start" data-kind="new" ${remaining || mode === 'known' ? '' : 'disabled'}>${mode === 'write' ? '✍️ Viết mới' : '📝 Học mới'} (${remaining})</button>
-        <button class="btn rose" data-act="start" data-kind="wrong" ${wrong ? '' : 'disabled'}>🔁 Câu sai (${wrong})</button>
+        <button class="btn ${mode === 'write' ? 'violet' : 'green'}" data-act="start" data-kind="new" ${remaining || mode === 'known' ? '' : 'disabled'}>${mode === 'write' ? 'Viết mới' : 'Học mới'} (${remaining})</button>
+        <button class="btn rose" data-act="start" data-kind="wrong" ${wrong ? '' : 'disabled'}>Ôn câu sai (${wrong})</button>
       </div></div>
     `;
     app.dataset.level = level;
@@ -348,11 +370,11 @@
           <span class="py">${esc(w.py)}</span>
           <span class="hv">[${esc(w.hv)}]</span>
           <span class="pos">(${esc(w.pos)})</span>
-          <span class="badges">${s.k ? '<span class="badge k">#</span>' : ''}${s.d ? '<span class="badge d">✓</span>' : ''}${s.v ? '<span class="badge v">✍️</span>' : ''}${(s.wk || s.wd || s.wv) ? '<span class="badge x">✗</span>' : ''}</span>
+          <span class="badges">${s.k ? '<span class="badge k">biết</span>' : ''}${s.d ? '<span class="badge d">câu</span>' : ''}${s.v ? '<span class="badge v">viết</span>' : ''}${(s.wk || s.wd || s.wv) ? '<span class="badge x">sai</span>' : ''}</span>
           <span class="tools">
-            <button data-act="speak" data-text="${esc(w.w)}" aria-label="Nghe">🔊</button>
-            <button data-act="strokes" data-id="${w.id}" aria-label="Xem cách viết">✍️</button>
-            <button data-act="edit" data-id="${w.id}" aria-label="Sửa">✏️</button>
+            <button data-act="speak" data-text="${esc(w.w)}" aria-label="Nghe">${I.speaker}</button>
+            <button data-act="strokes" data-id="${w.id}" aria-label="Xem cách viết">${I.brush}</button>
+            <button data-act="edit" data-id="${w.id}" aria-label="Sửa">${I.pen}</button>
           </span>
         </div>
         <div class="vi">${esc(w.vi)}</div>
@@ -377,7 +399,7 @@
       if (mode === 'known' && list.every(w => S.words[w.id] && S.words[w.id].k)) {
         mode = S.mode[level] = 'done';
         save();
-        toast('✨ Bạn đã biết hết từ vựng! Tự động chuyển sang Đoạn văn.');
+        toast('Bạn đã biết hết từ vựng — chuyển sang Điền câu.');
       }
       const flag = MODES[mode].f;
       pool = list.filter(w => !(S.words[w.id] && S.words[w.id][flag]));
@@ -386,7 +408,7 @@
         pool.sort((a, b) => (S.words[b.id]?.k ? 1 : 0) - (S.words[a.id]?.k ? 1 : 0));
       }
     }
-    if (!pool.length) { toast(mode === 'known' ? 'Không còn từ nào' : '🎉 Bạn đã hoàn thành hết cấp này!'); return; }
+    if (!pool.length) { toast(mode === 'known' ? 'Không còn từ nào' : 'Bạn đã hoàn thành hết cấp này!'); return; }
     const items = pool.slice(0, SESSION_SIZE).map(w => mode === 'write' ? { w, options: [] } : buildQuestion(w, mode, list));
     quiz = { level, kind, mode, items, i: 0, right: 0, wrong: 0, gained: 0, countdown: 3, answered: null, used: {} };
     if (mode === 'write') {
@@ -428,9 +450,9 @@
     const q = quiz;
     const header = `
       <div class="topbar">
-        <button class="icon-btn" data-act="quit" aria-label="Thoát">✕</button>
+        <button class="icon-btn" data-act="quit" aria-label="Thoát">${I.x}</button>
         <div class="pill">
-          <span class="chip ${MODES[q.mode].chip}">${q.kind === 'wrong' ? '🔁 Câu sai' : MODES[q.mode].label}</span>
+          <span class="chip ${MODES[q.mode].chip}">${q.kind === 'wrong' ? 'Ôn câu sai' : MODES[q.mode].label}</span>
           Điểm: <span class="val" style="color:var(--ink)">${fmt(S.score)}</span>
         </div>
       </div>
@@ -459,9 +481,9 @@
         <div class="big">${esc(w.w)}</div>
         <div class="sub">${used.nghe || ans ? esc(w.py) : '&nbsp;'}</div>
         <div class="hints">
-          <button class="hint hv" data-act="hint" data-h="hv" ${used.hv || ans ? 'disabled' : ''}>🈶 Hán Việt (−${PTS.hint}Đ)</button>
-          <button class="hint nghe" data-act="hint" data-h="nghe" ${ans ? 'disabled' : ''}>🔊 Nghe${used.nghe ? '' : ` (−${PTS.hint}Đ)`}</button>
-          <button class="hint nghia" data-act="hint" data-h="vidu" ${used.vidu || ans ? 'disabled' : ''}>📖 Ví dụ (−${PTS.hint}Đ)</button>
+          <button class="hint hv" data-act="hint" data-h="hv" ${used.hv || ans ? 'disabled' : ''}>Hán Việt (−${PTS.hint}Đ)</button>
+          <button class="hint nghe" data-act="hint" data-h="nghe" ${ans ? 'disabled' : ''}>${I.speaker} Nghe${used.nghe ? '' : ` (−${PTS.hint}Đ)`}</button>
+          <button class="hint nghia" data-act="hint" data-h="vidu" ${used.vidu || ans ? 'disabled' : ''}>${I.book} Ví dụ (−${PTS.hint}Đ)</button>
         </div>
         <div class="reveal">
           ${used.hv ? `<div class="r-hv">[${esc(w.hv)}]</div>` : ''}
@@ -473,9 +495,9 @@
       prompt = `
         <div class="sentence">${gapped}</div>
         <div class="hints">
-          <button class="hint hv" data-act="hint" data-h="hv" ${used.hv || ans ? 'disabled' : ''}>🈶 Hán Việt (−${PTS.hint}Đ)</button>
-          <button class="hint nghe" data-act="hint" data-h="nghe" ${ans ? 'disabled' : ''}>🔊 Nghe${used.nghe ? '' : ` (−${PTS.hint}Đ)`}</button>
-          <button class="hint nghia" data-act="hint" data-h="nghia" ${used.nghia || ans ? 'disabled' : ''}>📖 Nghĩa (−${PTS.hint}Đ)</button>
+          <button class="hint hv" data-act="hint" data-h="hv" ${used.hv || ans ? 'disabled' : ''}>Hán Việt (−${PTS.hint}Đ)</button>
+          <button class="hint nghe" data-act="hint" data-h="nghe" ${ans ? 'disabled' : ''}>${I.speaker} Nghe${used.nghe ? '' : ` (−${PTS.hint}Đ)`}</button>
+          <button class="hint nghia" data-act="hint" data-h="nghia" ${used.nghia || ans ? 'disabled' : ''}>${I.book} Nghĩa (−${PTS.hint}Đ)</button>
         </div>
         <div class="reveal">
           ${used.hv ? `<div class="r-hv">[${esc(w.hv)}]</div>` : ''}
@@ -498,14 +520,14 @@
 
     const answerCard = ans ? `
       <div class="card answer">
-        <div class="verdict ${ans.ok ? 'ok' : 'no'}">${ans.ok ? `✓ Chính xác! +${PTS.correct}Đ` : (ans.skipped ? `⏭ Đã bỏ qua (−${PTS.skip}Đ)` : '✗ Chưa đúng')}</div>
+        <div class="verdict ${ans.ok ? 'ok' : 'no'}">${ans.ok ? `✓ Chính xác! +${PTS.correct}Đ` : (ans.skipped ? `Đã bỏ qua (−${PTS.skip}Đ)` : '✗ Chưa đúng')}</div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
           <div>
-            <span class="zh" style="font-size:22px;font-weight:900">${esc(w.w)}</span>
+            <span class="zh" style="font-size:28px">${esc(w.w)}</span>
             <span class="p" style="margin-left:6px">${esc(w.py)}</span>
-            <span class="hv" style="color:var(--violet);font-weight:800;font-size:13px;margin-left:6px">[${esc(w.hv)}]</span>
+            <span class="hv" style="color:var(--green-ink);font-weight:500;font-size:13px;margin-left:6px">[${esc(w.hv)}]</span>
           </div>
-          <button class="icon-btn" data-act="speak" data-text="${esc(w.ex)}" aria-label="Nghe câu">🔊</button>
+          <button class="icon-btn" data-act="speak" data-text="${esc(w.ex)}" aria-label="Nghe câu">${I.speaker}</button>
         </div>
         <div class="v" style="margin-bottom:8px">${esc(w.vi)}</div>
         <div class="z">${highlight(w.ex, w.w)}</div>
@@ -521,7 +543,7 @@
         <div class="quiz-foot">
           ${ans
             ? `<button class="btn green next" data-act="next">${q.i + 1 < q.items.length ? 'Câu tiếp →' : 'Xem kết quả'}</button>`
-            : `<button class="skip" data-act="skip">⏩ Bỏ qua (−${PTS.skip}Đ)</button>`}
+            : `<button class="skip" data-act="skip">${I.skip} Bỏ qua (−${PTS.skip}Đ)</button>`}
         </div>
       </div>`;
   }
@@ -582,7 +604,7 @@
   function renderFinish(header) {
     const q = quiz;
     const total = q.items.length;
-    const emoji = q.right === total ? '🏆' : q.right >= total / 2 ? '🎉' : '💪';
+    const emoji = q.right === total ? '棒' : q.right >= total / 2 ? '好' : '加油';
     const s = levelStats(q.level);
     const { remaining: remain, wrong: wrongN } = modeCounts(s, q.mode);
     app.innerHTML = header + `
@@ -593,8 +615,8 @@
         <p>Điểm lượt này: <b class="c-rose">${q.gained >= 0 ? '+' : ''}${fmt(q.gained)}</b></p>
         <p>${esc(pick(CHEERS))}</p>
         <div class="actions">
-          ${remain ? `<button class="btn green" data-act="again" data-kind="new">📝 Học tiếp (${remain})</button>` : ''}
-          ${wrongN ? `<button class="btn rose" data-act="again" data-kind="wrong">🔁 Ôn câu sai (${wrongN})</button>` : ''}
+          ${remain ? `<button class="btn green" data-act="again" data-kind="new">Học tiếp (${remain})</button>` : ''}
+          ${wrongN ? `<button class="btn rose" data-act="again" data-kind="wrong">Ôn câu sai (${wrongN})</button>` : ''}
           <button class="btn ghost" data-act="back">Về danh sách</button>
         </div>
       </div>`;
@@ -634,8 +656,9 @@
     const got = () => (window.STROKES && window.STROKES[ch] ? done(window.STROKES[ch]) : fail && fail(new Error('no data')));
     if (window.STROKES && window.STROKES[ch]) got(); else loadShard(shardOf(ch)).then(got, () => fail && fail(new Error('load failed')));
   };
-  const GRID = `<svg class="grid" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 0L100 100M100 0L0 100M50 0V100M0 50H100" /></svg>`;
+  const GRID = `<svg class="grid" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0L100 100M100 0L0 100M50 0V100M0 50H100" /></svg>`;
 
+  const cssVar = n => getComputedStyle(document.body).getPropertyValue(n).trim();
   let writers = [];
   function destroyWriters() {
     writers.forEach(w => { try { w.cancelQuiz(); } catch (e) { /* ignore */ } });
@@ -648,8 +671,8 @@
     const w = HanziWriter.create(el, ch, Object.assign({
       width: size, height: size, padding: 12,
       charDataLoader: charLoader,
-      strokeColor: '#1e293b', radicalColor: '#ef4444', highlightColor: '#10b981',
-      outlineColor: '#e2e8f0', drawingColor: '#334155', drawingWidth: 22,
+      strokeColor: cssVar('--ink'), radicalColor: cssVar('--radical'), highlightColor: cssVar('--green'),
+      outlineColor: cssVar('--outline'), drawingColor: cssVar('--draw'), drawingWidth: 20,
       strokeAnimationSpeed: 1.2, delayBetweenStrokes: 220,
     }, opts));
     writers.push(w);
@@ -659,7 +682,7 @@
   // ----- công tắc "Tự viết": ẩn nét mờ + tắt gợi ý nét khi viết sai (lưu lại cho lần sau)
   const freeWrite = () => !!S.freeWrite;
   const freeToggle = () => `
-    <label class="switch-row"><span>✍️ Tự viết <small>(ẩn nét mờ &amp; gợi ý)</small></span>
+    <label class="switch-row"><span>Tự viết <small>(ẩn nét mờ &amp; gợi ý)</small></span>
       <input type="checkbox" class="free-toggle" ${freeWrite() ? 'checked' : ''}><i class="switch"></i></label>`;
   function bindFreeToggle(root, onChange) {
     const cb = root.querySelector('.free-toggle');
@@ -674,23 +697,23 @@
     app.innerHTML = header + `
       <div class="quiz">
         <div class="card prompt">
-          <div class="sub" style="font-size:18px;color:var(--ink);font-weight:800">${esc(w.vi)}</div>
+          <div class="sub" style="font-family:var(--display);font-size:26px;color:var(--ink);font-weight:600">${esc(w.vi)}</div>
           <div class="sub" id="w-py">${q.used.py ? esc(w.py) : '&nbsp;'}</div>
           <div class="hints">
-            <button class="hint nghe" data-act="whint" data-h="py">🔤 Pinyin${q.used.py ? '' : ` (−${PTS.hint}Đ)`}</button>
-            <button class="hint nghe" data-act="whint" data-h="nghe">🔊 Nghe${q.used.nghe ? '' : ` (−${PTS.hint}Đ)`}</button>
-            <button class="hint hv" data-act="whint" data-h="mau">👁 Xem mẫu (−${PTS.hint}Đ)</button>
+            <button class="hint nghe" data-act="whint" data-h="py">Pinyin${q.used.py ? '' : ` (−${PTS.hint}Đ)`}</button>
+            <button class="hint nghe" data-act="whint" data-h="nghe">${I.speaker} Nghe${q.used.nghe ? '' : ` (−${PTS.hint}Đ)`}</button>
+            <button class="hint hv" data-act="whint" data-h="mau">${I.eye} Xem mẫu (−${PTS.hint}Đ)</button>
           </div>
           <div class="reveal"><div class="zh" id="w-ex">${q.used.ex ? highlight(w.ex, w.w) : ''}</div></div>
         </div>
         <div class="card board-wrap">
-          <div class="slots" id="w-slots">${chars.map((c, k) => `<span class="slot${k === 0 ? ' cur' : ''}">${k === 0 ? '✍️' : '·'}</span>`).join('')}</div>
+          <div class="slots" id="w-slots">${chars.map((c, k) => `<span class="slot${k === 0 ? ' cur' : ''}">${k === 0 ? I.brush : '·'}</span>`).join('')}</div>
           <div class="board" id="w-board">${GRID}<div id="w-target"></div></div>
           <div class="board-note" id="w-note">${writeNote(1, chars.length)}</div>
           ${freeToggle()}
         </div>
         <div class="card answer" id="w-answer" hidden></div>
-        <div class="quiz-foot" id="w-foot"><button class="skip" data-act="skip">⏩ Bỏ qua (−${PTS.skip}Đ)</button></div>
+        <div class="quiz-foot" id="w-foot"><button class="skip" data-act="skip">${I.skip} Bỏ qua (−${PTS.skip}Đ)</button></div>
       </div>`;
     if (!chars.length) { answer(null, true); return; }
     bindFreeToggle(app, () => {
@@ -720,7 +743,7 @@
         if (slots[ws.ci]) { slots[ws.ci].textContent = ch; slots[ws.ci].className = 'slot ' + (charMiss >= 3 ? 'meh' : 'ok'); }
         ws.ci++;
         if (ws.ci < ws.chars.length) {
-          if (slots[ws.ci]) { slots[ws.ci].classList.add('cur'); slots[ws.ci].textContent = '✍️'; }
+          if (slots[ws.ci]) { slots[ws.ci].classList.add('cur'); slots[ws.ci].innerHTML = I.brush; }
           const note = document.getElementById('w-note');
           if (note) note.textContent = writeNote(ws.ci + 1, ws.chars.length);
           setTimeout(() => { if (quiz === q && !q.answered) startChar(); }, 450);
@@ -751,8 +774,8 @@
     const btns = app.querySelectorAll('[data-act=whint]');
     btns.forEach(b => {
       const k = b.dataset.h;
-      if (k === 'py') { b.textContent = '🔤 Pinyin'; b.disabled = !!q.used.py; }
-      if (k === 'nghe' && q.used.nghe) b.textContent = '🔊 Nghe';
+      if (k === 'py') { b.textContent = 'Pinyin'; b.disabled = !!q.used.py; }
+      if (k === 'nghe' && q.used.nghe) b.innerHTML = `${I.speaker} Nghe`;
     });
     const pill = app.querySelector('.topbar .pill .val'); if (pill) pill.textContent = fmt(S.score);
   }
@@ -776,19 +799,19 @@
     const box = document.getElementById('w-answer');
     box.hidden = false;
     box.innerHTML = `
-      <div class="verdict ${ans.ok ? 'ok' : 'no'}">${ans.ok ? `✓ Viết đúng! +${PTS.correct}Đ` : (ans.skipped ? `⏭ Đã bỏ qua (−${PTS.skip}Đ)` : '✗ Cần luyện thêm')}</div>
+      <div class="verdict ${ans.ok ? 'ok' : 'no'}">${ans.ok ? `✓ Viết đúng! +${PTS.correct}Đ` : (ans.skipped ? `Đã bỏ qua (−${PTS.skip}Đ)` : '✗ Cần luyện thêm')}</div>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
         <div>
-          <span class="zh" style="font-size:26px;font-weight:900">${esc(w.w)}</span>
+          <span class="zh" style="font-size:32px">${esc(w.w)}</span>
           <span class="p" style="margin-left:6px">${esc(w.py)}</span>
-          <span style="color:var(--violet);font-weight:800;font-size:13px;margin-left:6px">[${esc(w.hv)}]</span>
+          <span style="color:var(--green-ink);font-weight:500;font-size:13px;margin-left:6px">[${esc(w.hv)}]</span>
         </div>
-        <button class="icon-btn" data-act="speak" data-text="${esc(w.w)}" aria-label="Nghe">🔊</button>
+        <button class="icon-btn" data-act="speak" data-text="${esc(w.w)}" aria-label="Nghe">${I.speaker}</button>
       </div>
       <div class="z" style="margin-top:6px">${highlight(w.ex, w.w)}</div>
       ${w.exPy ? `<div class="p">${esc(w.exPy)}</div>` : ''}
       <div class="v">${esc(w.exVi)}</div>
-      <button class="btn ghost" style="width:100%;margin-top:10px" data-act="strokes" data-id="${w.id}">✍️ Xem thứ tự nét</button>`;
+      <button class="btn ghost" style="width:100%;margin-top:10px" data-act="strokes" data-id="${w.id}">${I.brush} Xem thứ tự nét</button>`;
     document.getElementById('w-foot').innerHTML =
       `<button class="btn green next" data-act="next">${q.i + 1 < q.items.length ? 'Câu tiếp →' : 'Xem kết quả'}</button>`;
     const pill = app.querySelector('.topbar .pill .val'); if (pill) pill.textContent = fmt(S.score);
@@ -813,16 +836,16 @@
     if (!chars.length) { toast('Từ này không có chữ Hán để viết'); return; }
     let cur = 0, writer = null;
     const ov = openSheet(`
-      <h3 style="display:flex;align-items:baseline;gap:8px">✍️ <span class="zh">${esc(w.w)}</span>
+      <h3 style="display:flex;align-items:baseline;gap:8px"><span class="zh">${esc(w.w)}</span>
         <small style="color:var(--muted)">${esc(w.py)} · ${esc(w.vi)}</small></h3>
       ${chars.length > 1 ? `<div class="char-tabs">${chars.map((c, k) => `<button class="zh${k === 0 ? ' on' : ''}" data-c="${k}">${esc(c)}</button>`).join('')}</div>` : ''}
       <div class="board" style="margin:10px auto">${GRID}<div class="target"></div></div>
       <div class="board-note s-note">Đang tải…</div>
       ${freeToggle()}
       <div class="row3">
-        <button class="btn ghost" data-x="anim">▶️ Xem nét</button>
-        <button class="btn green" data-x="practice">✍️ Tập viết</button>
-        <button class="btn ghost" data-x="speak">🔊 Nghe</button>
+        <button class="btn ghost" data-x="anim">${I.play} Xem nét</button>
+        <button class="btn green" data-x="practice">${I.brush} Tập viết</button>
+        <button class="btn ghost" data-x="speak">${I.speaker} Nghe</button>
       </div>`, ov => {
       const target = ov.querySelector('.target');
       const note = ov.querySelector('.s-note');
@@ -858,7 +881,7 @@
           onComplete: () => {
             practicing = false;
             writer.showOutline();
-            note.textContent = miss ? `Xong! Lỗi ${miss} nét` : 'Hoàn hảo! Không lỗi nét nào 🎉';
+            note.textContent = miss ? `Xong! Lỗi ${miss} nét` : 'Hoàn hảo! Không lỗi nét nào';
           },
         });
       };
@@ -1036,14 +1059,15 @@
       const chars = [...w.w].filter(c => HAN.test(c));
       let cur = 0, writer = null, step = -1, stepping = false;
       const ov = openDaily(`
-        <div class="d-head"><span class="chip violet">📅 Từ hôm nay · ${fmtDay(todayKey())}</span>
-          <button class="icon-btn d-close" aria-label="Để sau">✕</button></div>
+        <div class="d-head"><span class="chip violet">Từ hôm nay · ${fmtDay(todayKey())}</span>
+          <button class="icon-btn d-close" aria-label="Để sau">${I.x}</button></div>
         <div class="d-word">
           <span class="zh d-big">${esc(w.w)}</span>
-          <div><div class="d-py">${esc(w.py)} <span class="d-hv">[${esc(w.hv)}]</span> <span class="chip orange">${levelName(w.level)}</span></div>
-          <div class="d-vi">${esc(w.vi)} <small>(${esc(w.pos)})</small></div></div>
-          <button class="icon-btn d-say" aria-label="Nghe">🔊</button>
+          <div><div class="d-py">${esc(w.py)} <span class="d-hv">[${esc(w.hv)}]</span></div>
+          <div class="d-meta">${esc(w.pos)} · ${levelName(w.level)}</div></div>
+          <button class="icon-btn d-say" aria-label="Nghe">${I.speaker}</button>
         </div>
+        <div class="d-vi">${esc(w.vi)}</div>
         <div class="d-ex">
           <div class="z">${highlight(w.ex, w.w)}</div>
           ${w.exPy ? `<div class="p">${esc(w.exPy)}</div>` : ''}
@@ -1055,12 +1079,12 @@
         <div class="d-strokes"></div>
         <div class="d-note">Tên nét do app tự nhận dạng, nét phức tạp có thể chưa chuẩn — hãy theo hoạt ảnh.</div>
         <div class="row3 d-row">
-          <button class="btn ghost" data-d="all">▶️ Cả chữ</button>
-          <button class="btn ghost" data-d="next">⏭ Nét tiếp</button>
-          <button class="btn ghost" data-d="practice">✍️ Tập viết</button>
+          <button class="btn ghost" data-d="all">${I.play} Cả chữ</button>
+          <button class="btn ghost" data-d="next">${I.next} Nét tiếp</button>
+          <button class="btn ghost" data-d="practice">${I.brush} Tập viết</button>
         </div>
-        <button class="btn green d-done">✅ Done — Đã học từ này</button>
-        <button class="d-link d-swap">🔄 Đổi từ khác</button>`, ov => {
+        <button class="btn ink d-done">Done — đã học từ này</button>
+        <button class="d-link d-swap">Đổi từ khác</button>`, ov => {
         const target = ov.querySelector('.d-target');
         const note = ov.querySelector('.d-stepnote');
         const list = ov.querySelector('.d-strokes');
@@ -1108,7 +1132,7 @@
             showHintAfterMisses: 3,
             onMistake: () => { miss++; },
             onCorrectStroke: d => { step = d.strokeNum; renderStrokes(); },
-            onComplete: () => { step = -1; renderStrokes(); note.textContent = miss ? `Xong! Lỗi ${miss} nét` : 'Hoàn hảo! 🎉'; },
+            onComplete: () => { step = -1; renderStrokes(); note.textContent = miss ? `Xong! Lỗi ${miss} nét` : 'Hoàn hảo!'; },
           });
         };
         ov.querySelector('.d-done').onclick = () => {
@@ -1117,7 +1141,7 @@
           D.reviews = D.reviews.filter(r => r.id !== id);
           D.reviews.push({ id, due: addDays(today, 1), learned: today, fails: 0 });
           save();
-          toast(`✅ Đã học ${w.w} — mai ôn lại nhé!`);
+          toast(`Đã học ${w.w} — mai ôn lại nhé`);
           finish(true);
         };
         ov.querySelector('.d-swap').onclick = () => {
@@ -1145,8 +1169,8 @@
       const MAX = 3;
       let tries = 0, meaningOk = false, writeOk = false, phase = 'meaning', answerText = '';
       const ov = openDaily(`
-        <div class="d-head"><span class="chip orange">🔁 Ôn từ ngày ${fmtDay(rev.learned)}${n > 1 ? ` · ${k + 1}/${n}` : ''}</span>
-          <button class="icon-btn d-close" aria-label="Để sau">✕</button></div>
+        <div class="d-head"><span class="chip orange">Ôn từ ngày ${fmtDay(rev.learned)}${n > 1 ? ` · ${k + 1}/${n}` : ''}</span>
+          <button class="icon-btn d-close" aria-label="Để sau">${I.x}</button></div>
         <div class="d-body"></div>`, ov => {
         const body = ov.querySelector('.d-body');
         const finish = v => { closeDaily(); resolve(v); };
@@ -1179,7 +1203,7 @@
           body.innerHTML = `
             ${tryChip()}
             <div class="d-lbl d-center">Viết lại từ vừa rồi — không có nét mẫu</div>
-            <div class="slots">${chars.map((c, i) => `<span class="slot${i === 0 ? ' cur' : ''}">${i === 0 ? '✍️' : '·'}</span>`).join('')}</div>
+            <div class="slots">${chars.map((c, i) => `<span class="slot${i === 0 ? ' cur' : ''}">${i === 0 ? I.brush : '·'}</span>`).join('')}</div>
             <div class="board d-board">${GRID}<div class="d-target"></div></div>
             <div class="d-stepnote">Chữ 1/${chars.length} · sai 3 lần cùng một nét là tính chưa đúng</div>
             <button class="d-link d-giveup">Mình không nhớ chữ này</button>`;
@@ -1200,7 +1224,7 @@
                 if (slots[ci]) { slots[ci].textContent = chars[ci]; slots[ci].className = 'slot ok'; }
                 ci++;
                 if (ci < chars.length) {
-                  if (slots[ci]) { slots[ci].classList.add('cur'); slots[ci].textContent = '✍️'; }
+                  if (slots[ci]) { slots[ci].classList.add('cur'); slots[ci].innerHTML = I.brush; }
                   note.textContent = `Chữ ${ci + 1}/${chars.length}`;
                   setTimeout(startChar, 400);
                 } else setTimeout(() => endWrite(true), 400);
@@ -1237,7 +1261,7 @@
             master();
             speak(w.w);
             body.innerHTML = `
-              <div class="d-result ok">🎉 Hoàn thành!</div>
+              <div class="d-result ok">Hoàn thành!</div>
               <div class="d-center d-sub">Từ <b class="zh">${esc(w.w)}</b> đã được lưu vào <b>từ đã học</b> (+${PTS.correct}Đ)</div>
               ${reveal()}
               <button class="btn green d-next">${k + 1 < n ? 'Ôn từ tiếp theo →' : 'Tiếp tục →'}</button>`;
@@ -1249,7 +1273,7 @@
               <div class="d-result no">Chưa đúng — thử lại nhé</div>
               <div class="d-check"><div>${mark(meaningOk)} Nghĩa</div><div>${mark(writeOk)} Viết chữ</div></div>
               <div class="d-center d-sub">Còn ${MAX - tries} lần. ${meaningOk ? 'Nghĩa đã đúng, chỉ cần viết lại chữ.' : writeOk ? 'Chữ đã viết đúng, chỉ cần sửa lại nghĩa.' : 'Làm lại cả nghĩa và chữ.'}</div>
-              <button class="btn rose d-retry">✍️ Viết lại (lần ${tries + 1}/${MAX})</button>`;
+              <button class="btn rose d-retry">Viết lại (lần ${tries + 1}/${MAX})</button>`;
             body.querySelector('.d-retry').onclick = () => {
               if (!meaningOk) { if (!writeOk) answerText = ''; askMeaning(); } else askWrite();
             };
@@ -1261,7 +1285,7 @@
           const t = D.reviews.find(r => r.id === rev.id); if (t) { t.due = tomorrow; t.fails = rev.fails; }
           const s = st(rev.id); s.wv = 1; save();
           body.innerHTML = `
-            <div class="d-result no">Hẹn mai viết lại nhé 💪</div>
+            <div class="d-result no">Hẹn mai viết lại nhé</div>
             <div class="d-check"><div>${mark(meaningOk)} Nghĩa${meaningOk ? '' : ` <small>(bạn gõ: “${esc(answerText)}”)</small>`}</div><div>${mark(writeOk)} Viết chữ</div></div>
             ${reveal()}
             <div class="board d-board">${GRID}<div class="d-target"></div></div>
@@ -1274,7 +1298,7 @@
           }).catch(() => {});
           body.querySelector('.d-next').onclick = () => finish('fail');
           const ovr = body.querySelector('.d-override');
-          if (ovr) ovr.onclick = () => { master(); toast(`🎉 Đã lưu ${w.w} vào từ đã học`); finish('ok'); };
+          if (ovr) ovr.onclick = () => { master(); toast(`Đã lưu ${w.w} vào từ đã học`); finish('ok'); };
         };
 
         askMeaning();
@@ -1287,19 +1311,24 @@
     const D = dailyState();
     if (!D.on) return '';
     const today = todayKey();
-    const due = D.reviews.filter(r => r.due <= today).length;
+    const dueList = D.reviews.filter(r => r.due <= today);
     const t = D.today && D.today.date === today ? D.today : null;
     const w = t ? word(t.id) : null;
+    const first = w ? ([...w.w].find(c => HAN.test(c)) || w.w[0]) : '字';
+    const rw = dueList.length ? word(dueList[0].id) : null;
     return `
       <button class="card daily-card" data-act="daily">
+        <div class="dc-tile">${GRID}<span class="zh">${esc(first)}</span></div>
         <div class="dc-left">
-          <div class="dc-title">📅 Từ hôm nay</div>
+          <div class="dc-title">Từ hôm nay</div>
           ${w ? `<div class="dc-word"><span class="zh">${esc(w.w)}</span> <small>${t.done ? esc(w.py) + ' · ' + esc(w.vi) : 'chưa học'}</small></div>` : '<div class="dc-word"><small>Bấm để nhận từ mới</small></div>'}
-          <div class="dc-meta">✅ Đã thuộc ${D.mastered.length} · 🔁 Chờ ôn ${D.reviews.length}${due ? ` <b class="c-rose">(${due} hôm nay)</b>` : ''}</div>
+          <div class="dc-meta">Đã thuộc ${D.mastered.length} · chờ ôn ${D.reviews.length}</div>
         </div>
-        <span class="dc-status ${t && t.done && !due ? 'ok' : ''}">${t && t.done && !due ? '✓' : '▶'}</span>
-      </button>`;
+        <span class="dc-status ${t && t.done && !dueList.length ? 'ok' : ''}">${t && t.done && !dueList.length ? I.check : I.next}</span>
+      </button>
+      ${rw ? `<button class="dc-review" data-act="daily"><span class="zh">${esc(rw.w)}</span><span>${dueList.length > 1 ? `${dueList.length} từ` : 'Từ hôm qua'} chờ ôn — tự viết lại, không nét mẫu</span>${I.next}</button>` : ''}`;
   }
+
 
   // ---------------------------------------------------------------- sheets
   function openSheet(html, onMount) {
@@ -1343,8 +1372,14 @@
 
   function openMenu() {
     openSheet(`
-      <h3>⚙️ Cài đặt</h3>
-      <label class="switch-row d-set"><span>📅 Từ mỗi ngày <small>(hiện khi mở app)</small></span>
+      <h3>Cài đặt</h3>
+      <div class="d-scope"><span>Giao diện</span>
+        <select class="theme-sel">
+          <option value="auto" ${(S.theme || 'auto') === 'auto' ? 'selected' : ''}>Theo điện thoại</option>
+          <option value="light" ${S.theme === 'light' ? 'selected' : ''}>Sáng</option>
+          <option value="dark" ${S.theme === 'dark' ? 'selected' : ''}>Tối</option>
+        </select></div>
+      <label class="switch-row d-set"><span>Từ mỗi ngày <small>(hiện khi mở app)</small></span>
         <input type="checkbox" class="daily-on" ${dailyState().on ? 'checked' : ''}><i class="switch"></i></label>
       <div class="d-scope"><span>Lấy từ trong</span>
         <select class="daily-scope">
@@ -1352,14 +1387,15 @@
           ${LEVELS.map(l => `<option value="${l}" ${String(dailyState().scope) === String(l) ? 'selected' : ''}>${levelName(l)}</option>`).join('')}
         </select></div>
       <div class="menu">
-        <button class="btn ghost" data-x="export">⬇️ Sao lưu tiến độ (.json)</button>
-        <button class="btn ghost" data-x="import">⬆️ Khôi phục từ file sao lưu</button>
-        <button class="btn ghost" data-x="test">🔊 Thử giọng đọc</button>
-        <button class="btn rose" data-x="reset">🗑️ Xoá toàn bộ tiến độ</button>
+        <button class="btn ghost" data-x="export">${I.down} Sao lưu tiến độ (.json)</button>
+        <button class="btn ghost" data-x="import">${I.up} Khôi phục từ file sao lưu</button>
+        <button class="btn ghost" data-x="test">${I.speaker} Thử giọng đọc</button>
+        <button class="btn rose" data-x="reset">${I.trash} Xoá toàn bộ tiến độ</button>
       </div>
       <div class="note">Tiến độ được lưu trong trình duyệt này. Sao lưu định kỳ nếu bạn hay xoá dữ liệu trình duyệt.</div>
       <input type="file" accept="application/json" hidden>`, ov => {
       const file = ov.querySelector('input[type=file]');
+      ov.querySelector('.theme-sel').onchange = e => { S.theme = e.target.value; save(); applyTheme(); };
       ov.querySelector('.daily-on').onchange = e => { dailyState().on = e.target.checked; save(); route(); };
       ov.querySelector('.daily-scope').onchange = e => {
         const D = dailyState(); D.scope = e.target.value;
@@ -1433,6 +1469,20 @@
       nextQuestion();
     }
   });
+
+  // ---------------------------------------------------------------- theme
+  function applyTheme() {
+    const t = S.theme || 'auto';
+    if (t === 'auto') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', t);
+    // thanh trạng thái của điện thoại theo màu nền
+    document.querySelectorAll('meta[name=theme-color]').forEach(m => {
+      const isDarkMeta = (m.getAttribute('media') || '').includes('dark');
+      m.setAttribute('content', t === 'auto' ? (isDarkMeta ? '#0E1726' : '#F7F8F6') : (t === 'dark' ? '#0E1726' : '#F7F8F6'));
+    });
+  }
+  applyTheme();
+  if (window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', applyTheme);
 
   // ---------------------------------------------------------------- boot
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {

@@ -19,7 +19,7 @@ Mở http://localhost:8000.
 
 ## Tính năng
 
-- **Trang chủ:** tổng số từ, đã biết, hoàn thành, điểm, chuỗi ngày học (🔥), biểu đồ 7 ngày, tiến độ từng cấp HSK.
+- **Trang chủ:** tổng số từ, đã biết, hoàn thành, điểm, chuỗi ngày học, biểu đồ 7 ngày, tiến độ từng cấp HSK.
 - **Danh sách từ theo cấp:** chữ Hán, pinyin, âm Hán Việt, từ loại, nghĩa tiếng Việt, câu ví dụ (chữ Hán + pinyin + dịch), nghe phát âm, tìm kiếm (chữ / pinyin không dấu / Hán Việt / nghĩa), sửa nội dung từng từ.
 - **Chế độ `# Known`:** nhìn chữ → chọn nghĩa đúng trong 4 đáp án.
 - **Chế độ `✓ Done`:** câu ví dụ bị khuyết từ → chọn từ đúng. Khi đã biết hết từ của một cấp, app tự chuyển sang chế độ này.
@@ -29,7 +29,8 @@ Mở http://localhost:8000.
 - **📅 Từ mỗi ngày:** mở app mỗi ngày sẽ hiện 1 từ ngẫu nhiên (chọn phạm vi list trong ⚙️): nghĩa, câu ví dụ, hoạt ảnh nét và mô tả từng nét (bấm "Nét tiếp"), tập viết → bấm **Done**. Hôm sau, trước khi ra từ mới, app cho ôn từ hôm trước: chỉ hiện chữ, tự gõ nghĩa và tự viết lại không có nét mẫu. Đúng → lưu vào "đã thuộc"; sai được làm lại tối đa 3 lần, vẫn sai thì hẹn ôn lại hôm sau. Có thẻ "Từ hôm nay" ở trang chủ để mở lại, và có thể tắt trong ⚙️.
 - **Gợi ý trừ điểm:** Hán Việt (−10), Nghe (−10), Nghĩa/Ví dụ (−10), Bỏ qua (−5). Trả lời đúng +20.
 - **Câu sai:** ôn lại những từ đã trả lời sai; trả lời đúng thì từ đó được gỡ khỏi danh sách.
-- **Cài đặt (⚙️):** sao lưu và khôi phục tiến độ ra file `.json`, thử giọng đọc, xoá tiến độ.
+- **Cài đặt:** giao diện sáng/tối (hoặc theo điện thoại), bật/tắt Từ mỗi ngày và chọn list, sao lưu và khôi phục tiến độ ra file `.json`, thử giọng đọc, xoá tiến độ.
+- **Giao diện "Ô Mễ — nét thanh":** chữ Hán kiểu Tống mảnh (Noto Serif SC), tiêu đề Cormorant Garamond, nội dung Be Vietnam Pro; màu mực #0E1726 + ngọc #0F8C6E; logo ô 米字格 với chữ 字.
 - Phím tắt khi làm quiz: `A–D` hoặc `1–4` để chọn, `Enter` để sang câu tiếp.
 
 Phát âm dùng giọng đọc tiếng Trung có sẵn của hệ điều hành (Web Speech API). Trên iPhone/macOS giọng zh-CN có sẵn; trên Windows có thể phải cài thêm gói tiếng Trung trong Settings → Time & Language → Speech.
