@@ -21,6 +21,7 @@ Mở http://localhost:8000.
 
 - **Trang chủ:** tổng số từ, đã biết, hoàn thành, điểm, chuỗi ngày học, biểu đồ 7 ngày, tiến độ từng cấp HSK.
 - **Danh sách từ theo cấp:** chữ Hán, pinyin, âm Hán Việt, từ loại, nghĩa tiếng Việt, câu ví dụ (chữ Hán + pinyin + dịch), nghe phát âm, tìm kiếm (chữ / pinyin không dấu / Hán Việt / nghĩa), sửa nội dung từng từ.
+- **Đánh tích "Đã học xong":** ô tích đầu mỗi từ trong danh sách. Từ được tích tô xanh, chuyển xuống cuối danh sách (mục "Đã học xong"), được tính là đã biết + hoàn thành + đã viết trên thanh tiến độ, và không còn xuất hiện trong quiz / ôn câu sai / Từ mỗi ngày. Bấm lại để bỏ tích.
 - **Chế độ `# Known`:** nhìn chữ → chọn nghĩa đúng trong 4 đáp án.
 - **Chế độ `✓ Done`:** câu ví dụ bị khuyết từ → chọn từ đúng. Khi đã biết hết từ của một cấp, app tự chuyển sang chế độ này.
 - **Chế độ `✍️ Viết`:** nhìn nghĩa → tự viết từng chữ lên bảng ô 米 bằng ngón tay / chuột, app chấm từng nét (sai 3 lần sẽ hiện gợi ý nét). Gợi ý: Pinyin, Nghe, Xem mẫu (−10Đ). Đạt nếu trung bình ≤ 2 lỗi/chữ và không dùng "Xem mẫu".

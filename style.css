@@ -154,7 +154,8 @@ b, strong { font-weight: 600; }
 .level .name { font-size: 16px; font-weight: 600; }
 .level .pct { font-size: 12px; color: var(--muted); white-space: nowrap; }
 .progress { height: 4px; border-radius: 99px; background: var(--line); overflow: hidden; display: flex; margin-top: 10px; flex: 1; }
-.progress .g { background: var(--green); }
+.progress .m { background: var(--green-ink); }
+.progress .g { background: var(--green); opacity: .45; }
 .progress .o { background: var(--orange); }
 .level .count { font-size: 13px; color: var(--muted); margin-left: 10px; margin-top: 10px; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .level.locked { opacity: .5; }
@@ -186,7 +187,7 @@ b, strong { font-weight: 600; }
 
 .words { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-bottom: 96px; }
 .word { padding: 14px 16px; position: relative; }
-.word .head { display: flex; align-items: baseline; gap: 4px 8px; flex-wrap: wrap; padding-right: 116px; }
+.word .head { display: flex; align-items: center; gap: 4px 8px; flex-wrap: wrap; padding-right: 116px; }
 .word .idx { color: var(--faint); font-size: 12px; width: 26px; font-variant-numeric: tabular-nums; }
 .word .w { font-family: var(--zh); font-size: 26px; font-weight: 400; line-height: 1.1; }
 .word .py { color: var(--muted); font-size: 13px; }
@@ -412,3 +413,17 @@ body.no-scroll { overflow: hidden; }
 .sheet label.d-set { margin: 0 0 8px; justify-content: space-between; }
 .d-scope { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px; color: var(--ink); font-weight: 500; margin-bottom: 12px; }
 .d-scope select { padding: 7px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+
+/* đánh tích "đã học xong" */
+.tick { width: 28px; height: 28px; flex: none; border-radius: 8px; border: 1.5px solid var(--line-2); background: var(--card); color: transparent; display: grid; place-items: center; transition: background .15s, border-color .15s, color .15s; }
+.tick .i { width: 16px; height: 16px; stroke-width: 2.2; }
+@media (hover: hover) { .tick:not(.on):hover { border-color: var(--green); } }
+.tick.on { background: var(--green); border-color: var(--green); color: var(--on-accent); }
+.word .idx { width: auto; min-width: 20px; }
+.word.mastered { background: var(--green-soft); border-color: var(--board-line); }
+.word.mastered .w, .word.mastered .vi { color: var(--green-ink); }
+.word.mastered .ex { opacity: .75; }
+.m-divider { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--green-ink); margin: 10px 4px 0; }
+.m-divider .i { width: 15px; height: 15px; }
+.m-divider::after { content: ''; flex: 1; height: 1px; background: var(--board-line); }
+.legend i.m { background: var(--green-ink); }

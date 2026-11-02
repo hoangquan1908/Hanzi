@@ -12,7 +12,7 @@
   const levelSub = l => (l === 10 ? 'Từ HSK 2.0 ngoài HSK 3.0' : '');
   const SESSION_SIZE = 10;          // số câu mỗi lượt học
   const PTS = { correct: 20, hint: 10, skip: 5 };
-  const VERSION = '2.0.0';
+  const VERSION = '2.1.0';
   // f = cờ "đã xong", w = cờ "làm sai" trong S.words[id]
   const MODES = {
     known: { f: 'k', w: 'wk', label: 'Nghĩa', chip: 'green' },
@@ -77,6 +77,9 @@
     day().score += n;
   }
   const st = id => S.words[id] || (S.words[id] = {});
+  // m = đã đánh tích "học xong": tính là đã biết + hoàn thành + đã viết
+  const isM = id => !!(S.words[id] && S.words[id].m);
+  const has = (id, flag) => { const x = S.words[id]; return !!(x && (x[flag] || x.m)); };
 
   // ---------------------------------------------------------------- data helpers
   const byId = {};
@@ -97,19 +100,23 @@
 
   function levelStats(level) {
     const list = DATA[level];
-    let known = 0, done = 0, written = 0, wk = 0, wd = 0, wv = 0, a = 0, c = 0;
+    let known = 0, done = 0, written = 0, wk = 0, wd = 0, wv = 0, a = 0, c = 0, mastered = 0, knownOnly = 0, doneOnly = 0;
     list.forEach(w => {
       const s = S.words[w.id];
       if (!s) return;
-      if (s.k) known++;
-      if (s.d) done++;
-      if (s.wk) wk++;
-      if (s.wd) wd++;
-      if (s.v) written++;
-      if (s.wv) wv++;
+      if (s.m) { mastered++; known++; done++; written++; }
+      else {
+        if (s.k) known++;
+        if (s.d) done++;
+        if (s.v) written++;
+        if (s.wk) wk++;
+        if (s.wd) wd++;
+        if (s.wv) wv++;
+        if (s.d) doneOnly++; else if (s.k) knownOnly++;
+      }
       a += s.a || 0; c += s.c || 0;
     });
-    return { total: list.length, known, done, written, wk, wd, wv, acc: a ? c / a : null };
+    return { total: list.length, known, done, written, wk, wd, wv, mastered, knownOnly, doneOnly, acc: a ? c / a : null };
   }
 
   function streak() {
@@ -240,17 +247,24 @@
     }
     const s = levelStats(l);
     const gk = pct(s.known, s.total), od = pct(s.done, s.total);
+    const bar = progressBar(s);
     return `
       <button class="card level" data-act="open" data-level="${l}">
         <div class="row">
           <span class="name">${levelName(l)}${levelSub(l) ? `<small class="lvl-sub">${levelSub(l)}</small>` : ''}</span>
-          <span class="pct"><span class="c-green">biết ${gk}%</span> · <span class="c-orange">câu ${od}%</span> · <span class="c-violet">viết ${pct(s.written, s.total)}%</span></span>
+          <span class="pct">${s.mastered ? `<span class="c-green"><b>xong ${pct(s.mastered, s.total)}%</b></span> · ` : ''}<span class="c-green">biết ${gk}%</span> · <span class="c-orange">câu ${od}%</span> · <span class="c-violet">viết ${pct(s.written, s.total)}%</span></span>
         </div>
         <div class="row">
-          <div class="progress"><div class="g" style="width:${Math.max(0, gk - od)}%"></div><div class="o" style="width:${od}%"></div></div>
+          ${bar}
           <span class="count">${s.known}/${s.total}</span>
         </div>
       </button>`;
+  }
+
+  // thanh tiến độ: đã học xong (đậm) → đã biết → hoàn thành câu
+  function progressBar(s, cls = '') {
+    const w = n => (s.total ? (n / s.total * 100).toFixed(2) : 0) + '%';
+    return `<div class="progress ${cls}"><div class="m" style="width:${w(s.mastered)}"></div><div class="g" style="width:${w(s.knownOnly)}"></div><div class="o" style="width:${w(s.doneOnly)}"></div></div>`;
   }
 
   function chartSVG() {
@@ -305,7 +319,6 @@
     const s = levelStats(level);
     const mode = modeOf(level);
     const { done: doneN, wrong, remaining } = modeCounts(s, mode);
-    const g = pct(s.known, s.total), o = pct(s.done, s.total);
     const metaText = mode === 'known' ? `Đã biết: ${s.known}/${s.total} từ`
       : mode === 'done' ? `Hoàn thành: ${s.done}/${s.total} câu` : `Đã viết: ${s.written}/${s.total} từ`;
 
@@ -329,11 +342,11 @@
         <span class="chip orange">${levelName(level)}</span>
         <span class="acc">Tỷ lệ đúng: ${s.acc == null ? '—' : (s.acc * 100).toFixed(1) + '%'}</span>
       </div>
-      <div class="progress bigbar">${mode === 'write'
-        ? `<div class="v" style="width:${pct(doneN, s.total)}%"></div>`
-        : `<div class="g" style="width:${Math.max(0, g - o)}%"></div><div class="o" style="width:${o}%"></div>`}</div>
+      ${mode === 'write'
+        ? `<div class="progress bigbar"><div class="m" style="width:${pct(s.mastered, s.total)}%"></div><div class="v" style="width:${Math.max(0, pct(doneN, s.total) - pct(s.mastered, s.total))}%"></div></div>`
+        : progressBar(s, 'bigbar')}
 
-      <div class="list-head">Danh sách từ <small>(${s.total} từ)</small></div>
+      <div class="list-head">Danh sách từ <small>(${s.total} từ${s.mastered ? ` · ${s.mastered} đã học xong` : ''})</small></div>
       <div class="search"><input id="q" type="search" placeholder="Tìm chữ, pinyin, nghĩa…" value="${esc(listQuery)}" autocomplete="off"><span>⌕</span></div>
       <div class="words" id="words"></div>
 
@@ -360,17 +373,22 @@
         stripTones(w.hv).includes(q) || stripTones(w.vi).includes(q));
     }
     if (!list.length) { box.innerHTML = '<div class="empty">Không tìm thấy từ nào</div>'; return; }
+    list = [...list.filter(w => !isM(w.id)), ...list.filter(w => isM(w.id))];   // từ đã học xong xuống cuối
+    let firstM = true;
     box.innerHTML = list.map(w => {
       const s = S.words[w.id] || {};
-      return `
-      <div class="card word">
+      const m = !!s.m;
+      const divider = m && firstM ? (firstM = false, `<div class="m-divider">${I.check} Đã học xong</div>`) : '';
+      return `${divider}
+      <div class="card word${m ? ' mastered' : ''}">
         <div class="head">
+          <button class="tick${m ? ' on' : ''}" data-act="tick" data-id="${w.id}" aria-pressed="${m}" aria-label="${m ? 'Bỏ đánh dấu học xong' : 'Đánh dấu đã học xong'}">${I.check}</button>
           <span class="idx">${w.n}</span>
           <span class="w">${esc(w.w)}</span>
           <span class="py">${esc(w.py)}</span>
           <span class="hv">[${esc(w.hv)}]</span>
           <span class="pos">(${esc(w.pos)})</span>
-          <span class="badges">${s.k ? '<span class="badge k">biết</span>' : ''}${s.d ? '<span class="badge d">câu</span>' : ''}${s.v ? '<span class="badge v">viết</span>' : ''}${(s.wk || s.wd || s.wv) ? '<span class="badge x">sai</span>' : ''}</span>
+          <span class="badges">${m ? '' : `${s.k ? '<span class="badge k">biết</span>' : ''}${s.d ? '<span class="badge d">câu</span>' : ''}${s.v ? '<span class="badge v">viết</span>' : ''}${(s.wk || s.wd || s.wv) ? '<span class="badge x">sai</span>' : ''}`}</span>
           <span class="tools">
             <button data-act="speak" data-text="${esc(w.w)}" aria-label="Nghe">${I.speaker}</button>
             <button data-act="strokes" data-id="${w.id}" aria-label="Xem cách viết">${I.brush}</button>
@@ -387,6 +405,16 @@
     }).join('');
   }
 
+  function toggleMastered(id, level) {
+    const s = st(id), w = word(id);
+    if (s.m) { delete s.m; delete s.mt; toast(`Bỏ đánh dấu ${w.w}`); }
+    else { s.m = 1; s.mt = todayKey(); toast(`Đã học xong ${w.w} — chuyển xuống cuối danh sách`); }
+    save();
+    const y = window.scrollY;
+    renderLevel(level);
+    window.scrollTo(0, y);
+  }
+
   // ---------------------------------------------------------------- quiz
   function startQuiz(level, kind) {
     let mode = modeOf(level);
@@ -394,15 +422,15 @@
     let pool;
     if (kind === 'wrong') {
       const flag = MODES[mode].w;
-      pool = shuffle(list.filter(w => S.words[w.id] && S.words[w.id][flag]));
+      pool = shuffle(list.filter(w => S.words[w.id] && S.words[w.id][flag] && !isM(w.id)));
     } else {
-      if (mode === 'known' && list.every(w => S.words[w.id] && S.words[w.id].k)) {
+      if (mode === 'known' && list.every(w => has(w.id, 'k'))) {
         mode = S.mode[level] = 'done';
         save();
         toast('Bạn đã biết hết từ vựng — chuyển sang Điền câu.');
       }
       const flag = MODES[mode].f;
-      pool = list.filter(w => !(S.words[w.id] && S.words[w.id][flag]));
+      pool = list.filter(w => !has(w.id, flag));
       if (mode !== 'known') {
         // ưu tiên những từ đã biết nghĩa trước
         pool.sort((a, b) => (S.words[b.id]?.k ? 1 : 0) - (S.words[a.id]?.k ? 1 : 0));
@@ -907,7 +935,7 @@
     const lv = D.scope === 'all' ? LEVELS : LEVELS.filter(l => String(l) === String(D.scope));
     let pool = [];
     (lv.length ? lv : LEVELS).forEach(l => DATA[l].forEach(w => {
-      if (!busy.has(w.id) && !(S.words[w.id] && S.words[w.id].k) && [...w.w].some(c => HAN.test(c))) pool.push(w.id);
+      if (!busy.has(w.id) && !has(w.id, 'k') && [...w.w].some(c => HAN.test(c))) pool.push(w.id);
     }));
     if (!pool.length) (lv.length ? lv : LEVELS).forEach(l => DATA[l].forEach(w => { if (!busy.has(w.id)) pool.push(w.id); }));
     return pool.length ? pick(pool) : null;
@@ -1450,6 +1478,7 @@
       case 'strokes': openStrokeSheet(b.dataset.id); break;
       case 'whint': writeHint(b.dataset.h); break;
       case 'daily': runDaily(true); break;
+      case 'tick': toggleMastered(b.dataset.id, lvl); break;
     }
   });
 
