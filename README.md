@@ -26,6 +26,7 @@ Mở http://localhost:8000.
 - **Chế độ `✍️ Viết`:** nhìn nghĩa → tự viết từng chữ lên bảng ô 米 bằng ngón tay / chuột, app chấm từng nét (sai 3 lần sẽ hiện gợi ý nét). Gợi ý: Pinyin, Nghe, Xem mẫu (−10Đ). Đạt nếu trung bình ≤ 2 lỗi/chữ và không dùng "Xem mẫu".
 - **Công tắc "Tự viết":** ở bảng luyện viết và bảng xem nét — bật để ẩn nét mờ và tắt gợi ý khi viết sai, tự viết hoàn toàn. App nhớ lựa chọn cho lần sau.
 - **Xem thứ tự nét:** nút ✍️ ở mỗi từ trong danh sách → hoạt ảnh thứ tự nét + tập viết từng chữ.
+- **📅 Từ mỗi ngày:** mở app mỗi ngày sẽ hiện 1 từ ngẫu nhiên (chọn phạm vi list trong ⚙️): nghĩa, câu ví dụ, hoạt ảnh nét và mô tả từng nét (bấm "Nét tiếp"), tập viết → bấm **Done**. Hôm sau, trước khi ra từ mới, app cho ôn từ hôm trước: chỉ hiện chữ, tự gõ nghĩa và tự viết lại không có nét mẫu. Đúng → lưu vào "đã thuộc"; sai được làm lại tối đa 3 lần, vẫn sai thì hẹn ôn lại hôm sau. Có thẻ "Từ hôm nay" ở trang chủ để mở lại, và có thể tắt trong ⚙️.
 - **Gợi ý trừ điểm:** Hán Việt (−10), Nghe (−10), Nghĩa/Ví dụ (−10), Bỏ qua (−5). Trả lời đúng +20.
 - **Câu sai:** ôn lại những từ đã trả lời sai; trả lời đúng thì từ đó được gỡ khỏi danh sách.
 - **Cài đặt (⚙️):** sao lưu và khôi phục tiến độ ra file `.json`, thử giọng đọc, xoá tiến độ.
